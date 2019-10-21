@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using Studiengangsverwaltung.controller;
+using System.Windows;
 
 namespace Studiengangsverwaltung.view
 {
@@ -10,7 +10,12 @@ namespace Studiengangsverwaltung.view
     {
         public MainWindow()
         {
-            InitializeComponent();
+            MainWindowController.Instance.start(this);
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MainWindowController.Instance.exit();
         }
     }
 }

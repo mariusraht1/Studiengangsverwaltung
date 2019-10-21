@@ -77,12 +77,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controller\MainWindowController.cs" />
+    <Compile Include="controller\ReadWriteController.cs" />
     <Compile Include="model\Abschluss.cs" />
     <Compile Include="model\Adresse.cs" />
     <Compile Include="model\Dozent.cs" />
     <Compile Include="model\Kurs.cs" />
     <Compile Include="model\Person.cs" />
     <Compile Include="model\Semester.cs" />
+    <Compile Include="model\Settings.cs" />
     <Compile Include="model\Student.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
