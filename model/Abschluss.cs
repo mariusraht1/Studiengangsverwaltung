@@ -1,10 +1,10 @@
-﻿namespace Studiengangsverwaltung
+﻿namespace Studiengangsverwaltung.model
 {
-    public class Abschluss
+    class Abschluss
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        
+
         public Abschluss(int id, string name)
         {
             ID = id;

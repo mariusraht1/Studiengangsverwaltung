@@ -2,21 +2,14 @@
 
 namespace Studiengangsverwaltung
 {
-    class Student
+    class Student : Person
     {
-        public int ID { get; set; }
-        public string Vorname { get; set; }
-        public string Nachname { get; set; }
-        public Adresse Adresse { get; set; }
-        public DateTime Geburtsdatum { get; set; }
+        public int ECTS { get; set; }
 
-        public Student(int id, string vorname, string nachname, Adresse adresse, DateTime geburtsdatum)
+        public Student(int id, string vorname, string nachname, Adresse adresse, DateTime geburtsdatum, int ects)
+        : base(id, vorname, nachname, adresse, geburtsdatum)
         {
-            ID = id;
-            Vorname = vorname;
-            Nachname = nachname;
-            Adresse = adresse;
-            Geburtsdatum = geburtsdatum;
+            ECTS = ects;
         }
     }
 }
