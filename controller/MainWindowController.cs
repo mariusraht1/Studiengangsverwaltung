@@ -20,15 +20,20 @@ namespace Studiengangsverwaltung.controller
         {
             mainWindow.InitializeComponent();
 
-            mainWindow.lv_kurse.ItemsSource = Kurs.Liste;
-            mainWindow.cb_rolle.ItemsSource = new ObservableCollection<string>() { Person.Rolle.Dozent.ToString(), Person.Rolle.Student.ToString() };
+            // TODO: Daten auslesen und Objekte anlegen
 
-            // TODO: Daten auslesen
+
+            mainWindow.lv_personen.ItemsSource = Person.Liste;
+            mainWindow.lv_kurse.ItemsSource = Kurs.Liste;
+            mainWindow.cb_rolle.ItemsSource = new ObservableCollection<string>() { Person.Rollen.Dozent.ToString(), Person.Rollen.Student.ToString() };
         }
 
         public void exit()
         {
+            System.Windows.Application.Current.MainWindow.Hide();
+
             // TODO: Daten speichern
+
 
             Environment.Exit(0);
         }
