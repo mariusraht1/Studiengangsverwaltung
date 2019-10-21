@@ -1,6 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
-namespace Studiengangsverwaltung
+namespace Studiengangsverwaltung.view
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
@@ -10,16 +11,6 @@ namespace Studiengangsverwaltung
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void tb_person_search_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
-        }
-
-        private void tb_kurs_search_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
         }
     }
 }
