@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Studiengangsverwaltung" Height="450" Width="800" Closing="MainWindow_Closing">
+        Title="Studiengangsverwaltung" Width="800" Height="460" Closing="MainWindow_Closing">
     <Window.Resources>
         <Style x:Key="TabItemText" TargetType="{x:Type TextBlock}">
             <Style.Triggers>
@@ -31,22 +31,22 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <TextBox x:Name="tb_person_search" Height="23" Margin="596,5,10,0" TextWrapping="Wrap" Text="Suche..." VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="2,0,0,0" MaxLines="1" IsUndoEnabled="True"/>
-                    <ComboBox x:Name="cb_rolle" HorizontalAlignment="Left" Margin="95,178,0,0" VerticalAlignment="Top" Width="128" Height="28" FontSize="14" FontFamily="Calibri"/>
-                    <Label Content="Vorname:" Margin="10,210,676,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
-                    <TextBox x:Name="tb_vorname" HorizontalAlignment="Left" Height="28" Margin="95,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
-                    <Label Content="Nachname:" Margin="10,243,676,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
-                    <TextBox x:Name="tb_nachname" HorizontalAlignment="Left" Height="28" Margin="95,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
-                    <Label Content="Rolle:" Margin="10,177,676,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
-                    <Label Content="Geburtstag:" Margin="10,276,676,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
-                    <DatePicker x:Name="dp_geburtstag" HorizontalAlignment="Left" Margin="95,277,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="104" Text="20.10.2019"/>
-                    <Label Content="Straße:" Margin="359,210,344,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tb_person_search" Height="23" Margin="596,5,10,0" TextWrapping="Wrap" Text="Suche..." VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="2,0,0,0" MaxLines="1" IsUndoEnabled="True" GotFocus="tb_person_search_GotFocus" LostFocus="tb_person_search_LostFocus"/>
+                    <ComboBox x:Name="cb_rolle" HorizontalAlignment="Left" Margin="98,178,0,0" VerticalAlignment="Top" Width="128" Height="28" FontSize="14" FontFamily="Calibri" SelectedIndex="0" VerticalContentAlignment="Center" Padding="8,3"/>
+                    <Label Content="Vorname:" Margin="10,211,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
+                    <TextBox x:Name="tb_vorname" HorizontalAlignment="Left" Height="28" Margin="98,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
+                    <Label Content="Nachname:" Margin="10,244,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
+                    <TextBox x:Name="tb_nachname" HorizontalAlignment="Left" Height="28" Margin="98,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
+                    <Label Content="Rolle:" Margin="10,178,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
+                    <Label Content="Geburtstag:" Margin="10,277,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
+                    <DatePicker x:Name="dp_geburtstag" HorizontalAlignment="Left" Margin="98,277,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="104" Text="20.10.2019"/>
+                    <Label Content="Straße:" Margin="359,211,344,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
                     <TextBox x:Name="tb_strasse" Height="28" Margin="427,211,10,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
-                    <Label Content="PLZ/Ort:" Margin="359,243,344,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
+                    <Label Content="PLZ/Ort:" Margin="359,244,344,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
                     <TextBox x:Name="tb_postleitzahl" Height="28" Margin="427,244,275,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="0" MaxLines="1" HorizontalContentAlignment="Center"/>
                     <TextBox x:Name="tb_ort" Height="28" Margin="496,244,10,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
-                    <Button x:Name="btn_person_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom"/>
-                    <Button x:Name="btn_person_save" Content="Speichern" Margin="0,0,10,10" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"/>
+                    <Button x:Name="btn_person_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand"/>
+                    <Button x:Name="btn_person_save" Content="Speichern" Margin="0,0,10,10" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
                 </Grid>
             </TabItem>
             <TabItem FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
@@ -54,6 +54,9 @@
                     <TextBlock Text="Kursverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5" Cursor="Arrow">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <ListView x:Name="lv_kurse" Height="140" Margin="10,33,10,0" VerticalAlignment="Top">
                         <ListView.View>
                             <GridView>
@@ -61,16 +64,16 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <TextBox x:Name="tb_kurs_search" Height="23" Margin="596,5,10,0" TextWrapping="Wrap" Text="Suche..." VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="2,0,0,0" MaxLines="1" IsUndoEnabled="True"/>
-                    <Button x:Name="btn_kurs_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom"/>
-                    <Button x:Name="btn_kurs_save" Content="Speichern" Margin="0,0,10,10" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"/>
+                    <TextBox x:Name="tb_kurs_search" Height="23" Margin="596,5,10,0" TextWrapping="Wrap" Text="Suche..." VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="2,0,0,0" MaxLines="1" IsUndoEnabled="True" GotFocus="tb_kurs_search_GotFocus"/>
+                    <Button x:Name="btn_kurs_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand"/>
+                    <Button x:Name="btn_kurs_save" Content="Speichern" Margin="0,0,10,10" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
                     <TextBox x:Name="tb_beschreibung" HorizontalAlignment="Left" Height="61" Margin="111,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="326" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="4,3" MaxLines="1"/>
                     <DatePicker x:Name="dp_startdatum" HorizontalAlignment="Left" Margin="189,277,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="104" Text="20.10.2019"/>
                     <DatePicker x:Name="dp_endedatum" HorizontalAlignment="Left" Margin="333,277,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Width="104" Height="28" Text="20.10.2019"/>
-                    <Label Content="Kursname:&#xA;" Margin="10,178,656,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
-                    <Label Content="Beschreibung:&#xA;" Margin="10,211,660,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Width="96"/>
+                    <Label Content="Kursname:" Margin="10,178,660,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top"/>
+                    <Label Content="Beschreibung:" Margin="10,211,660,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Width="96" Padding="4,0,0,0" VerticalContentAlignment="Center"/>
                     <TextBox x:Name="tb_name" HorizontalAlignment="Left" Height="28" Margin="111,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="326" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
-                    <Label Content="Semester:&#xA;" Margin="10,277,660,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center"/>
+                    <Label Content="Semester:" Margin="10,277,660,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center"/>
                     <Label Content="von" Margin="152,277,582,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Width="32" HorizontalContentAlignment="Center"/>
                     <Label Content="bis" Margin="298,277,438,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="30" HorizontalContentAlignment="Center" Padding="5"/>
                     <TextBox x:Name="tb_semester" HorizontalAlignment="Left" Height="28" Margin="111,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLines="1"/>

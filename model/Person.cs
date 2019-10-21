@@ -4,6 +4,8 @@ namespace Studiengangsverwaltung
 {
     abstract class Person
     {
+        public enum Rolle { Student, Dozent }
+
         public int ID { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
