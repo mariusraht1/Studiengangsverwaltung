@@ -25,6 +25,7 @@ namespace Studiengangsverwaltung.controller
         public void exit()
         {
             // TODO: Daten speichern
+            ReadWriteController.Instance.write();
 
             Environment.Exit(0);
         }

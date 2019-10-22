@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.ObjectModel;
 
 namespace Studiengangsverwaltung
 {
@@ -14,5 +14,9 @@ namespace Studiengangsverwaltung
             Name = name;
             Beschreibung = beschreibung;
         }
+
+        public static ObservableCollection<Kurs> Liste { get; set; }
+
+
     }
 }

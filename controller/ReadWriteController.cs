@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace Studiengangsverwaltung.controller
@@ -14,12 +16,28 @@ namespace Studiengangsverwaltung.controller
 
         public void read()
         {
+            List<object> xmlData = new List<object>();
+
 
         }
 
         public void write()
         {
+            // https://stackoverflow.com/questions/9839034/generating-xml-from-multiple-classes
+            // https://stackoverflow.com/questions/34787395/xmlserializer-streamwriter-multiple-types-classes-into-same-xml-file
+            // https://stackoverflow.com/questions/15247053/serialize-multiple-objects
 
+            Kurs.Liste.Add(new Kurs(1, "Testkurs", "Testkursbeschreibung"));
+
+            if (Kurs.Liste.Count > 0)
+            {
+                XmlSerializer writer = new XmlSerializer(typeof(Kurs));
+
+                using (FileStream output = File.OpenWrite(MainWindowController.Instance.Settings.PathToDataFile))
+                {
+                    writer.Serialize(output, Kurs.Liste);
+                }
+            }
         }
 
         //*****************************************************************************************//
