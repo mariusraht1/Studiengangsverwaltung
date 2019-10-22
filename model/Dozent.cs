@@ -3,7 +3,7 @@ using System;
 
 namespace Studiengangsverwaltung
 {
-    class Dozent : Person
+    public class Dozent : Person
     {
         public Abschluss Abschluss { get; set; }
 

@@ -4,6 +4,7 @@
     {
         public string PathToProgram { get; set; }
         public string PathToDataFile { get; set; }
+        public bool ChangesApplied { get; set; }
 
         private static Settings instance;
 
@@ -15,6 +16,7 @@
         public void init()
         {
             PathToDataFile = PathToProgram + "data.xml";
+            ChangesApplied = false;
         }
     }
 }

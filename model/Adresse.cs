@@ -1,6 +1,6 @@
 ﻿namespace Studiengangsverwaltung
 {
-    class Adresse
+    public class Adresse
     {
         private string strasse;
         private string nummer;

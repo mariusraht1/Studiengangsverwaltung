@@ -83,6 +83,10 @@
     <Compile Include="model\Adresse.cs" />
     <Compile Include="model\Dozent.cs" />
     <Compile Include="model\Kurs.cs" />
+    <Compile Include="model\StudentListe.cs" />
+    <Compile Include="model\StudiengangListe.cs" />
+    <Compile Include="model\PersonListe.cs" />
+    <Compile Include="model\KursListe.cs" />
     <Compile Include="model\Person.cs" />
     <Compile Include="model\Semester.cs" />
     <Compile Include="model\Settings.cs" />

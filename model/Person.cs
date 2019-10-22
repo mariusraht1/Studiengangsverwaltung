@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Studiengangsverwaltung
 {
-    abstract class Person
+    public abstract class Person
     {
         public enum Rollen { Student, Dozent }
 
@@ -13,6 +13,8 @@ namespace Studiengangsverwaltung
         public string Nachname { get; set; }
         public Adresse Adresse { get; set; }
         public DateTime Geburtsdatum { get; set; }
+
+        public Person() { }
 
         public Person(int id, Rollen rolle, string vorname, string nachname, Adresse adresse, DateTime geburtsdatum)
         {
@@ -24,6 +26,6 @@ namespace Studiengangsverwaltung
             Geburtsdatum = geburtsdatum;
         }
 
-        public static ObservableCollection<Person> Liste { get; set; }
+
     }
 }

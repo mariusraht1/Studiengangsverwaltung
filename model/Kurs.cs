@@ -1,12 +1,12 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Studiengangsverwaltung
+﻿namespace Studiengangsverwaltung
 {
-    class Kurs
+    public class Kurs
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public string Beschreibung { get; set; }
+
+        public Kurs() { }
 
         public Kurs(int id, string name, string beschreibung)
         {
@@ -14,9 +14,7 @@ namespace Studiengangsverwaltung
             Name = name;
             Beschreibung = beschreibung;
         }
-
-        public static ObservableCollection<Kurs> Liste { get; set; }
-
+        
 
     }
 }

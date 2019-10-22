@@ -14,8 +14,6 @@ namespace Studiengangsverwaltung.controller
             get { return instance ?? (instance = new MainWindowController()); }
         }
 
-        public Settings Settings { get; set; }
-
         public void start(MainWindow mainWindow)
         {
             mainWindow.InitializeComponent();
@@ -23,8 +21,18 @@ namespace Studiengangsverwaltung.controller
             // TODO: Daten auslesen und Objekte anlegen
 
 
-            mainWindow.lv_personen.ItemsSource = Person.Liste;
-            mainWindow.lv_kurse.ItemsSource = Kurs.Liste;
+
+            Settings.Instance.init();
+
+            PersonListe.Instance.Liste = new PersonListe();
+            KursListe.Instance.Liste = new KursListe();
+            StudiengangListe.Instance.Liste = new StudiengangListe();
+
+            KursListe.Instance.Liste.Add(new Kurs(1, "Testkurs", "Testkursbeschreibung"));
+
+            mainWindow.lv_personen.ItemsSource = PersonListe.Instance.Liste;
+            mainWindow.lv_kurse.ItemsSource = KursListe.Instance.Liste;
+            mainWindow.lv_studiengaenge.ItemsSource = StudiengangListe.Instance.Liste;
             mainWindow.cb_rolle.ItemsSource = new ObservableCollection<string>() { Person.Rollen.Dozent.ToString(), Person.Rollen.Student.ToString() };
         }
 

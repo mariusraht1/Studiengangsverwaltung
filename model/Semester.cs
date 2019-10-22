@@ -2,7 +2,7 @@ using System;
 
 namespace Studiengangsverwaltung
 {
-    class Semester
+    public class Semester
     {
         public int ID { get; set; }
         public DateTime Startdatum { get; set; }

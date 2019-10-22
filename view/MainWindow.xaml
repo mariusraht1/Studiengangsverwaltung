@@ -83,7 +83,16 @@
                 <TabItem.Header>
                     <TextBlock Text="Studiengangsverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5" Cursor="Arrow"/>
+                <Grid Background="#FFE5E5E5" Cursor="Arrow">
+                    <ListView x:Name="lv_studiengaenge" Height="140" Margin="10,33,10,0" VerticalAlignment="Top">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <TextBox x:Name="tb_studiengang_search" Height="23" Margin="596,5,10,0" TextWrapping="Wrap" Text="Suche..." VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="2,0,0,0" MaxLines="1" IsUndoEnabled="True" GotFocus="tb_person_search_GotFocus" LostFocus="tb_person_search_LostFocus"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

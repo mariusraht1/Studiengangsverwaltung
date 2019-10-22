@@ -2,7 +2,7 @@
 
 namespace Studiengangsverwaltung
 {
-    class Student : Person
+    public class Student : Person
     {
         public int ECTS { get; set; }
 

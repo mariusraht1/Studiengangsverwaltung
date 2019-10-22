@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Studiengangsverwaltung.model;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Studiengangsverwaltung.controller
 {
     class ReadWriteController
     {
-        static ReadWriteController instance;
+        private static ReadWriteController instance;
 
         public static ReadWriteController Instance
         {
@@ -23,19 +26,29 @@ namespace Studiengangsverwaltung.controller
 
         public void write()
         {
-            // https://stackoverflow.com/questions/9839034/generating-xml-from-multiple-classes
-            // https://stackoverflow.com/questions/34787395/xmlserializer-streamwriter-multiple-types-classes-into-same-xml-file
-            // https://stackoverflow.com/questions/15247053/serialize-multiple-objects
+            // Serialize multiple Lists at once:
+            //ObservableCollection<object> objectList = new ObservableCollection<object>();
+            //foreach(Kurs kurs in KursListe.Instance.Liste) {
+            //    objectList.Add(kurs);
+            //}
 
-            Kurs.Liste.Add(new Kurs(1, "Testkurs", "Testkursbeschreibung"));
+            //XmlSerializer writer = new XmlSerializer(typeof(ObservableCollection<object>), new Type[] { typeof(Kurs) });
 
-            if (Kurs.Liste.Count > 0)
+            //using (FileStream output = File.OpenWrite(Settings.Instance.PathToDataFile))
+            //{
+            //    writer.Serialize(output, objectList);
+            //}
+
+            Settings.Instance.ChangesApplied = true;
+
+            if (Settings.Instance.ChangesApplied.Equals(true)
+                 && KursListe.Instance.Liste.Count > 0)
             {
-                XmlSerializer writer = new XmlSerializer(typeof(Kurs));
+                XmlSerializer writer = new XmlSerializer(typeof(KursListe));
 
-                using (FileStream output = File.OpenWrite(MainWindowController.Instance.Settings.PathToDataFile))
+                using (FileStream output = File.Create(Settings.Instance.PathToDataFile))
                 {
-                    writer.Serialize(output, Kurs.Liste);
+                    writer.Serialize(output, KursListe.Instance.Liste);
                 }
             }
         }
@@ -46,14 +59,14 @@ namespace Studiengangsverwaltung.controller
 
         public void read_out_settings_xml()
         {
-            if (!File.Exists(MainWindowController.Instance.Settings.PathToDataFile))
+            if (!File.Exists(Settings.Instance.PathToDataFile))
             {
                 // Standardwerte setzen
             }
             else
             {
                 XmlSerializer reader = new XmlSerializer(typeof(Kurs));
-                using (FileStream input = File.OpenRead(MainWindowController.Instance.Settings.PathToDataFile))
+                using (FileStream input = File.OpenRead(Settings.Instance.PathToDataFile))
                 {
                     Kurs rx = reader.Deserialize(input) as Kurs;
                 }
@@ -68,9 +81,9 @@ namespace Studiengangsverwaltung.controller
         {
             XmlSerializer writer = new XmlSerializer(typeof(Kurs));
 
-            using (FileStream output = File.OpenWrite(MainWindowController.Instance.Settings.PathToDataFile))
+            using (FileStream output = File.OpenWrite(Settings.Instance.PathToDataFile))
             {
-                writer.Serialize(output, MainWindowController.Instance.Settings.ToString());
+                writer.Serialize(output, Settings.Instance.ToString());
             }
         }
     }
