@@ -2,17 +2,22 @@
 {
     public class Adresse
     {
-        private string strasse;
-        private string nummer;
-        private int postleitzahl;
-        private string ort;
+        public string Strasse { get; set; }
+        public string Hausnummer { get; set; }
+        public int Postleitzahl { get; set; }
+        public string Ort { get; set; }
 
-        public Adresse(string strasse, string nummer, int postleitzahl, string ort)
+        public Adresse(string strasse, string hausnummer, int postleitzahl, string ort)
         {
-            this.strasse      = strasse;
-            this.nummer       = nummer;
-            this.postleitzahl = postleitzahl;
-            this.ort          = ort;
+            Strasse      = strasse;
+            Hausnummer   = hausnummer;
+            Postleitzahl = postleitzahl;
+            Ort          = ort;
+        }
+
+        public override string ToString()
+        {
+            return Strasse + " " + Hausnummer + ", " + Postleitzahl + " " + Ort;
         }
     }
 }

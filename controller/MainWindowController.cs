@@ -28,6 +28,7 @@ namespace Studiengangsverwaltung.controller
             KursListe.Instance.Liste = new KursListe();
             StudiengangListe.Instance.Liste = new StudiengangListe();
 
+            PersonListe.Instance.Liste.Add(new Student(1, "Max", "Mustermann", new Adresse("Musterstraße", "1a", 12345, "Musterstadt"), new DateTime(1990, 10, 12).Date, 20));
             KursListe.Instance.Liste.Add(new Kurs(1, "Testkurs", "Testkursbeschreibung"));
 
             mainWindow.lv_personen.ItemsSource = PersonListe.Instance.Liste;

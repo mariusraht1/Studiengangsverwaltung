@@ -18,29 +18,5 @@ namespace Studiengangsverwaltung.view
         {
             MainWindowController.Instance.exit();
         }
-
-        private void tb_person_search_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb_person_search = sender as TextBox;
-            tb_person_search.Text = "";
-        }
-
-        private void tb_person_search_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb_search = sender as TextBox;
-            tb_search.Text = "Suche...";
-        }
-
-        private void tb_kurs_search_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb_search = sender as TextBox;
-            tb_search.Text = "";
-        }
-
-        private void tb_kurs_search_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb_search = sender as TextBox;
-            tb_search.Text = "Suche...";
-        }
     }
 }

@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Studiengangsverwaltung.model
 {
     [XmlRoot("PersonListe")]
-    public class PersonListe : ObservableCollection<Kurs>
+    public class PersonListe : ObservableCollection<Person>
     {
         public PersonListe Liste { get; set; }
 

@@ -1,10 +1,10 @@
 using Studiengangsverwaltung.model;
-using System.Collections.ObjectModel;
 
 namespace Studiengangsverwaltung
 {
     public class Studiengang
     {
+        public string Name { get; set; }
         public Kurs Kurs { get; set; }
         public Semester Semester { get; set; }
         public Dozent Dozent { get; set; }
@@ -12,8 +12,9 @@ namespace Studiengangsverwaltung
 
         public Studiengang() { }
 
-        public Studiengang(Kurs kurs, Semester semester, Dozent dozent, StudentListe studenten)
+        public Studiengang(string name, Kurs kurs, Semester semester, Dozent dozent, StudentListe studenten)
         {
+            Name = name;
             Kurs = kurs;
             Semester = semester;
             Dozent = dozent;
