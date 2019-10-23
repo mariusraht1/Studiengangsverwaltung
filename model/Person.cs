@@ -1,13 +1,17 @@
+using Studiengangsverwaltung.model;
 using System;
 
 namespace Studiengangsverwaltung
 {
+    public enum Rolle
+    {
+        Student,
+        Dozent
+    }
+
     public abstract class Person
     {
-        public enum Rollen { Student, Dozent }
-
-        public int ID { get; set; }
-        public Rollen Rolle { get; set; }
+        public Rolle Rolle { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
         public Adresse Adresse { get; set; }
@@ -15,16 +19,15 @@ namespace Studiengangsverwaltung
 
         public Person() { }
 
-        public Person(int id, Rollen rolle, string vorname, string nachname, Adresse adresse, DateTime geburtsdatum)
+        public Person(Rolle rolle, string vorname, string nachname, Adresse adresse, DateTime geburtsdatum)
         {
-            ID = id;
             Rolle = rolle;
             Vorname = vorname;
             Nachname = nachname;
             Adresse = adresse;
             Geburtsdatum = geburtsdatum;
+
+            PersonListe.Instance.Add(this);
         }
-
-
     }
 }

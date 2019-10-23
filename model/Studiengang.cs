@@ -5,22 +5,18 @@ namespace Studiengangsverwaltung
     public class Studiengang
     {
         public string Name { get; set; }
-        public Kurs Kurs { get; set; }
-        public Semester Semester { get; set; }
-        public Dozent Dozent { get; set; }
-        public StudentListe Studenten { get; set; }
+        public Abschluss Abschluss { get; set; }
+        public SemesterListe SemesterListe { get; set; }
 
         public Studiengang() { }
 
-        public Studiengang(string name, Kurs kurs, Semester semester, Dozent dozent, StudentListe studenten)
+        public Studiengang(string name, Abschluss abschluss, SemesterListe semesterListe)
         {
             Name = name;
-            Kurs = kurs;
-            Semester = semester;
-            Dozent = dozent;
-            Studenten = studenten;
+            Abschluss = abschluss;
+            SemesterListe = semesterListe;
+
+            StudiengangListe.Instance.Add(this);
         }
-
-
     }
 }

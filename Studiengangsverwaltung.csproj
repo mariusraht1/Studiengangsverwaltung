@@ -59,6 +59,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,11 +80,15 @@
     </ApplicationDefinition>
     <Compile Include="controller\MainWindowController.cs" />
     <Compile Include="controller\ReadWriteController.cs" />
+    <Compile Include="controller\SerializeObjectsWrapper.cs" />
     <Compile Include="model\Abschluss.cs" />
     <Compile Include="model\Adresse.cs" />
     <Compile Include="model\Dozent.cs" />
     <Compile Include="model\Kurs.cs" />
+    <Compile Include="model\AbschlussListe.cs" />
+    <Compile Include="model\AdressListe.cs" />
     <Compile Include="model\StudentListe.cs" />
+    <Compile Include="model\SemesterListe.cs" />
     <Compile Include="model\StudiengangListe.cs" />
     <Compile Include="model\PersonListe.cs" />
     <Compile Include="model\KursListe.cs" />

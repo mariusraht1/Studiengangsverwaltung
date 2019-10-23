@@ -1,20 +1,24 @@
-﻿namespace Studiengangsverwaltung
+﻿using Studiengangsverwaltung.model;
+
+namespace Studiengangsverwaltung
 {
     public class Kurs
     {
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Beschreibung { get; set; }
+        public Dozent Dozent { get; set; }
+        public StudentListe StudentListe { get; set; }
 
         public Kurs() { }
 
-        public Kurs(int id, string name, string beschreibung)
+        public Kurs(string name, string beschreibung, Dozent dozent, StudentListe studentListe)
         {
-            ID = id;
             Name = name;
             Beschreibung = beschreibung;
-        }
-        
+            Dozent = dozent;
+            StudentListe = studentListe;
 
+            KursListe.Instance.Add(this);
+        }
     }
 }

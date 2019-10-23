@@ -7,8 +7,10 @@ namespace Studiengangsverwaltung
     {
         public Abschluss Abschluss { get; set; }
 
-        public Dozent(int id, string vorname, string nachname, Adresse adresse, DateTime geburtsdatum, Abschluss abschluss)
-        : base(id, Rollen.Dozent, vorname, nachname, adresse, geburtsdatum)
+        public Dozent() { }
+
+        public Dozent(string vorname, string nachname, Adresse adresse, DateTime geburtsdatum, Abschluss abschluss)
+        : base(Rolle.Dozent, vorname, nachname, adresse, geburtsdatum)
         {
             Abschluss = abschluss;
         }

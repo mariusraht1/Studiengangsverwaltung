@@ -13,7 +13,7 @@
             get { return instance ?? (instance = new Settings()); }
         }
 
-        public void init()
+        public void Init()
         {
             PathToDataFile = PathToProgram + "data.xml";
             ChangesApplied = false;

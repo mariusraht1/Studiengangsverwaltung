@@ -24,7 +24,7 @@
                     <TextBlock Text="Personenverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5" Cursor="Arrow">
-                    <ListView x:Name="lv_personen" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single">
+                    <ListView x:Name="lv_personen" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="lv_personen_SelectionChanged">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -41,32 +41,28 @@
                                 </GridViewColumn>
                                 <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" Width="154"/>
                                 <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" Width="154"/>
-                                <GridViewColumn Header="Geburtsdatum" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Geburtsdatum, StringFormat='dd.MM.yyyy'}" HorizontalAlignment="Center" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum, StringFormat='dd.MM.yyyy'}" Width="100"/>
                                 <GridViewColumn Header="Adresse" DisplayMemberBinding="{Binding Adresse}" Width="260"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <ComboBox x:Name="cb_rolle" HorizontalAlignment="Left" Margin="100,155,0,0" VerticalAlignment="Top" Width="128" Height="28" FontSize="14" FontFamily="Calibri" SelectedIndex="0" VerticalContentAlignment="Center" Padding="8,3"/>
+                    <ComboBox x:Name="cb_rolle" HorizontalAlignment="Left" Margin="100,155,0,0" VerticalAlignment="Top" Width="128" Height="28" FontSize="14" FontFamily="Calibri" SelectedIndex="0" VerticalContentAlignment="Center" Padding="8,3" SelectionChanged="cb_rolle_SelectionChanged"/>
                     <Label Content="Vorname:" Margin="10,188,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
                     <TextBox x:Name="tb_vorname" HorizontalAlignment="Left" Height="28" Margin="100,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
                     <Label Content="Nachname:" Margin="10,221,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
                     <TextBox x:Name="tb_nachname" HorizontalAlignment="Left" Height="28" Margin="100,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
                     <Label Content="Rolle:" Margin="10,155,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
                     <Label Content="Geburtstag:" Margin="10,254,673,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
-                    <DatePicker x:Name="dp_geburtstag" HorizontalAlignment="Left" Margin="100,254,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="104" Text="20.10.2019"/>
+                    <DatePicker x:Name="dp_geburtstag" HorizontalAlignment="Left" Margin="100,254,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="104"/>
                     <Label Content="Straße:" Margin="359,188,346,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
                     <TextBox x:Name="tb_strasse" Height="28" Margin="427,188,10,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
                     <Label Content="PLZ/Ort:" Margin="359,221,346,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0"/>
                     <TextBox x:Name="tb_postleitzahl" Height="28" Margin="427,221,275,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="0" MaxLines="1" HorizontalContentAlignment="Center"/>
                     <TextBox x:Name="tb_ort" Height="28" Margin="496,221,10,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
-                    <Button x:Name="btn_person_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand"/>
-                    <Button x:Name="btn_person_save" Content="Speichern" Margin="0,0,10,10" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
+                    <Button x:Name="btn_person_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand" Click="btn_person_reset_Click"/>
+                    <Button x:Name="btn_person_save" Content="Speichern" Margin="0,0,10,10" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_person_save_Click"/>
+                    <Button x:Name="btn_person_add" Content="Hinzufügen" Margin="0,0,220,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_person_add_Click"/>
+                    <Button x:Name="btn_person_del" Content="Löschen" Margin="0,0,115,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_person_del_Click"/>
                 </Grid>
             </TabItem>
             <TabItem FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
@@ -105,8 +101,8 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <DatePicker x:Name="dp_startdatum" HorizontalAlignment="Left" Margin="190,254,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="104" Text="20.10.2019"/>
-                    <DatePicker x:Name="dp_endedatum" HorizontalAlignment="Left" Margin="334,254,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Width="104" Height="28" Text="20.10.2019"/>
+                    <DatePicker x:Name="dp_startdatum" HorizontalAlignment="Left" Margin="190,254,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="104"/>
+                    <DatePicker x:Name="dp_endedatum" HorizontalAlignment="Left" Margin="334,254,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Width="104" Height="28"/>
                     <Label Content="Semester:" Margin="10,254,660,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center"/>
                     <Label Content="von" Margin="154,254,582,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Width="32" HorizontalContentAlignment="Center"/>
                     <Label Content="bis" Margin="299,254,439,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="30" HorizontalContentAlignment="Center" Padding="5"/>

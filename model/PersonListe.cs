@@ -1,18 +1,19 @@
 ﻿using System.Collections.ObjectModel;
-using System.Xml.Serialization;
 
 namespace Studiengangsverwaltung.model
 {
-    [XmlRoot("PersonListe")]
     public class PersonListe : ObservableCollection<Person>
     {
-        public PersonListe Liste { get; set; }
-
         private static PersonListe instance;
 
         public static PersonListe Instance
         {
             get { return instance ?? (instance = new PersonListe()); }
+        }
+
+        public static void SetInstance(PersonListe personListe)
+        {
+            instance = personListe;
         }
     }
 }

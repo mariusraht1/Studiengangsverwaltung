@@ -9,6 +9,8 @@
         public Abschluss(string name)
         {
             Name = name;
+
+            AbschlussListe.Instance.Add(this);
         }
     }
 }
