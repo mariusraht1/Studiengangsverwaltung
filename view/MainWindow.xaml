@@ -24,12 +24,6 @@
                     <TextBlock Text="Studiengangsverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5" Cursor="Arrow">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
                     <ListView x:Name="lv_studiengaenge" Height="140" Margin="10,10,10,0" VerticalAlignment="Top">
                         <ListView.View>
                             <GridView>
@@ -75,8 +69,8 @@
                     <ComboBox Margin="0,202,10,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="335"/>
                     <Button Content="+" HorizontalAlignment="Left" Margin="407,235,0,0" VerticalAlignment="Top" Width="28" Height="28"/>
                     <Button Content="+" HorizontalAlignment="Right" Margin="0,235,10,0" VerticalAlignment="Top" Width="28" Height="28"/>
-                    <Button x:Name="btn_new_studiengang" Content="Neu" Margin="0,0,220,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_new_person_Click"/>
-                    <Button x:Name="btn_del_studiengang" Content="Löschen" Margin="0,0,115,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_del_person_Click"/>
+                    <Button x:Name="btn_new_studiengang" Content="Neu" Margin="0,0,220,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
+                    <Button x:Name="btn_del_studiengang" Content="Löschen" Margin="0,0,115,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
                 </Grid>
             </TabItem>
             <TabItem FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
