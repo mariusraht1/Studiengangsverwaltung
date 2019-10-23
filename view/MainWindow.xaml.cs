@@ -27,10 +27,10 @@ namespace Studiengangsverwaltung.view
         {
             Settings.Instance.ChangesApplied = false;
 
-            btn_person_reset.IsEnabled = false;
-            btn_person_add.IsEnabled = true;
-            btn_person_del.IsEnabled = true;
-            btn_person_save.IsEnabled = false;
+            btn_reset_person.IsEnabled = false;
+            btn_new_person.IsEnabled = true;
+            btn_del_person.IsEnabled = true;
+            btn_save_person.IsEnabled = false;
 
             Person selectedPerson = lv_personen.SelectedItem as Person;
 
@@ -57,22 +57,22 @@ namespace Studiengangsverwaltung.view
                 {
                     Settings.Instance.ChangesApplied = true;
 
-                    btn_person_reset.IsEnabled = true;
-                    btn_person_save.IsEnabled = true;
+                    btn_reset_person.IsEnabled = true;
+                    btn_save_person.IsEnabled = true;
                 }
             }
         }
 
-        private void btn_person_reset_Click(object sender, RoutedEventArgs e)
+        private void btn_reset_person_Click(object sender, RoutedEventArgs e)
         {
             lv_personen_SelectionChanged(null, null);
         }
 
-        private void btn_person_add_Click(object sender, RoutedEventArgs e)
+        private void btn_new_person_Click(object sender, RoutedEventArgs e)
         {
             lv_personen.SelectedIndex = -1;
-            btn_person_add.IsEnabled = false;
-            btn_person_del.IsEnabled = false;
+            btn_new_person.IsEnabled = false;
+            btn_del_person.IsEnabled = false;
 
             cb_rolle.SelectedIndex = 0;
             tb_vorname.Text = "";
@@ -85,15 +85,15 @@ namespace Studiengangsverwaltung.view
             tb_vorname.Focus();
         }
 
-        private void btn_person_del_Click(object sender, RoutedEventArgs e)
+        private void btn_del_person_Click(object sender, RoutedEventArgs e)
         {
             Person selectedPerson = lv_personen.SelectedItem as Person;
             PersonListe.Instance.Remove(selectedPerson);
 
-            btn_person_add_Click(null, null);
+            btn_new_person_Click(null, null);
         }
 
-        private void btn_person_save_Click(object sender, RoutedEventArgs e)
+        private void btn_save_person_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Felder für Abschluss und ECTS einfügen (auch erst ein-/ausblenden, wenn erforderlich)
 
