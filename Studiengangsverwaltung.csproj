@@ -56,6 +56,9 @@
   <PropertyGroup>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Studiengangsverwaltung.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -78,7 +81,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="controller\MainWindowController.cs" />
     <Compile Include="controller\ReadWriteController.cs" />
     <Compile Include="controller\SerializeObjectsWrapper.cs" />
     <Compile Include="model\Abschluss.cs" />
@@ -101,10 +103,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="model\Studiengang.cs" />
+    <Compile Include="view\Kursverwaltung.xaml.cs">
+      <DependentUpon>Kursverwaltung.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="view\Personverwaltung.xaml.cs">
+      <DependentUpon>Personverwaltung.xaml</DependentUpon>
+    </Compile>
+    <Page Include="view\Kursverwaltung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\Personverwaltung.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
