@@ -1,4 +1,4 @@
-﻿namespace Studiengangsverwaltung.model
+﻿namespace Universitätsverwaltung.model
 {
     class Settings
     {

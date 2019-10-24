@@ -1,7 +1,7 @@
-using Studiengangsverwaltung.model;
+using Universitätsverwaltung.model;
 using System;
 
-namespace Studiengangsverwaltung
+namespace Universitätsverwaltung
 {
     public enum Rolle
     {

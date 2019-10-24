@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C2147297-13A3-4A52-B683-0AA575712B1D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Studiengangsverwaltung</RootNamespace>
-    <AssemblyName>Studiengangsverwaltung</AssemblyName>
+    <RootNamespace>Universitätsverwaltung</RootNamespace>
+    <AssemblyName>Universitätsverwaltung</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -57,7 +57,7 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Studiengangsverwaltung.App</StartupObject>
+    <StartupObject>Universitätsverwaltung.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -112,6 +112,12 @@
     <Compile Include="view\Personverwaltung.xaml.cs">
       <DependentUpon>Personverwaltung.xaml</DependentUpon>
     </Compile>
+    <Compile Include="view\Semesterverwaltung.xaml.cs">
+      <DependentUpon>Semesterverwaltung.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\Studiengangsverwaltung.xaml.cs">
+      <DependentUpon>Studiengangsverwaltung.xaml</DependentUpon>
+    </Compile>
     <Page Include="view\Kursverwaltung.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,6 +127,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\Personverwaltung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\Semesterverwaltung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\Studiengangsverwaltung.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

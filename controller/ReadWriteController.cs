@@ -1,9 +1,9 @@
-﻿using Studiengangsverwaltung.model;
+﻿using Universitätsverwaltung.model;
 using System;
 using System.IO;
 using System.Runtime.Serialization;
 
-namespace Studiengangsverwaltung.controller
+namespace Universitätsverwaltung.controller
 {
     class ReadWriteController
     {

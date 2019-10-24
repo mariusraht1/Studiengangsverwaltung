@@ -1,9 +1,9 @@
-﻿using Studiengangsverwaltung.controller;
-using Studiengangsverwaltung.model;
+﻿using Universitätsverwaltung.controller;
+using Universitätsverwaltung.model;
 using System;
 using System.Windows;
 
-namespace Studiengangsverwaltung.view
+namespace Universitätsverwaltung.view
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
@@ -31,7 +31,7 @@ namespace Studiengangsverwaltung.view
 
             //lv_personen.ItemsSource = PersonListe.Instance;
             //lv_kurse.ItemsSource = KursListe.Instance;
-            lv_studiengaenge.ItemsSource = StudiengangListe.Instance;
+            //lv_studiengaenge.ItemsSource = StudiengangListe.Instance;
             //cb_rolle.ItemsSource = Enum.GetValues(typeof(Rolle));
             //cb_rolle.SelectedItem = Rolle.Student;
         }

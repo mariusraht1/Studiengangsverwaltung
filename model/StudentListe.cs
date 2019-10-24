@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Studiengangsverwaltung.model
+namespace Universitätsverwaltung.model
 {
     public class StudentListe : ObservableCollection<Student>
     {

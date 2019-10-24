@@ -3,11 +3,11 @@
 namespace Universitätsverwaltung.view
 {
     /// <summary>
-    /// Interaktionslogik für Kursverwaltung.xaml
+    /// Interaktionslogik für Studiengangsverwaltung.xaml
     /// </summary>
-    public partial class Kursverwaltung : UserControl
+    public partial class Studiengangsverwaltung : UserControl
     {
-        public Kursverwaltung()
+        public Studiengangsverwaltung()
         {
             InitializeComponent();
         }

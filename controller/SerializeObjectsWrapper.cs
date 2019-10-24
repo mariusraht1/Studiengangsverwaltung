@@ -1,7 +1,7 @@
-﻿using Studiengangsverwaltung.model;
+﻿using Universitätsverwaltung.model;
 using System.Runtime.Serialization;
 
-namespace Studiengangsverwaltung.controller
+namespace Universitätsverwaltung.controller
 {
     [DataContract]
     [KnownType(typeof(Dozent))]

@@ -1,10 +1,10 @@
-﻿using Studiengangsverwaltung.model;
+﻿using Universitätsverwaltung.model;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Studiengangsverwaltung.view
+namespace Universitätsverwaltung.view
 {
     /// <summary>
     /// Interaktionslogik für Personverwaltung.xaml

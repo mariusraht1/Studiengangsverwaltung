@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Studiengangsverwaltung
+namespace Universitätsverwaltung
 {
     public class Student : Person
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Studiengangsverwaltung
+namespace Universitätsverwaltung
 {
     /// <summary>
     /// Interaktionslogik für "App.xaml"

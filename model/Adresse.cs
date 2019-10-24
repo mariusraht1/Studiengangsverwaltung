@@ -1,6 +1,6 @@
-﻿using Studiengangsverwaltung.model;
+﻿using Universitätsverwaltung.model;
 
-namespace Studiengangsverwaltung
+namespace Universitätsverwaltung
 {
     public class Adresse
     {
