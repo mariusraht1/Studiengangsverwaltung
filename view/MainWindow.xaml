@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Universitätsverwaltung.view"
         mc:Ignorable="d"
-        Title="Universitätsverwaltung" Width="890" Height="570" Closing="MainWindow_Closing" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="Universitätsverwaltung" Width="890" Height="612" Closing="MainWindow_Closing" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Window.Resources>
         <Style x:Key="TabItemText" TargetType="{x:Type TextBlock}">
             <Style.Triggers>
@@ -20,25 +20,25 @@
     </Window.Resources>
     <Grid>
         <TabControl x:Name="tc_menu" Margin="10">
-            <TabItem FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" Margin="-4,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <TabItem x:Name="ti_studiengangsverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" Margin="-4,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <TabItem.Header>
                     <TextBlock Text="Studiengangsverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
                 <local:Studiengangsverwaltung/>
             </TabItem>
-            <TabItem FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
+            <TabItem x:Name="ti_personverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
                 <TabItem.Header>
-                    <TextBlock Text="Personenverwaltung" Style="{StaticResource TabItemText}" />
+                    <TextBlock Text="Personverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
                 <local:Personverwaltung/>
             </TabItem>
-            <TabItem FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
+            <TabItem x:Name="ti_kursverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
                 <TabItem.Header>
                     <TextBlock Text="Kursverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
                 <local:Kursverwaltung/>
             </TabItem>
-            <TabItem FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
+            <TabItem x:Name="ti_semesterverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
                 <TabItem.Header>
                     <TextBlock Text="Semesterverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>

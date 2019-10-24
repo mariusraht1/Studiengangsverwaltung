@@ -7,9 +7,21 @@ namespace Universitätsverwaltung.view
     /// </summary>
     public partial class Semesterverwaltung : UserControl
     {
+        private static Semesterverwaltung instance;
+
+        public static Semesterverwaltung Instance
+        {
+            get { return instance ?? (instance = new Semesterverwaltung()); }
+        }
+
         public Semesterverwaltung()
         {
             InitializeComponent();
+        }
+
+        public void Init()
+        {
+
         }
     }
 }

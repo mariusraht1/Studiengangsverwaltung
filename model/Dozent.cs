@@ -1,10 +1,13 @@
 ﻿using Universitätsverwaltung.model;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Universitätsverwaltung
 {
     public class Dozent : Person
     {
+        [Required]
         public Abschluss Abschluss { get; set; }
 
         public Dozent() { }
@@ -13,6 +16,22 @@ namespace Universitätsverwaltung
         : base(Rolle.Dozent, vorname, nachname, adresse, geburtsdatum)
         {
             Abschluss = abschluss;
+        }
+
+        public new bool IsValid()
+        {
+            switch (base.IsValid())
+            {
+                case true:
+                    ValidationContext validationContext = new ValidationContext(this);
+                    List<ValidationResult> validationResults = new List<ValidationResult>();
+
+                    return Validator.TryValidateObject(this, validationContext, validationResults);
+                case false:
+                    return false;
+            }
+
+            return true;
         }
     }
 }

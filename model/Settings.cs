@@ -5,6 +5,7 @@
         public string PathToProgram { get; set; }
         public string PathToDataFile { get; set; }
         public bool ChangesApplied { get; set; }
+        public string DateFormat { get; set; }
 
         private static Settings instance;
 
@@ -17,6 +18,7 @@
         {
             PathToDataFile = PathToProgram + "data.xml";
             ChangesApplied = false;
+            DateFormat = "dd.MM.yyyy";
         }
     }
 }

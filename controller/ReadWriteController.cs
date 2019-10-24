@@ -45,8 +45,7 @@ namespace Universitätsverwaltung.controller
             {
                 Settings.Instance.ChangesApplied = true;
 
-                if (Settings.Instance.ChangesApplied.Equals(true)
-                     && StudiengangListe.Instance.Count > 0)
+                if (Settings.Instance.ChangesApplied.Equals(true))
                 {
                     DataContractSerializer serializer = new DataContractSerializer(typeof(SerializeObjectsWrapper), null,
                         2147483647, false, true, null);

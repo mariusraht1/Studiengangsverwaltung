@@ -17,8 +17,6 @@ namespace Universitätsverwaltung
             Beschreibung = beschreibung;
             Dozent = dozent;
             StudentListe = studentListe;
-
-            KursListe.Instance.Add(this);
         }
     }
 }

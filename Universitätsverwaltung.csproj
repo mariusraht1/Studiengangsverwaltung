@@ -61,6 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
@@ -83,12 +84,14 @@
     </ApplicationDefinition>
     <Compile Include="controller\ReadWriteController.cs" />
     <Compile Include="controller\SerializeObjectsWrapper.cs" />
+    <Compile Include="controller\Validation.cs" />
     <Compile Include="model\Abschluss.cs" />
     <Compile Include="model\Adresse.cs" />
     <Compile Include="model\Dozent.cs" />
     <Compile Include="model\Kurs.cs" />
     <Compile Include="model\AbschlussListe.cs" />
     <Compile Include="model\AdressListe.cs" />
+    <Compile Include="model\DozentListe.cs" />
     <Compile Include="model\StudentListe.cs" />
     <Compile Include="model\SemesterListe.cs" />
     <Compile Include="model\StudiengangListe.cs" />
@@ -166,9 +169,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\img\uni_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +182,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="resources\img\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

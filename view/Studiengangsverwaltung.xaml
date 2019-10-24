@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="485" d:DesignWidth="858">
+             mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518">
     <Grid Background="#FFE5E5E5" Cursor="Arrow">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -12,7 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lv_studiengaenge" Height="140" Margin="10,10,10,0" VerticalAlignment="Top">
+        <ListView x:Name="lv_studiengang" Height="140" Margin="10,10,10,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -21,21 +20,20 @@
         </ListView>
         <Label Content="Semester:" Margin="10,202,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="85"/>
         <Label Content="Dozent:" Margin="440,202,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68"/>
-        <Label Content="Studiengang:" Margin="10,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="85"/>
-        <ComboBox x:Name="cb_studiengang" HorizontalAlignment="Left" Margin="100,155,0,0" VerticalAlignment="Top" Width="295" Height="28"/>
-        <TextBox x:Name="tb_studiengang" HorizontalAlignment="Left" Height="28" Margin="100,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="335" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
-        <ListView HorizontalAlignment="Left" Margin="100,268,0,0" Width="335" Height="164" VerticalAlignment="Top">
+        <Label Content="Studiengang:" Margin="10,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
+        <TextBox x:Name="tb_studiengang" HorizontalAlignment="Left" Height="28" Margin="115,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
+        <ListView x:Name="lv_kurs" HorizontalAlignment="Left" Margin="100,268,0,0" Width="335" Height="164" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="cb_studiengang_Copy" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="45" Height="28"/>
-        <Button x:Name="btn_add_semester" Content="+" Margin="60,235,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="35"/>
+        <ComboBox x:Name="cb_semester" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="52" Height="28"/>
+        <Button x:Name="btn_add_semester" Content="+" Margin="67,235,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="28"/>
         <Label Content="Kurs:" Margin="97,202,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="338"/>
-        <ComboBox x:Name="cb_studiengang_Copy1" Margin="100,235,0,0" VerticalAlignment="Top" Width="302" Height="28" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left"/>
-        <ListView HorizontalAlignment="Left" Margin="10,268,0,0" Width="85" Height="164" VerticalAlignment="Top">
+        <ComboBox x:Name="cb_kurs" Margin="100,235,0,0" VerticalAlignment="Top" Width="302" Height="28" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left"/>
+        <ListView x:Name="lv_semester" HorizontalAlignment="Left" Margin="10,268,0,0" Width="85" Height="164" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -44,7 +42,7 @@
         </ListView>
         <Label Content="Student:" Margin="440,235,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68"/>
         <ComboBox x:Name="cb_student" Margin="0,235,43,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="302"/>
-        <ListView Margin="440,268,10,0" Height="164" VerticalAlignment="Top">
+        <ListView x:Name="lv_student" Margin="440,268,10,0" Height="164" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -52,12 +50,15 @@
             </ListView.View>
         </ListView>
         <Separator Height="9" Margin="10,188,10,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_reset_studiengang" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand"/>
-        <Button x:Name="btn_save_studiengang" Content="Speichern" Margin="0,0,10,10" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
-        <ComboBox Margin="0,202,10,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="335"/>
+        <Button x:Name="btn_reset_studiengang" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand"/>
+        <Button x:Name="btn_save_studiengang" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
+        <ComboBox x:Name="cb_dozent" Margin="0,202,10,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="335"/>
         <Button Content="+" HorizontalAlignment="Left" Margin="407,235,0,0" VerticalAlignment="Top" Width="28" Height="28"/>
         <Button Content="+" HorizontalAlignment="Right" Margin="0,235,10,0" VerticalAlignment="Top" Width="28" Height="28"/>
-        <Button x:Name="btn_new_studiengang" Content="Neu" Margin="0,0,220,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
-        <Button x:Name="btn_del_studiengang" Content="Löschen" Margin="0,0,115,10" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
+        <Button x:Name="btn_new_studiengang" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
+        <Button x:Name="btn_del_studiengang" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
+        <Separator Margin="10,0,10,31" Height="8" VerticalAlignment="Bottom"/>
+        <Label Content="Version: 24.10.2019" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="118"/>
+        <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="715" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
     </Grid>
 </UserControl>

@@ -15,8 +15,6 @@ namespace Universitätsverwaltung
             Name = name;
             Abschluss = abschluss;
             SemesterListe = semesterListe;
-
-            StudiengangListe.Instance.Add(this);
         }
     }
 }

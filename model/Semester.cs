@@ -18,8 +18,6 @@ namespace Universitätsverwaltung
             Startdatum = startdatum;
             Endedatum = endeDatum;
             KursListe = kursListe;
-
-            SemesterListe.Instance.Add(this);
         }
     }
 }
