@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Universitätsverwaltung.model;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
@@ -124,52 +125,52 @@ namespace Universitätsverwaltung.view
 
         #region TextBox
 
-        private void Dp_geburtsdatum_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Dp_geburtsdatum_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(0, typeof(Person), dp_geburtsdatum, dp_geburtsdatum.Text, "Geburtsdatum", lbl_geburtsdatum.Content.ToString());
         }
 
-        private void Tb_matrikelnummer_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_matrikelnummer_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(1, typeof(Student), tb_matrikelnummer, tb_matrikelnummer.Text, "Matrikelnummer", lbl_matrikelnummer.Content.ToString());
         }
 
-        private void Tb_abschluss_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_abschluss_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(2, typeof(Abschluss), tb_abschluss, tb_abschluss.Text, "Name", lbl_abschluss.Content.ToString());
         }
 
-        private void Tb_ects_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_ects_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(3, typeof(Student), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
         }
 
-        private void Tb_vorname_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_vorname_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(4, typeof(Person), tb_vorname, tb_vorname.Text, "Vorname", lbl_vorname.Content.ToString());
         }
 
-        private void Tb_nachname_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_nachname_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(5, typeof(Person), tb_nachname, tb_nachname.Text, "Nachname", lbl_nachname.Content.ToString());
         }
 
-        private void Tb_strasse_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_strasse_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(6, typeof(Adresse), tb_strasse, tb_strasse.Text, "Strasse", lbl_strasse_nr.Content.ToString());
         }
 
-        private void Tb_hausnummer_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_hausnummer_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(7, typeof(Adresse), tb_hausnummer, tb_hausnummer.Text, "Hausnummer", lbl_strasse_nr.Content.ToString());
         }
 
-        private void Tb_postleitzahl_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_postleitzahl_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(8, typeof(Adresse), tb_postleitzahl, tb_postleitzahl.Text, "Postleitzahl", lbl_plz_ort.Content.ToString());
         }
 
-        private void Tb_ort_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Tb_ort_KeyUp(object sender, KeyEventArgs e)
         {
             validateAttribute(9, typeof(Adresse), tb_ort, tb_ort.Text, "Ort", lbl_plz_ort.Content.ToString());
         }

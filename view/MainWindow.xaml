@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="Universitätsverwaltung" Width="890" Height="612" Closing="MainWindow_Closing" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Window.Resources>
+        <Style x:Key="contextMenu" TargetType="{x:Type Control}">
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu IsEnabled="False" Visibility="Hidden">
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style BasedOn="{StaticResource contextMenu}" TargetType="TextBox"/>
+        <Style BasedOn="{StaticResource contextMenu}" TargetType="DatePickerTextBox"/>
         <Style x:Key="TabItemText" TargetType="{x:Type TextBlock}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="True">
