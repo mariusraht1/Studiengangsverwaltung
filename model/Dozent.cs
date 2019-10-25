@@ -36,15 +36,29 @@ namespace Universitätsverwaltung
 
         public override bool Equals(object obj)
         {
-            Dozent dozent = (Dozent)obj;
-
-            if (dozent == null)
+            if (obj == null)
             {
                 return false;
             }
 
-            return base.Equals(obj)
-                    && Abschluss.Equals(dozent.Abschluss);
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Dozent dozent = (Dozent)obj;
+
+            return Rolle.Equals(dozent.Rolle)
+                && Vorname.Equals(dozent.Vorname)
+                && Nachname.Equals(dozent.Nachname)
+                && Adresse.Equals(dozent.Adresse)
+                && Geburtsdatum.Equals(dozent.Geburtsdatum)
+                && Abschluss.Equals(dozent.Abschluss);
         }
 
         public override string ToString()

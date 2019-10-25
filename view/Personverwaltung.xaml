@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
              mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518">
     <Grid Background="#FFE5E5E5" Cursor="Arrow">
-        <ListView x:Name="lv_personen" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="Lv_personen_SelectionChanged">
+        <ListView x:Name="lv_personen" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="Lv_personen_SelectionChanged" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Rolle" Width="60">

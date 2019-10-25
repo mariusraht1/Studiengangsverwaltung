@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Universitätsverwaltung.controller;
-using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
@@ -51,12 +50,22 @@ namespace Universitätsverwaltung
 
         public override bool Equals(object obj)
         {
-            Person person = (Person)obj;
-
-            if(person == null)
+            if (obj == null)
             {
                 return false;
             }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Person person = (Person)obj;
 
             return Rolle.Equals(person.Rolle)
                     && Vorname.Equals(person.Vorname)

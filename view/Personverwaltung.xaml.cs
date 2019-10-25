@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using Universitätsverwaltung.model;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
@@ -315,16 +317,17 @@ namespace Universitätsverwaltung.view
             List<Person> personResult2 = PersonListe.Instance.Where(x => x.Vorname.Equals(newPerson.Vorname)
                                                                     && x.Nachname.Equals(newPerson.Nachname)
                                                                     && x.Geburtsdatum.Equals(newPerson.Geburtsdatum))
-                                                       .ToList();
+                                                             .ToList();
 
             if (personResult1.Count > 0)
             {
                 MessageBox.Show("Person existiert bereits:" +
                     "\nRolle: " + personResult1[0].Rolle +
                     "\nName: " + personResult1[0].Vorname + " " + personResult1[0].Nachname +
-                    "\nGeburtsdatum: " + personResult1[0].Geburtsdatum +
+                    "\nGeburtsdatum: " + personResult1[0].Geburtsdatum.ToShortDateString() +
                     "\nAdresse: " + personResult1[0].Adresse, "Person vorhanden", MessageBoxButton.OK);
 
+                btn_new_person.IsEnabled = true;
                 return true;
             }
             else if (personResult2.Count > 0)
@@ -366,6 +369,53 @@ namespace Universitätsverwaltung.view
             {
                 datePickerTextBox.Focus();
             }
+        }
+
+        private GridViewColumnHeader lastHeaderClicked = null;
+        private ListSortDirection lastDirection = ListSortDirection.Ascending;
+
+        private void GridViewColumnHeaderClickedHandler(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            ListSortDirection direction;
+
+            if (headerClicked != null)
+            {
+                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
+                {
+                    if (headerClicked != lastHeaderClicked)
+                    {
+                        direction = ListSortDirection.Ascending;
+                    }
+                    else
+                    {
+                        if (lastDirection == ListSortDirection.Ascending)
+                        {
+                            direction = ListSortDirection.Descending;
+                        }
+                        else
+                        {
+                            direction = ListSortDirection.Ascending;
+                        }
+                    }
+
+                    string header = headerClicked.Column.Header as string;
+                    Sort(header, direction);
+
+                    lastHeaderClicked = headerClicked;
+                    lastDirection = direction;
+                }
+            }
+        }
+
+        private void Sort(string sortBy, ListSortDirection direction)
+        {
+            ICollectionView dataView = CollectionViewSource.GetDefaultView(lv_personen.ItemsSource);
+
+            dataView.SortDescriptions.Clear();
+            SortDescription sd = new SortDescription(sortBy, direction);
+            dataView.SortDescriptions.Add(sd);
+            dataView.Refresh();
         }
     }
 }

@@ -46,16 +46,30 @@ namespace Universitätsverwaltung
 
         public override bool Equals(object obj)
         {
-            Student student = (Student)obj;
-
-            if (student == null)
+            if (obj == null)
             {
                 return false;
             }
 
-            return base.Equals(obj) 
-                    && Matrikelnummer.Equals(student.Matrikelnummer)
-                    && ECTS.Equals(student.ECTS);
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Student student = (Student)obj;
+
+            return Rolle.Equals(student.Rolle)
+                && Vorname.Equals(student.Vorname)
+                && Nachname.Equals(student.Nachname)
+                && Adresse.Equals(student.Adresse)
+                && Geburtsdatum.Equals(student.Geburtsdatum)
+                && Matrikelnummer.Equals(student.Matrikelnummer)
+                && ECTS.Equals(student.ECTS);
         }
 
         public override string ToString()

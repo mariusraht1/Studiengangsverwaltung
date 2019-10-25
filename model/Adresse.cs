@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Universitätsverwaltung.controller;
 using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
-    public class Adresse
+    public class Adresse : IComparable
     {
         [Required]
         [StringLength(80, MinimumLength = 2)]
@@ -52,7 +53,17 @@ namespace Universitätsverwaltung
         {
             Adresse adresse = (Adresse)obj;
 
-            if (adresse == null)
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
@@ -71,6 +82,42 @@ namespace Universitätsverwaltung
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null || obj.GetType() != GetType())
+            {
+                return -1;
+            }
+
+            Adresse adresse = (Adresse)obj;
+
+            int strasseEqualRate = Strasse.CompareTo(adresse.Strasse);
+
+            switch (strasseEqualRate)
+            {
+                case 0:
+                    int hausnummerEqualRate = Hausnummer.CompareTo(adresse.Hausnummer);
+
+                    switch (hausnummerEqualRate)
+                    {
+                        case 0:
+                            int plzEqualRate = Postleitzahl.CompareTo(adresse.Postleitzahl);
+
+                            switch (plzEqualRate)
+                            {
+                                case 0:
+                                    return Ort.CompareTo(adresse.Ort);
+                                default:
+                                    return plzEqualRate;
+                            }
+                        default:
+                            return hausnummerEqualRate;
+                    }
+                default:
+                    return strasseEqualRate;
+            }
         }
     }
 }
