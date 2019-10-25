@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
-             mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518">
-    <Grid Background="#FFE5E5E5" Cursor="Arrow">
+             mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518" Cursor="Arrow">
+    <Grid Background="#FFE5E5E5">
         <ListView x:Name="lv_person" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="Lv_person_SelectionChanged" GridViewColumnHeader.Click="GridViewColumnHeaderLvPersonClickedHandler">
             <ListView.View>
                 <GridView>
@@ -36,13 +36,12 @@
         <Label x:Name="lbl_plz_ort" Content="PLZ/Ort:" Margin="10,353,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="85"/>
         <TextBox x:Name="tb_postleitzahl" TabIndex="8" MaxLength="5" Height="28" Margin="100,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="0" MaxLines="1" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="64" KeyUp="Tb_postleitzahl_KeyUp"/>
         <TextBox x:Name="tb_ort" TabIndex="9" MaxLength="60" Height="28" Margin="169,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" KeyUp="Tb_ort_KeyUp" HorizontalAlignment="Left" Width="331"/>
-        <Button x:Name="btn_reset_person" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand" Click="btn_reset_person_Click"/>
-        <Button x:Name="btn_new_person" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_new_person_Click"/>
-        <Button x:Name="btn_del_person" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_del_person_Click"/>
-        <Button x:Name="btn_save_person" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_save_person_Click"/>
+        <Button x:Name="btn_reset_person" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Click="btn_reset_person_Click"/>
+        <Button x:Name="btn_new_person" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="btn_new_person_Click"/>
+        <Button x:Name="btn_del_person" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="btn_del_person_Click"/>
+        <Button x:Name="btn_save_person" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="btn_save_person_Click"/>
         <Separator Margin="10,0,10,31" Height="8" VerticalAlignment="Bottom"/>
-        <Label x:Name="lbl_version" Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="118"/>
-        <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="715" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
+        <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="712" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
         <Label x:Name="lbl_abschluss" Content="Abschluss:" Margin="10,221,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="85"/>
         <TextBox x:Name="tb_abschluss" TabIndex="3" MaxLength="80" Height="28" Margin="100,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" KeyUp="Tb_abschluss_KeyUp" HorizontalAlignment="Left" Width="400" IsEnabled="False"/>
         <Label x:Name="lbl_matrikelnummer" Content="Matrikelnr.:" Margin="10,188,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="85"/>
@@ -50,5 +49,7 @@
         <TextBox x:Name="tb_ects" TabIndex="3" MaxLength="2" Height="28" Margin="396,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" MaxLines="1" KeyUp="Tb_ects_KeyUp" HorizontalAlignment="Left" Width="40" IsEnabled="False" HorizontalContentAlignment="Center"/>
         <Label x:Name="lbl_ects" Content="ECTS-Punkte:" Margin="281,188,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="97"/>
         <TextBox x:Name="tb_hausnummer" TabIndex="7" MaxLength="5" Height="28" Margin="436,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="0" MaxLines="1" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="64" KeyUp="Tb_hausnummer_KeyUp"/>
+        <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="68"/>
+        <Label Content="Version:" Margin="0,0,83,10" Height="21" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="48" FontWeight="Bold"/>
     </Grid>
 </UserControl>

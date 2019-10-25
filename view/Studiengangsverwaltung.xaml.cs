@@ -41,6 +41,8 @@ namespace Universitätsverwaltung.view
             tb_studiengang.Focus();
         }
 
+        #region ListViewSorter
+
         private ListViewSorter lvStudiengangSorter = new ListViewSorter();
         private ListViewSorter lvSemesterSorter = new ListViewSorter();
         private ListViewSorter lvKursSorter = new ListViewSorter();
@@ -69,5 +71,7 @@ namespace Universitätsverwaltung.view
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
             lvStudentSorter.SortHeader(headerClicked, lv_student);
         }
+
+        #endregion
     }
 }

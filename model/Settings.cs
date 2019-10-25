@@ -4,7 +4,7 @@ namespace Universitätsverwaltung.model
 {
     internal class Settings
     {
-        public static string Version = "Version: " + DateTime.Now.Date.ToString("dd.MM.yyyy");
+        public static string Version = DateTime.Now.Date.ToString("dd.MM.yyyy");
 
         public string PathToProgram { get; set; }
         public string PathToDataFile { get; set; }

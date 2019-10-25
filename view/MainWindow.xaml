@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Universitätsverwaltung.view"
         mc:Ignorable="d" Title="Universitätsverwaltung" Width="890" Height="612" Closing="MainWindow_Closing" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
         <Style x:Key="contextMenu" TargetType="{x:Type Control}">
             <Setter Property="ContextMenu">
                 <Setter.Value>

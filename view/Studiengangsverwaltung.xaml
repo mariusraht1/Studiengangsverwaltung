@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
-             mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518">
+             mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518" Cursor="Arrow">
     <Grid Background="#FFE5E5E5" Cursor="Arrow">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -59,7 +59,8 @@
         <Button x:Name="btn_new_studiengang" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
         <Button x:Name="btn_del_studiengang" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
         <Separator Margin="10,0,10,31" Height="8" VerticalAlignment="Bottom"/>
-        <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="118"/>
-        <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="715" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
+        <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="68"/>
+        <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="712" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
+        <Label Content="Version:" Margin="0,0,83,10" Height="21" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="48" FontWeight="Bold"/>
     </Grid>
 </UserControl>

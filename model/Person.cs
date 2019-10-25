@@ -16,9 +16,7 @@ namespace Universitätsverwaltung
         public Rolle Rolle { get; set; }
         [Required]
         [StringLength(42, MinimumLength = 2)]
-        [Display(Name = "Vorname")]
         public string Vorname { get; set; }
-        [Display(Name = "Nachname")]
         [Required]
         [StringLength(42, MinimumLength = 2)]
         public string Nachname { get; set; }
@@ -26,7 +24,6 @@ namespace Universitätsverwaltung
         public Adresse Adresse { get; set; }
         [Date]
         [Required]
-        [Display(Name = "Geburtsdatum")]
         public DateTime Geburtsdatum { get; set; }
 
         public Person() { }

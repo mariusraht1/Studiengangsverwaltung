@@ -85,7 +85,7 @@
     <Compile Include="controller\ListViewSorter.cs" />
     <Compile Include="controller\ReadWriteController.cs" />
     <Compile Include="controller\SerializeObjectsWrapper.cs" />
-    <Compile Include="controller\Validation.cs" />
+    <Compile Include="controller\ValidationController.cs" />
     <Compile Include="model\Abschluss.cs" />
     <Compile Include="model\Adresse.cs" />
     <Compile Include="model\Dozent.cs" />

@@ -31,6 +31,8 @@ namespace Universitätsverwaltung.view
             tb_name.Focus();
         }
 
+        #region ListViewSorter
+
         private ListViewSorter lvKursSorter = new ListViewSorter();
 
         private void GridViewColumnHeaderLvKursClickedHandler(object sender, RoutedEventArgs e)
@@ -38,5 +40,7 @@ namespace Universitätsverwaltung.view
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
             lvKursSorter.SortHeader(headerClicked, lv_kurs);
         }
+
+        #endregion
     }
 }

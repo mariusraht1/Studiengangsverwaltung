@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
-             mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518">
+             mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518" Cursor="Arrow">
     <Grid Background="#FFE5E5E5">
-        <ListView x:Name="lv_semester" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" GridViewColumnHeader.Click="GridViewColumnHeaderLvPersonClickedHandler">
+        <ListView x:Name="lv_semester" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" GridViewColumnHeader.Click="GridViewColumnHeaderLvSemesterClickedHandler" SelectionChanged="Lv_semester_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nr." DisplayMemberBinding="{Binding Name}" Width="40"/>
@@ -14,20 +14,21 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <DatePicker x:Name="dp_startdatum" HorizontalAlignment="Left" Margin="190,155,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="100"/>
-        <DatePicker x:Name="dp_endedatum" HorizontalAlignment="Left" Margin="321,155,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Width="100" Height="28"/>
+        <DatePicker x:Name="dp_startdatum" HorizontalAlignment="Left" Margin="190,155,0,0" VerticalAlignment="Top" Height="28" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" Width="100" KeyUp="Dp_startdatum_KeyUp"/>
+        <DatePicker x:Name="dp_endedatum" HorizontalAlignment="Left" Margin="321,155,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="14" Width="100" Height="28" KeyUp="Dp_endedatum_KeyUp"/>
         <Label Content="von" Margin="154,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Width="32" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
         <Label Content="bis" Margin="290,154,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="30" HorizontalContentAlignment="Center" Padding="5" HorizontalAlignment="Left"/>
-        <TextBox x:Name="tb_semester" HorizontalAlignment="Left" Height="28" Margin="113,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLines="1" Loaded="Tb_semester_Loaded"/>
-        <Label Content="Semester:" Margin="10,155,742,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_beschreibung" HorizontalAlignment="Left" Height="61" Margin="113,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="4,3" MaxLines="1"/>
-        <Label Content="Beschreibung:" Margin="10,188,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="98"/>
-        <Button x:Name="btn_reset_semester" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand"/>
-        <Button x:Name="btn_new_semester" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
-        <Button x:Name="btn_del_semester" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
-        <Button x:Name="btn_save_semester" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
+        <TextBox x:Name="tb_semester" MaxLength="3" HorizontalAlignment="Left" Height="28" Margin="113,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLines="1" Loaded="Tb_semester_Loaded" KeyUp="Tb_semester_KeyUp"/>
+        <Label x:Name="lbl_semester" Content="Semester:" Margin="10,155,750,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_beschreibung" MaxLength="80" HorizontalAlignment="Left" Height="61" Margin="113,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="4,3" MaxLines="1" KeyUp="Tb_beschreibung_KeyUp"/>
+        <Label x:Name="lbl_beschreibung" Content="Beschreibung:" Margin="10,188,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="98"/>
+        <Button x:Name="btn_reset_semester" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Click="Btn_reset_semester_Click"/>
+        <Button x:Name="btn_new_semester" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="Btn_new_semester_Click"/>
+        <Button x:Name="btn_del_semester" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="Btn_del_semester_Click"/>
+        <Button x:Name="btn_save_semester" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="Btn_save_semester_Click"/>
         <Separator Margin="10,0,10,31" Height="8" VerticalAlignment="Bottom"/>
-        <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="118"/>
-        <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="715" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
+        <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="712" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
+        <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="68"/>
+        <Label Content="Version:" Margin="0,0,83,10" Height="21" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="48" FontWeight="Bold"/>
     </Grid>
 </UserControl>
