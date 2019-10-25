@@ -40,17 +40,37 @@ namespace Universitätsverwaltung
             AdressListe.Instance.Add(this);
         }
 
-        public override string ToString()
-        {
-            return Strasse + " " + Hausnummer + ", " + Postleitzahl + " " + Ort;
-        }
-
         public bool IsValid()
         {
             ValidationContext validationContext = new ValidationContext(this);
             List<ValidationResult> validationResults = new List<ValidationResult>();
 
             return Validator.TryValidateObject(this, validationContext, validationResults);
+        }
+
+        public override bool Equals(object obj)
+        {
+            Adresse adresse = (Adresse)obj;
+
+            if (adresse == null)
+            {
+                return false;
+            }
+
+            return Strasse.Equals(adresse.Strasse)
+                    && Hausnummer.Equals(adresse.Hausnummer)
+                    && Postleitzahl.Equals(adresse.Postleitzahl)
+                    && Ort.Equals(adresse.Ort);
+        }
+
+        public override string ToString()
+        {
+            return Strasse + " " + Hausnummer + ", " + Postleitzahl + " " + Ort;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

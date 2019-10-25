@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Universitätsverwaltung.model;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
@@ -16,7 +17,7 @@ namespace Universitätsverwaltung.view
     public partial class Personverwaltung : UserControl
     {
         private bool[] validAttribute = new bool[10];
-        private enum personArtAttribute
+        private enum PersonArtAttribute
         {
             matrikelnummer = 1,
             ects = 3,
@@ -25,10 +26,9 @@ namespace Universitätsverwaltung.view
 
         private static Personverwaltung instance;
 
-        public static Personverwaltung Instance
-        {
-            get { return instance ?? (instance = new Personverwaltung()); }
-        }
+        public static Personverwaltung Instance => instance ?? (instance = new Personverwaltung());
+
+        public DatePickerTextBox Dptb_geburtsdatum { get; private set; }
 
         public Personverwaltung()
         {
@@ -80,6 +80,13 @@ namespace Universitätsverwaltung.view
                     validAttribute[i] = true;
                 }
             }
+            else
+            {
+                for (int i = 0; i < validAttribute.Length; i++)
+                {
+                    validAttribute[i] = false;
+                }
+            }
         }
 
         private void Cb_rolle_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,8 +102,9 @@ namespace Universitätsverwaltung.view
                     tb_ects.IsEnabled = false;
                     tb_abschluss.IsEnabled = true;
 
-                    validAttribute[(int)personArtAttribute.matrikelnummer] = true;
-                    validAttribute[(int)personArtAttribute.ects] = true;
+                    validAttribute[(int)PersonArtAttribute.abschluss] = false;
+                    validAttribute[(int)PersonArtAttribute.matrikelnummer] = true;
+                    validAttribute[(int)PersonArtAttribute.ects] = true;
                     break;
                 case Rolle.Student:
                     tb_matrikelnummer.IsEnabled = true;
@@ -104,21 +112,19 @@ namespace Universitätsverwaltung.view
                     tb_abschluss.Text = "";
                     tb_abschluss.IsEnabled = false;
 
-                    validAttribute[(int)personArtAttribute.abschluss] = true;
+                    validAttribute[(int)PersonArtAttribute.abschluss] = true;
+                    validAttribute[(int)PersonArtAttribute.matrikelnummer] = false;
+                    validAttribute[(int)PersonArtAttribute.ects] = false;
                     break;
             }
 
             Person selectedPerson = lv_personen.SelectedItem as Person;
 
-            if (Settings.Instance.ChangesApplied == false
-                && selectedPerson != null)
+            if (selectedPerson != null)
             {
                 if (!rolle.Equals(selectedPerson.Rolle))
                 {
-                    Settings.Instance.ChangesApplied = true;
-
                     btn_reset_person.IsEnabled = true;
-                    btn_save_person.IsEnabled = true;
                 }
             }
         }
@@ -240,6 +246,7 @@ namespace Universitätsverwaltung.view
             tb_vorname.Text = "";
             tb_nachname.Text = "";
             tb_strasse.Text = "";
+            tb_hausnummer.Text = "";
             tb_postleitzahl.Text = "";
             tb_ort.Text = "";
 
@@ -285,8 +292,13 @@ namespace Universitätsverwaltung.view
 
             if (selectedPerson == null)
             {
-                PersonListe.Instance.Add(newPerson);
-                lv_personen.SelectedIndex = PersonListe.Instance.Count - 1;
+                switch (!IsDuplicate(newPerson))
+                {
+                    case true:
+                        PersonListe.Instance.Add(newPerson);
+                        lv_personen.SelectedIndex = PersonListe.Instance.Count - 1;
+                        break;
+                }
             }
             else
             {
@@ -297,6 +309,63 @@ namespace Universitätsverwaltung.view
             }
         }
 
+        private bool IsDuplicate(Person newPerson)
+        {
+            List<Person> personResult1 = PersonListe.Instance.Where(x => x.Equals(newPerson)).ToList();
+            List<Person> personResult2 = PersonListe.Instance.Where(x => x.Vorname.Equals(newPerson.Vorname)
+                                                                    && x.Nachname.Equals(newPerson.Nachname)
+                                                                    && x.Geburtsdatum.Equals(newPerson.Geburtsdatum))
+                                                       .ToList();
+
+            if (personResult1.Count > 0)
+            {
+                MessageBox.Show("Person existiert bereits:" +
+                    "\nRolle: " + personResult1[0].Rolle +
+                    "\nName: " + personResult1[0].Vorname + " " + personResult1[0].Nachname +
+                    "\nGeburtsdatum: " + personResult1[0].Geburtsdatum +
+                    "\nAdresse: " + personResult1[0].Adresse, "Person vorhanden", MessageBoxButton.OK);
+
+                return true;
+            }
+            else if (personResult2.Count > 0)
+            {
+                string msgTxt = "Person existiert bereits:";
+
+                foreach (Person person in personResult2)
+                {
+                    msgTxt += "Vorname: " + person.Vorname + "; Nachname: " + person.Nachname
+                                + "; Geburtsdatum: " + person.Geburtsdatum + "\n";
+                }
+
+                msgTxt += "Möchten Sie die Person dennoch anlegen?";
+
+                MessageBoxResult msgBoxResult = MessageBox.Show(msgTxt, "Person vorhanden", MessageBoxButton.YesNo);
+
+                switch (msgBoxResult)
+                {
+                    case MessageBoxResult.Yes:
+                        return false;
+                    default:
+                        btn_new_person.IsEnabled = true;
+                        return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
+
+        private void Dp_geburtsdatum_Loaded(object sender, RoutedEventArgs e)
+        {
+            DatePickerTextBox datePickerTextBox = (DatePickerTextBox)dp_geburtsdatum.Template.FindName("PART_TextBox", dp_geburtsdatum);
+
+            if (datePickerTextBox != null)
+            {
+                datePickerTextBox.Focus();
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:model="clr-namespace:Universitätsverwaltung.model"
              mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518">
     <Grid Background="#FFE5E5E5" Cursor="Arrow">
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
         <Label Content="Semester:" Margin="10,202,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="85"/>
         <Label Content="Dozent:" Margin="440,202,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68"/>
         <Label Content="Studiengang:" Margin="10,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
-        <TextBox x:Name="tb_studiengang" HorizontalAlignment="Left" Height="28" Margin="115,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1"/>
+        <TextBox x:Name="tb_studiengang" HorizontalAlignment="Left" Height="28" Margin="115,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" Loaded="Tb_studiengang_Loaded"/>
         <ListView x:Name="lv_kurs" HorizontalAlignment="Left" Margin="100,268,0,0" Width="335" Height="164" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
@@ -58,7 +59,7 @@
         <Button x:Name="btn_new_studiengang" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
         <Button x:Name="btn_del_studiengang" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand"/>
         <Separator Margin="10,0,10,31" Height="8" VerticalAlignment="Bottom"/>
-        <Label Content="Version: 24.10.2019" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="118"/>
+        <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="118"/>
         <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="715" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
     </Grid>
 </UserControl>

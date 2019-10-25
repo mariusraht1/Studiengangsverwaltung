@@ -43,5 +43,29 @@ namespace Universitätsverwaltung
 
             return true;
         }
+
+        public override bool Equals(object obj)
+        {
+            Student student = (Student)obj;
+
+            if (student == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj) 
+                    && Matrikelnummer.Equals(student.Matrikelnummer)
+                    && ECTS.Equals(student.ECTS);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

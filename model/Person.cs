@@ -48,5 +48,31 @@ namespace Universitätsverwaltung
 
             return Validator.TryValidateObject(this, validationContext, validationResults);
         }
+
+        public override bool Equals(object obj)
+        {
+            Person person = (Person)obj;
+
+            if(person == null)
+            {
+                return false;
+            }
+
+            return Rolle.Equals(person.Rolle)
+                    && Vorname.Equals(person.Vorname)
+                    && Nachname.Equals(person.Nachname)
+                    && Adresse.Equals(person.Adresse)
+                    && Geburtsdatum.Equals(person.Geburtsdatum);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

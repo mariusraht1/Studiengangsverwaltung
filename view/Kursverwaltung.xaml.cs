@@ -23,5 +23,10 @@ namespace Universitätsverwaltung.view
         {
 
         }
+
+        private void Tb_name_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            tb_name.Focus();
+        }
     }
 }

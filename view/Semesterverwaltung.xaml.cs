@@ -9,10 +9,7 @@ namespace Universitätsverwaltung.view
     {
         private static Semesterverwaltung instance;
 
-        public static Semesterverwaltung Instance
-        {
-            get { return instance ?? (instance = new Semesterverwaltung()); }
-        }
+        public static Semesterverwaltung Instance => instance ?? (instance = new Semesterverwaltung());
 
         public Semesterverwaltung()
         {
@@ -22,6 +19,11 @@ namespace Universitätsverwaltung.view
         public void Init()
         {
 
+        }
+
+        private void Tb_semester_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            tb_semester.Focus();
         }
     }
 }

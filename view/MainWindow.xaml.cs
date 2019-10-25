@@ -1,8 +1,8 @@
-﻿using Universitätsverwaltung.controller;
-using Universitätsverwaltung.model;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Universitätsverwaltung.controller;
+using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung.view
 {
@@ -13,10 +13,7 @@ namespace Universitätsverwaltung.view
     {
         private static MainWindow instance;
 
-        public static MainWindow Instance
-        {
-            get { return instance ?? (instance = new MainWindow()); }
-        }
+        public static MainWindow Instance => instance ?? (instance = new MainWindow());
 
         public MainWindow()
         {

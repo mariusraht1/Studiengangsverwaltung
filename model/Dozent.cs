@@ -33,5 +33,28 @@ namespace Universitätsverwaltung
 
             return true;
         }
+
+        public override bool Equals(object obj)
+        {
+            Dozent dozent = (Dozent)obj;
+
+            if (dozent == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                    && Abschluss.Equals(dozent.Abschluss);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

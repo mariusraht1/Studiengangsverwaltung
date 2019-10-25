@@ -14,5 +14,27 @@ namespace Universitätsverwaltung.model
         {
             Name = name;
         }
+
+        public override bool Equals(object obj)
+        {
+            Abschluss abschluss = (Abschluss)obj;
+
+            if (abschluss == null)
+            {
+                return false;
+            }
+
+            return Name.Equals(abschluss.Name);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

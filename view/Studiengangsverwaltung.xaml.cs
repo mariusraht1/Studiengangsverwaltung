@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Controls;
 using Universitätsverwaltung.model;
 
@@ -31,6 +32,11 @@ namespace Universitätsverwaltung.view
         public void Init()
         {
 
+        }
+
+        private void Tb_studiengang_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            tb_studiengang.Focus();
         }
     }
 }
