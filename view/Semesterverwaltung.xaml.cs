@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Universitätsverwaltung.controller;
 
 namespace Universitätsverwaltung.view
 {
@@ -24,6 +26,14 @@ namespace Universitätsverwaltung.view
         private void Tb_semester_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             tb_semester.Focus();
+        }
+
+        private ListViewSorter lvSemesterSorter = new ListViewSorter();
+
+        private void GridViewColumnHeaderLvPersonClickedHandler(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            lvSemesterSorter.SortHeader(headerClicked, lv_semester);
         }
     }
 }

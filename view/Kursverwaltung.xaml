@@ -9,7 +9,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lv_kurse" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListView x:Name="lv_kurs" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="278"/>

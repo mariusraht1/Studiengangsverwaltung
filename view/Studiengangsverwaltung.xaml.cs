@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using Universitätsverwaltung.controller;
 using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung.view
@@ -37,6 +39,35 @@ namespace Universitätsverwaltung.view
         private void Tb_studiengang_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             tb_studiengang.Focus();
+        }
+
+        private ListViewSorter lvStudiengangSorter = new ListViewSorter();
+        private ListViewSorter lvSemesterSorter = new ListViewSorter();
+        private ListViewSorter lvKursSorter = new ListViewSorter();
+        private ListViewSorter lvStudentSorter = new ListViewSorter();
+
+        private void GridViewColumnHeaderLvStudiengangClickedHandler(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            lvStudiengangSorter.SortHeader(headerClicked, lv_studiengang);
+        }
+
+        private void GridViewColumnHeaderLvSemesterClickedHandler(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            lvSemesterSorter.SortHeader(headerClicked, lv_semester);
+        }
+
+        private void GridViewColumnHeaderLvKursClickedHandler(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            lvKursSorter.SortHeader(headerClicked, lv_kurs);
+        }
+
+        private void GridViewColumnHeaderLvStudentClickedHandler(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            lvStudentSorter.SortHeader(headerClicked, lv_student);
         }
     }
 }

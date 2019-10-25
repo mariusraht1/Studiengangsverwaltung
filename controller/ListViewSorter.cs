@@ -13,7 +13,7 @@ namespace Universitätsverwaltung.controller
         {
             ListSortDirection direction;
 
-            if (headerClicked != null)
+            if (headerClicked != null && listView.Items.Count > 0)
             {
                 if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
                 {

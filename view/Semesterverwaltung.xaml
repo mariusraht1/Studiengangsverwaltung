@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
              mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518">
     <Grid Background="#FFE5E5E5">
-        <ListView x:Name="lv_kurse_Copy" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListView x:Name="lv_semester" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" GridViewColumnHeader.Click="GridViewColumnHeaderLvPersonClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nr." DisplayMemberBinding="{Binding Name}" Width="40"/>

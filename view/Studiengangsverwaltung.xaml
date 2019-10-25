@@ -12,7 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lv_studiengang" Height="140" Margin="10,10,10,0" VerticalAlignment="Top">
+        <ListView x:Name="lv_studiengang" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvStudiengangClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -23,7 +23,7 @@
         <Label Content="Dozent:" Margin="440,202,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68"/>
         <Label Content="Studiengang:" Margin="10,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
         <TextBox x:Name="tb_studiengang" HorizontalAlignment="Left" Height="28" Margin="115,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" Loaded="Tb_studiengang_Loaded"/>
-        <ListView x:Name="lv_kurs" HorizontalAlignment="Left" Margin="100,268,0,0" Width="335" Height="164" VerticalAlignment="Top">
+        <ListView x:Name="lv_kurs" HorizontalAlignment="Left" Margin="100,268,0,0" Width="335" Height="164" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -34,7 +34,7 @@
         <Button x:Name="btn_add_semester" Content="+" Margin="67,235,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="28"/>
         <Label Content="Kurs:" Margin="97,202,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="338"/>
         <ComboBox x:Name="cb_kurs" Margin="100,235,0,0" VerticalAlignment="Top" Width="302" Height="28" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left"/>
-        <ListView x:Name="lv_semester" HorizontalAlignment="Left" Margin="10,268,0,0" Width="85" Height="164" VerticalAlignment="Top">
+        <ListView x:Name="lv_semester" HorizontalAlignment="Left" Margin="10,268,0,0" Width="85" Height="164" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvSemesterClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -43,7 +43,7 @@
         </ListView>
         <Label Content="Student:" Margin="440,235,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68"/>
         <ComboBox x:Name="cb_student" Margin="0,235,43,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="302"/>
-        <ListView x:Name="lv_student" Margin="440,268,10,0" Height="164" VerticalAlignment="Top">
+        <ListView x:Name="lv_student" Margin="440,268,10,0" Height="164" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvStudentClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

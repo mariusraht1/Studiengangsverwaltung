@@ -37,12 +37,12 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
-            lv_personen.ItemsSource = PersonListe.Instance;
+            lv_person.ItemsSource = PersonListe.Instance;
             cb_rolle.ItemsSource = Enum.GetValues(typeof(Rolle));
             cb_rolle.SelectedItem = Rolle.Student;
         }
 
-        private void Lv_personen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Lv_person_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Settings.Instance.ChangesApplied = false;
 
@@ -51,7 +51,7 @@ namespace Universitätsverwaltung.view
             btn_del_person.IsEnabled = true;
             btn_save_person.IsEnabled = false;
 
-            Person selectedPerson = lv_personen.SelectedItem as Person;
+            Person selectedPerson = lv_person.SelectedItem as Person;
 
             if (selectedPerson != null)
             {
@@ -121,7 +121,7 @@ namespace Universitätsverwaltung.view
                     break;
             }
 
-            Person selectedPerson = lv_personen.SelectedItem as Person;
+            Person selectedPerson = lv_person.SelectedItem as Person;
 
             if (selectedPerson != null)
             {
@@ -232,12 +232,12 @@ namespace Universitätsverwaltung.view
 
         private void btn_reset_person_Click(object sender, RoutedEventArgs e)
         {
-            Lv_personen_SelectionChanged(null, null);
+            Lv_person_SelectionChanged(null, null);
         }
 
         private void btn_new_person_Click(object sender, RoutedEventArgs e)
         {
-            lv_personen.SelectedIndex = -1;
+            lv_person.SelectedIndex = -1;
             btn_new_person.IsEnabled = false;
             btn_del_person.IsEnabled = false;
 
@@ -258,7 +258,7 @@ namespace Universitätsverwaltung.view
 
         private void btn_del_person_Click(object sender, RoutedEventArgs e)
         {
-            Person selectedPerson = lv_personen.SelectedItem as Person;
+            Person selectedPerson = lv_person.SelectedItem as Person;
             PersonListe.Instance.Remove(selectedPerson);
 
             btn_new_person_Click(null, null);
@@ -266,7 +266,7 @@ namespace Universitätsverwaltung.view
 
         private void btn_save_person_Click(object sender, RoutedEventArgs e)
         {
-            Person selectedPerson = lv_personen.SelectedItem as Person;
+            Person selectedPerson = lv_person.SelectedItem as Person;
             Person newPerson = null;
 
             Rolle rolle = (Rolle)cb_rolle.SelectedItem;
@@ -299,7 +299,7 @@ namespace Universitätsverwaltung.view
                 {
                     case true:
                         PersonListe.Instance.Add(newPerson);
-                        lv_personen.SelectedIndex = PersonListe.Instance.Count - 1;
+                        lv_person.SelectedIndex = PersonListe.Instance.Count - 1;
                         break;
                 }
             }
@@ -372,12 +372,12 @@ namespace Universitätsverwaltung.view
             }
         }
 
-        private ListViewSorter lvPersonenSorter = new ListViewSorter();
+        private ListViewSorter lvPersonSorter = new ListViewSorter();
 
-        private void GridViewColumnHeaderClickedHandler(object sender, RoutedEventArgs e)
+        private void GridViewColumnHeaderLvPersonClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvPersonenSorter.SortHeader(headerClicked, lv_personen);
+            lvPersonSorter.SortHeader(headerClicked, lv_person);
         }
     }
 }
