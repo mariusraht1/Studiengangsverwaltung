@@ -21,11 +21,18 @@ namespace Universitätsverwaltung
             ECTS = ects;
         }
 
-        public Student(string vorname, string nachname, Adresse adresse, DateTime geburtsdatum, string matrikelnummer, string ects)
+        public Student(string vorname, string nachname, Adresse adresse, string geburtsdatum, string matrikelnummer, string ects)
         : base(Rolle.Student, vorname, nachname, adresse, geburtsdatum)
         {
-            Matrikelnummer = int.Parse(matrikelnummer);
-            ECTS = int.Parse(ects);
+            if (int.TryParse(matrikelnummer, out int result))
+            {
+                Matrikelnummer = int.Parse(matrikelnummer);
+            }
+
+            if (int.TryParse(ects, out result))
+            {
+                ECTS = int.Parse(ects);
+            }
         }
 
         public new bool IsValid()
@@ -63,11 +70,7 @@ namespace Universitätsverwaltung
 
             Student student = (Student)obj;
 
-            return Rolle.Equals(student.Rolle)
-                && Vorname.Equals(student.Vorname)
-                && Nachname.Equals(student.Nachname)
-                && Adresse.Equals(student.Adresse)
-                && Geburtsdatum.Equals(student.Geburtsdatum)
+            return base.Equals(student)
                 && Matrikelnummer.Equals(student.Matrikelnummer)
                 && ECTS.Equals(student.ECTS);
         }

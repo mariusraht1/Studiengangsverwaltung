@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Universitätsverwaltung.controller;
@@ -23,7 +22,6 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
-            cb_semester.ItemsSource = SemesterListe.Instance;
             cb_kurs.ItemsSource = KursListe.Instance;
             cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList();
             cb_student.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Student)).ToList();

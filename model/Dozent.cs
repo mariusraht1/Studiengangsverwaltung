@@ -1,7 +1,7 @@
-﻿using Universitätsverwaltung.model;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
@@ -13,6 +13,12 @@ namespace Universitätsverwaltung
         public Dozent() { }
 
         public Dozent(string vorname, string nachname, Adresse adresse, DateTime geburtsdatum, Abschluss abschluss)
+        : base(Rolle.Dozent, vorname, nachname, adresse, geburtsdatum)
+        {
+            Abschluss = abschluss;
+        }
+
+        public Dozent(string vorname, string nachname, Adresse adresse, string geburtsdatum, Abschluss abschluss)
         : base(Rolle.Dozent, vorname, nachname, adresse, geburtsdatum)
         {
             Abschluss = abschluss;
@@ -53,11 +59,7 @@ namespace Universitätsverwaltung
 
             Dozent dozent = (Dozent)obj;
 
-            return Rolle.Equals(dozent.Rolle)
-                && Vorname.Equals(dozent.Vorname)
-                && Nachname.Equals(dozent.Nachname)
-                && Adresse.Equals(dozent.Adresse)
-                && Geburtsdatum.Equals(dozent.Geburtsdatum)
+            return base.Equals(dozent)
                 && Abschluss.Equals(dozent.Abschluss);
         }
 

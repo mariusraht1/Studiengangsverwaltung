@@ -37,6 +37,19 @@ namespace Universitätsverwaltung
             Geburtsdatum = geburtsdatum;
         }
 
+        public Person(Rolle rolle, string vorname, string nachname, Adresse adresse, string geburtsdatum)
+        {
+            Rolle = rolle;
+            Vorname = vorname;
+            Nachname = nachname;
+            Adresse = adresse;
+
+            if (DateTime.TryParse(geburtsdatum, out DateTime result))
+            {
+                Geburtsdatum = DateTime.Parse(geburtsdatum);
+            }
+        }
+
         public bool IsValid()
         {   
             ValidationContext validationContext = new ValidationContext(this);

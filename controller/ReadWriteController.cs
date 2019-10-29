@@ -1,18 +1,15 @@
-﻿using Universitätsverwaltung.model;
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.Serialization;
+using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung.controller
 {
-    class ReadWriteController
+    internal class ReadWriteController
     {
         private static ReadWriteController instance;
 
-        public static ReadWriteController Instance
-        {
-            get { return instance ?? (instance = new ReadWriteController()); }
-        }
+        public static ReadWriteController Instance => instance ?? (instance = new ReadWriteController());
 
         public void Read()
         {
@@ -43,16 +40,11 @@ namespace Universitätsverwaltung.controller
         {
             try
             {
-                Settings.Instance.ChangesApplied = true;
-
-                if (Settings.Instance.ChangesApplied.Equals(true))
+                DataContractSerializer serializer = new DataContractSerializer(typeof(SerializeObjectsWrapper), null,
+                    2147483647, false, true, null);
+                using (FileStream output = File.Create(Settings.Instance.PathToDataFile))
                 {
-                    DataContractSerializer serializer = new DataContractSerializer(typeof(SerializeObjectsWrapper), null,
-                        2147483647, false, true, null);
-                    using (FileStream output = File.Create(Settings.Instance.PathToDataFile))
-                    {
-                        serializer.WriteObject(output, SerializeObjectsWrapper.Instance);
-                    }
+                    serializer.WriteObject(output, SerializeObjectsWrapper.Instance);
                 }
             }
             catch (Exception)

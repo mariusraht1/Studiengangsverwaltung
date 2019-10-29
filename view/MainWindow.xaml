@@ -31,6 +31,9 @@
         </Style>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <TabControl x:Name="tc_menu" Margin="10">
             <TabItem x:Name="ti_studiengangsverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" Margin="-4,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <TabItem.Header>
@@ -49,12 +52,6 @@
                     <TextBlock Text="Kursverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
                 <local:Kursverwaltung/>
-            </TabItem>
-            <TabItem x:Name="ti_semesterverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
-                <TabItem.Header>
-                    <TextBlock Text="Semesterverwaltung" Style="{StaticResource TabItemText}" />
-                </TabItem.Header>
-                <local:Semesterverwaltung/>
             </TabItem>
         </TabControl>
     </Grid>

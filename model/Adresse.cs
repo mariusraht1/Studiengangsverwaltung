@@ -27,7 +27,12 @@ namespace Universitätsverwaltung
         {
             Strasse = strasse;
             Hausnummer = hausnummer;
-            Postleitzahl = int.Parse(postleitzahl);
+
+            if (int.TryParse(postleitzahl, out int result))
+            {
+                Postleitzahl = int.Parse(postleitzahl);
+            }
+            
             Ort = ort;
         }
 

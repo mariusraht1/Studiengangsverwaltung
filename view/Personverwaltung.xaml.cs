@@ -21,12 +21,11 @@ namespace Universitätsverwaltung.view
         public static Personverwaltung Instance => instance ?? (instance = new Personverwaltung());
 
         private ValidationController validationController = null;
-        private bool[] validAttributes = new bool[10];
         private enum PersonArtAttribute
         {
             matrikelnummer = 1,
-            ects = 3,
-            abschluss = 2
+            abschluss = 2,
+            ects = 3
         }
 
         public DatePickerTextBox Dptb_geburtsdatum { get; private set; }
@@ -35,7 +34,7 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
-            validationController = new ValidationController(validAttributes, lbl_error_msg, btn_save_person);
+            validationController = new ValidationController(new bool[10], lbl_error_msg, btn_save);
 
             lv_person.ItemsSource = PersonListe.Instance;
             cb_rolle.ItemsSource = Enum.GetValues(typeof(Rolle));
@@ -64,20 +63,16 @@ namespace Universitätsverwaltung.view
 
         #endregion
 
-#region SelectionChanged
+        #region SelectionChanged
 
         private void Lv_person_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Settings.Instance.ChangesApplied = false;
+            btn_reset.IsEnabled = false;
+            btn_new.IsEnabled = true;
+            btn_del.IsEnabled = true;
+            btn_save.IsEnabled = false;
 
-            btn_reset_person.IsEnabled = false;
-            btn_new_person.IsEnabled = true;
-            btn_del_person.IsEnabled = true;
-            btn_save_person.IsEnabled = false;
-
-            Person selectedPerson = lv_person.SelectedItem as Person;
-
-            if (selectedPerson != null)
+            if (lv_person.SelectedItem is Person selectedPerson)
             {
                 dp_geburtsdatum.SelectedDate = selectedPerson.Geburtsdatum;
                 tb_vorname.Text = selectedPerson.Vorname;
@@ -102,17 +97,11 @@ namespace Universitätsverwaltung.view
                         break;
                 }
 
-                for (int i = 0; i < validAttributes.Length; i++)
-                {
-                    validAttributes[i] = true;
-                }
+                validationController.ResetValidAttributes(true);
             }
             else
             {
-                for (int i = 0; i < validAttributes.Length; i++)
-                {
-                    validAttributes[i] = false;
-                }
+                validationController.ResetValidAttributes(false);
             }
         }
 
@@ -129,9 +118,9 @@ namespace Universitätsverwaltung.view
                     tb_ects.IsEnabled = false;
                     tb_abschluss.IsEnabled = true;
 
-                    validAttributes[(int)PersonArtAttribute.abschluss] = false;
-                    validAttributes[(int)PersonArtAttribute.matrikelnummer] = true;
-                    validAttributes[(int)PersonArtAttribute.ects] = true;
+                    validationController.ValidAttributes[(int)PersonArtAttribute.abschluss] = false;
+                    validationController.ValidAttributes[(int)PersonArtAttribute.matrikelnummer] = true;
+                    validationController.ValidAttributes[(int)PersonArtAttribute.ects] = true;
                     break;
                 case Rolle.Student:
                     tb_matrikelnummer.IsEnabled = true;
@@ -139,9 +128,9 @@ namespace Universitätsverwaltung.view
                     tb_abschluss.Text = "";
                     tb_abschluss.IsEnabled = false;
 
-                    validAttributes[(int)PersonArtAttribute.abschluss] = true;
-                    validAttributes[(int)PersonArtAttribute.matrikelnummer] = false;
-                    validAttributes[(int)PersonArtAttribute.ects] = false;
+                    validationController.ValidAttributes[(int)PersonArtAttribute.abschluss] = true;
+                    validationController.ValidAttributes[(int)PersonArtAttribute.matrikelnummer] = false;
+                    validationController.ValidAttributes[(int)PersonArtAttribute.ects] = false;
                     break;
             }
 
@@ -151,81 +140,218 @@ namespace Universitätsverwaltung.view
             {
                 if (!rolle.Equals(selectedPerson.Rolle))
                 {
-                    btn_reset_person.IsEnabled = true;
+                    btn_reset.IsEnabled = true;
                 }
             }
         }
 
         #endregion
 
-        #region TextBox
+        #region TextChanged
 
         private void Dp_geburtsdatum_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(0, typeof(Person), dp_geburtsdatum, dp_geburtsdatum.Text, "Geburtsdatum", lbl_geburtsdatum.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(0, typeof(Person), dp_geburtsdatum, dp_geburtsdatum.Text, "Geburtsdatum", lbl_geburtsdatum.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_matrikelnummer_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(1, typeof(Student), tb_matrikelnummer, tb_matrikelnummer.Text, "Matrikelnummer", lbl_matrikelnummer.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(1, typeof(Student), tb_matrikelnummer, tb_matrikelnummer.Text, "Matrikelnummer", lbl_matrikelnummer.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_abschluss_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(2, typeof(Abschluss), tb_abschluss, tb_abschluss.Text, "Name", lbl_abschluss.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(2, typeof(Abschluss), tb_abschluss, tb_abschluss.Text, "Name", lbl_abschluss.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_ects_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(3, typeof(Student), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(3, typeof(Student), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_vorname_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(4, typeof(Person), tb_vorname, tb_vorname.Text, "Vorname", lbl_vorname.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(4, typeof(Person), tb_vorname, tb_vorname.Text, "Vorname", lbl_vorname.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_nachname_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(5, typeof(Person), tb_nachname, tb_nachname.Text, "Nachname", lbl_nachname.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(5, typeof(Person), tb_nachname, tb_nachname.Text, "Nachname", lbl_nachname.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_strasse_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(6, typeof(Adresse), tb_strasse, tb_strasse.Text, "Strasse", lbl_strasse_nr.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(6, typeof(Adresse), tb_strasse, tb_strasse.Text, "Strasse", lbl_strasse_nr.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_hausnummer_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(7, typeof(Adresse), tb_hausnummer, tb_hausnummer.Text, "Hausnummer", lbl_strasse_nr.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(7, typeof(Adresse), tb_hausnummer, tb_hausnummer.Text, "Hausnummer", lbl_strasse_nr.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_postleitzahl_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(8, typeof(Adresse), tb_postleitzahl, tb_postleitzahl.Text, "Postleitzahl", lbl_plz_ort.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(8, typeof(Adresse), tb_postleitzahl, tb_postleitzahl.Text, "Postleitzahl", lbl_plz_ort.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
         }
 
         private void Tb_ort_KeyUp(object sender, KeyEventArgs e)
         {
-            validationController.ValidateAttribute(9, typeof(Adresse), tb_ort, tb_ort.Text, "Ort", lbl_plz_ort.Content.ToString());
+            bool isValidAttribute = validationController.IsValidAttribute(9, typeof(Adresse), tb_ort, tb_ort.Text, "Ort", lbl_plz_ort.Content.ToString());
+            EnableSaveButton(isValidAttribute);
+            EnableResetButton();
+        }
+
+        private void EnableSaveButton(bool isValidAttribute)
+        {
+            switch (validationController.IsValidObject() && HasChanged())
+            {
+                case true:
+                    btn_save.IsEnabled = true;
+                    break;
+                case false:
+                    btn_save.IsEnabled = false;
+                    break;
+            }
+        }
+
+        private bool HasChanged()
+        {
+            Person person = null;
+            Person selectedPerson = (Person)lv_person.SelectedItem;
+
+            if (selectedPerson != null)
+            {
+                Adresse adresse = new Adresse(tb_strasse.Text, tb_hausnummer.Text, tb_postleitzahl.Text, tb_ort.Text);
+                Abschluss abschluss = new Abschluss(tb_abschluss.Text);
+
+                switch (cb_rolle.SelectedItem)
+                {
+                    case Rolle.Dozent:
+                        Dozent dozent = new Dozent(tb_vorname.Text, tb_nachname.Text, adresse, dp_geburtsdatum.Text, abschluss);
+                        person = dozent;
+                        break;
+                    case Rolle.Student:
+                        Student student = new Student(tb_vorname.Text, tb_nachname.Text, adresse, dp_geburtsdatum.Text, tb_matrikelnummer.Text, tb_ects.Text);
+                        person = student;
+                        break;
+                }
+
+                return person.Equals(selectedPerson);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void EnableResetButton()
+        {
+            switch (lv_person.SelectedItem is Person
+                    && HasChanged())
+            {
+                case true:
+                    btn_reset.IsEnabled = true;
+                    break;
+                case false:
+                    btn_reset.IsEnabled = false;
+                    break;
+            }
         }
 
         #endregion
 
-        #region Button
+        #region GotFocus
 
-        private void btn_reset_person_Click(object sender, RoutedEventArgs e)
+        private void Dp_geburtsdatum_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            Lv_person_SelectionChanged(null, null);
+            DatePickerTextBox dptb_geburtsdatum = (DatePickerTextBox)dp_geburtsdatum.Template.FindName("PART_TextBox", dp_geburtsdatum);
+
+            if (dptb_geburtsdatum != null)
+            {
+                dptb_geburtsdatum.SelectAll();
+            }
         }
 
-        private void btn_new_person_Click(object sender, RoutedEventArgs e)
+        private void Tb_matrikelnummer_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_matrikelnummer.SelectAll();
+        }
+
+        private void Tb_ects_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_ects.SelectAll();
+        }
+
+        private void Tb_abschluss_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_abschluss.SelectAll();
+        }
+
+        private void Tb_vorname_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_vorname.SelectAll();
+        }
+
+        private void Tb_nachname_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_nachname.SelectAll();
+        }
+
+        private void Tb_strasse_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_strasse.SelectAll();
+        }
+
+        private void Tb_hausnummer_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_hausnummer.SelectAll();
+        }
+
+        private void Tb_postleitzahl_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_postleitzahl.SelectAll();
+        }
+
+        private void Tb_ort_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            tb_ort.SelectAll();
+        }
+
+        #endregion
+
+        #region OnClick
+
+        private void Btn_reset_Click(object sender, RoutedEventArgs e)
+        {
+            Lv_person_SelectionChanged(null, null);
+            lbl_error_msg.Content = "";
+        }
+
+        private void Btn_new_Click(object sender, RoutedEventArgs e)
         {
             lv_person.SelectedIndex = -1;
-            btn_new_person.IsEnabled = false;
-            btn_del_person.IsEnabled = false;
+            btn_new.IsEnabled = false;
+            btn_del.IsEnabled = false;
 
-            cb_rolle.SelectedIndex = 0;
+            Cb_rolle_SelectionChanged(null, null);
             dp_geburtsdatum.Text = "";
             tb_matrikelnummer.Text = "";
             tb_ects.Text = "";
@@ -240,17 +366,16 @@ namespace Universitätsverwaltung.view
             dp_geburtsdatum.Focus();
         }
 
-        private void btn_del_person_Click(object sender, RoutedEventArgs e)
+        private void Btn_del_Click(object sender, RoutedEventArgs e)
         {
             Person selectedPerson = lv_person.SelectedItem as Person;
             PersonListe.Instance.Remove(selectedPerson);
 
-            btn_new_person_Click(null, null);
+            Btn_new_Click(null, null);
         }
 
-        private void btn_save_person_Click(object sender, RoutedEventArgs e)
+        private void Btn_save_Click(object sender, RoutedEventArgs e)
         {
-            Person selectedPerson = lv_person.SelectedItem as Person;
             Person newPerson = null;
 
             Rolle rolle = (Rolle)cb_rolle.SelectedItem;
@@ -261,7 +386,7 @@ namespace Universitätsverwaltung.view
             string postleitzahl = tb_postleitzahl.Text;
             string ort = tb_ort.Text;
             Adresse adresse = new Adresse(strasse, hausnummer, tb_postleitzahl.Text, tb_ort.Text);
-            DateTime geburtstag = dp_geburtsdatum.SelectedDate.Value;
+            string geburtstag = dp_geburtsdatum.Text;
             Abschluss abschluss = new Abschluss(tb_abschluss.Text);
             string matrikelnummer = tb_matrikelnummer.Text;
             string ects = tb_ects.Text;
@@ -277,7 +402,15 @@ namespace Universitätsverwaltung.view
                 newPerson = student;
             }
 
-            if (selectedPerson == null)
+            if (lv_person.SelectedItem is Person selectedPerson)
+            {
+                Person existingPerson = PersonListe.Instance.Where(x => x.Equals(selectedPerson)).Single();
+                int indexExistingPerson = PersonListe.Instance.IndexOf(existingPerson);
+
+                PersonListe.Instance[indexExistingPerson] = newPerson;
+                lv_person.SelectedItem = newPerson;
+            }
+            else
             {
                 switch (!IsDuplicate(newPerson))
                 {
@@ -286,13 +419,6 @@ namespace Universitätsverwaltung.view
                         lv_person.SelectedIndex = PersonListe.Instance.Count - 1;
                         break;
                 }
-            }
-            else
-            {
-                Person existingPerson = PersonListe.Instance.Where(x => x.Equals(selectedPerson)).Single();
-                int indexExistingPerson = PersonListe.Instance.IndexOf(existingPerson);
-
-                PersonListe.Instance[indexExistingPerson] = newPerson;
             }
         }
 
@@ -312,7 +438,7 @@ namespace Universitätsverwaltung.view
                     "\nGeburtsdatum: " + personResult1[0].Geburtsdatum.ToShortDateString() +
                     "\nAdresse: " + personResult1[0].Adresse, "Person vorhanden", MessageBoxButton.OK);
 
-                btn_new_person.IsEnabled = true;
+                btn_new.IsEnabled = true;
                 return true;
             }
             else if (personResult2.Count > 0)
@@ -334,7 +460,7 @@ namespace Universitätsverwaltung.view
                     case MessageBoxResult.Yes:
                         return false;
                     default:
-                        btn_new_person.IsEnabled = true;
+                        btn_new.IsEnabled = true;
                         return true;
                 }
             }

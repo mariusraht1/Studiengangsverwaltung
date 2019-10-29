@@ -1,7 +1,7 @@
-using Universitätsverwaltung.model;
 using System;
 using System.ComponentModel.DataAnnotations;
 using Universitätsverwaltung.controller;
+using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
@@ -19,6 +19,7 @@ namespace Universitätsverwaltung
         [Date]
         [Required]
         public DateTime Endedatum { get; set; }
+        public KursListe KursListe { get; set; }
 
         public Semester() { }
 
@@ -32,7 +33,11 @@ namespace Universitätsverwaltung
 
         public Semester(string nummer, string beschreibung, DateTime startdatum, DateTime endeDatum)
         {
-            Nummer = int.Parse(nummer);
+            if (int.TryParse(nummer, out int result))
+            {
+                Nummer = int.Parse(nummer);
+            }
+
             Beschreibung = beschreibung;
             Startdatum = startdatum;
             Endedatum = endeDatum;

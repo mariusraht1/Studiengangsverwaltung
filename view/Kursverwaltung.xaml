@@ -6,25 +6,28 @@
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
              mc:Ignorable="d" d:DesignWidth="858" d:DesignHeight="518" Cursor="Arrow">
     <Grid Background="#FFE5E5E5">
-        <ListView x:Name="lv_kurs" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler">
+        <ListView x:Name="lv_kurs" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler" SelectionChanged="Lv_kurs_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="278"/>
-                    <GridViewColumn Header="Beschreibung" DisplayMemberBinding="{Binding Beschreibung}" Width="450"/>
+                    <GridViewColumn Header="Beschreibung" DisplayMemberBinding="{Binding Beschreibung}" Width="480"/>
+                    <GridViewColumn Header="ECTS" DisplayMemberBinding="{Binding ECTS}" Width="60"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Kursname:" Margin="10,155,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98"/>
-        <TextBox x:Name="tb_name" HorizontalAlignment="Left" Height="28" Margin="113,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" Loaded="Tb_name_Loaded"/>
-        <Label Content="Beschreibung:" Margin="10,188,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="98"/>
-        <TextBox x:Name="tb_beschreibung" HorizontalAlignment="Left" Height="61" Margin="113,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="4,3" MaxLines="1"/>
-        <Button x:Name="btn_reset_kurs" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom"/>
-        <Button x:Name="btn_new_kurs" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"/>
-        <Button x:Name="btn_del_kurs" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"/>
-        <Button x:Name="btn_save_kurs" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"/>
+        <Label x:Name="lbl_name" Content="Kursname:" Margin="10,155,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98"/>
+        <TextBox x:Name="tb_name" HorizontalAlignment="Left" Height="28" Margin="113,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" Loaded="Tb_name_Loaded" GotKeyboardFocus="Tb_name_GotKeyboardFocus" KeyUp="Tb_name_KeyUp"/>
+        <Label x:Name="lbl_beschreibung" Content="Beschreibung:" Margin="10,188,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="98"/>
+        <TextBox x:Name="tb_beschreibung" HorizontalAlignment="Left" Height="61" Margin="113,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="4,3" MaxLines="1" GotKeyboardFocus="Tb_beschreibung_GotKeyboardFocus" KeyUp="Tb_beschreibung_KeyUp"/>
+        <Button x:Name="btn_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Click="Btn_reset_Click"/>
+        <Button x:Name="btn_new" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="Btn_new_Click"/>
+        <Button x:Name="btn_del" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="Btn_del_Click"/>
+        <Button x:Name="btn_save" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="Btn_save_Click"/>
         <Separator Margin="10,0,10,31" Height="8" VerticalAlignment="Bottom"/>
         <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="712" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
         <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="68"/>
         <Label Content="Version:" Margin="0,0,83,10" Height="21" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="48" FontWeight="Bold"/>
+        <Label x:Name="lbl_ects" Content="ECTS-Punkte:" Margin="10,254,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98"/>
+        <TextBox x:Name="tb_ects" HorizontalAlignment="Left" Height="28" Margin="113,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" GotKeyboardFocus="Tb_ects_GotKeyboardFocus" KeyUp="Tb_ects_KeyUp"/>
     </Grid>
 </UserControl>

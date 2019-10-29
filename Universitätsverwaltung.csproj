@@ -116,9 +116,6 @@
     <Compile Include="view\Personverwaltung.xaml.cs">
       <DependentUpon>Personverwaltung.xaml</DependentUpon>
     </Compile>
-    <Compile Include="view\Semesterverwaltung.xaml.cs">
-      <DependentUpon>Semesterverwaltung.xaml</DependentUpon>
-    </Compile>
     <Compile Include="view\Studiengangsverwaltung.xaml.cs">
       <DependentUpon>Studiengangsverwaltung.xaml</DependentUpon>
     </Compile>
@@ -131,10 +128,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\Personverwaltung.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="view\Semesterverwaltung.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,8 +177,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="resources\img\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

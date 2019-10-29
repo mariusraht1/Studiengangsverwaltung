@@ -20,10 +20,8 @@ namespace Universitätsverwaltung.controller
             Btn_save = btn_save;
         }
 
-        public void ValidateAttribute(int valID, Type type, Control control, string value, string propertyName, string displayName)
+        public bool IsValidAttribute(int valID, Type type, Control control, string value, string propertyName, string displayName)
         {
-            Lbl_error_msg.Content = "";
-
             ValidationContext validationContext = new ValidationContext(control);
             validationContext.DisplayName = displayName;
             List<ValidationResult> validationResults = new List<ValidationResult>();
@@ -31,34 +29,40 @@ namespace Universitätsverwaltung.controller
 
             ValidAttributes[valID] = Validator.TryValidateValue(value, validationContext, validationResults, validationAttributes);
 
-            switch (ValidAttributes[valID])
+            switch (validationResults.Count)
             {
-                case true:
-                    bool isValidObject = true;
-
-                    for (int i = 0; i < ValidAttributes.Length; i++)
-                    {
-                        if (!ValidAttributes[i])
-                        {
-                            isValidObject = false;
-                            break;
-                        }
-                    }
-
-                    switch (isValidObject)
-                    {
-                        case true:
-                            Btn_save.IsEnabled = true;
-                            break;
-                        case false:
-                            Btn_save.IsEnabled = false;
-                            break;
-                    }
+                case 0:
+                    Lbl_error_msg.Content = "";
                     break;
-                case false:
-                    Btn_save.IsEnabled = false;
+                default:
                     Lbl_error_msg.Content = validationResults[0].ErrorMessage;
                     break;
+            }
+
+            return ValidAttributes[valID];
+        }
+
+        public bool IsValidObject()
+        {
+            bool isValidObject = true;
+
+            for (int i = 0; i < ValidAttributes.Length; i++)
+            {
+                if (!ValidAttributes[i])
+                {
+                    isValidObject = false;
+                    break;
+                }
+            }
+
+            return isValidObject;
+        }
+
+        public void ResetValidAttributes(bool reset)
+        {
+            for (int i = 0; i < ValidAttributes.Length; i++)
+            {
+                ValidAttributes[i] = reset;
             }
         }
     }
