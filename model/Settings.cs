@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Universitätsverwaltung.model
+﻿namespace Universitätsverwaltung.model
 {
     internal class Settings
     {

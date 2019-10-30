@@ -31,9 +31,6 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <TabControl x:Name="tc_menu" Margin="10">
             <TabItem x:Name="ti_personverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
                 <TabItem.Header>

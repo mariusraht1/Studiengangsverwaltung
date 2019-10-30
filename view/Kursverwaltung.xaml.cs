@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Universitätsverwaltung.controller;
 using Universitätsverwaltung.model;
 
@@ -93,26 +95,30 @@ namespace Universitätsverwaltung.view
 
         private void Tb_name_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(0, typeof(Kurs), tb_name, tb_name.Text, "Name", lbl_name.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 0, typeof(Kurs), tb_name, tb_name.Text, "Name", lbl_name.Content.ToString());
         }
 
         private void Tb_beschreibung_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(1, typeof(Kurs), tb_beschreibung, tb_beschreibung.Text, "Beschreibung", lbl_beschreibung.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 1, typeof(Kurs), tb_beschreibung, tb_beschreibung.Text, "Beschreibung", lbl_beschreibung.Content.ToString());
         }
 
         private void Tb_ects_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(2, typeof(Kurs), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 2, typeof(Kurs), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
         }
 
-        private void EnableSaveButton(bool isValidAttribute)
+        private void ValidateInput(KeyEventArgs e, int valID, Type type, Control control, string value, string propertyName, string displayName)
+        {
+            if (!e.Key.Equals(Key.Enter) && !e.Key.Equals(Key.Escape))
+            {
+                validationController.IsValidAttribute(valID, type, control, value, propertyName, displayName);
+                EnableSaveButton();
+                EnableResetButton();
+            }
+        }
+
+        private void EnableSaveButton()
         {
             switch (validationController.IsValidObject() && HasChanged())
             {
@@ -127,12 +133,11 @@ namespace Universitätsverwaltung.view
 
         private bool HasChanged()
         {
-            Kurs kurs = null;
             Kurs selectedKurs = (Kurs)lv_kurs.SelectedItem;
 
             if (selectedKurs != null)
             {
-                kurs = new Kurs(tb_name.Text, tb_beschreibung.Text, tb_ects.Text);
+                Kurs kurs = new Kurs(tb_name.Text, tb_beschreibung.Text, tb_ects.Text);
 
                 return !kurs.Equals(selectedKurs);
             }
@@ -207,15 +212,10 @@ namespace Universitätsverwaltung.view
                 KursListe.Instance[indexExistingKurs] = newKurs;
                 lv_kurs.SelectedItem = newKurs;
             }
-            else
+            else if (!IsDuplicate(newKurs))
             {
-                switch (!IsDuplicate(newKurs))
-                {
-                    case true:
-                        KursListe.Instance.Add(newKurs);
-                        lv_kurs.SelectedIndex = KursListe.Instance.Count - 1;
-                        break;
-                }
+                KursListe.Instance.Add(newKurs);
+                lv_kurs.SelectedIndex = KursListe.Instance.Count - 1;
             }
         }
 

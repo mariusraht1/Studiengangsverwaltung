@@ -151,75 +151,65 @@ namespace Universitätsverwaltung.view
 
         private void Dp_geburtsdatum_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(0, typeof(Person), dp_geburtsdatum, dp_geburtsdatum.Text, "Geburtsdatum", lbl_geburtsdatum.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 0, typeof(Person), dp_geburtsdatum, dp_geburtsdatum.Text, "Geburtsdatum", lbl_geburtsdatum.Content.ToString());
         }
 
         private void Tb_matrikelnummer_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(1, typeof(Student), tb_matrikelnummer, tb_matrikelnummer.Text, "Matrikelnummer", lbl_matrikelnummer.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 1, typeof(Student), tb_matrikelnummer, tb_matrikelnummer.Text, "Matrikelnummer", lbl_matrikelnummer.Content.ToString());
         }
 
         private void Tb_abschluss_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(2, typeof(Abschluss), tb_abschluss, tb_abschluss.Text, "Name", lbl_abschluss.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 2, typeof(Abschluss), tb_abschluss, tb_abschluss.Text, "Name", lbl_abschluss.Content.ToString());
         }
 
         private void Tb_ects_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(3, typeof(Student), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 3, typeof(Student), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
         }
 
         private void Tb_vorname_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(4, typeof(Person), tb_vorname, tb_vorname.Text, "Vorname", lbl_vorname.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 4, typeof(Person), tb_vorname, tb_vorname.Text, "Vorname", lbl_vorname.Content.ToString());
         }
 
         private void Tb_nachname_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(5, typeof(Person), tb_nachname, tb_nachname.Text, "Nachname", lbl_nachname.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 5, typeof(Person), tb_nachname, tb_nachname.Text, "Nachname", lbl_nachname.Content.ToString());
         }
 
         private void Tb_strasse_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(6, typeof(Adresse), tb_strasse, tb_strasse.Text, "Strasse", lbl_strasse_nr.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 6, typeof(Adresse), tb_strasse, tb_strasse.Text, "Strasse", lbl_strasse_nr.Content.ToString());
         }
 
         private void Tb_hausnummer_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(7, typeof(Adresse), tb_hausnummer, tb_hausnummer.Text, "Hausnummer", lbl_strasse_nr.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 7, typeof(Adresse), tb_hausnummer, tb_hausnummer.Text, "Hausnummer", lbl_strasse_nr.Content.ToString());
         }
 
         private void Tb_postleitzahl_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(8, typeof(Adresse), tb_postleitzahl, tb_postleitzahl.Text, "Postleitzahl", lbl_plz_ort.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 8, typeof(Adresse), tb_postleitzahl, tb_postleitzahl.Text, "Postleitzahl", lbl_plz_ort.Content.ToString());
         }
 
         private void Tb_ort_KeyUp(object sender, KeyEventArgs e)
         {
-            bool isValidAttribute = validationController.IsValidAttribute(9, typeof(Adresse), tb_ort, tb_ort.Text, "Ort", lbl_plz_ort.Content.ToString());
-            EnableSaveButton(isValidAttribute);
-            EnableResetButton();
+            ValidateInput(e, 9, typeof(Adresse), tb_ort, tb_ort.Text, "Ort", lbl_plz_ort.Content.ToString());
         }
 
-        private void EnableSaveButton(bool isValidAttribute)
+        private void ValidateInput(KeyEventArgs e, int valID, Type type, Control control, string value, string propertyName, string displayName)
+        {
+            if (!e.Key.Equals(Key.Enter) && !e.Key.Equals(Key.Escape))
+            {
+                validationController.IsValidAttribute(valID, type, control, value, propertyName, displayName);
+                EnableSaveButton();
+                EnableResetButton();
+            }
+        }
+
+        private void EnableSaveButton()
         {
             switch (validationController.IsValidObject() && HasChanged())
             {
@@ -410,15 +400,10 @@ namespace Universitätsverwaltung.view
                 PersonListe.Instance[indexExistingPerson] = newPerson;
                 lv_person.SelectedItem = newPerson;
             }
-            else
+            else if (!IsDuplicate(newPerson))
             {
-                switch (!IsDuplicate(newPerson))
-                {
-                    case true:
-                        PersonListe.Instance.Add(newPerson);
-                        lv_person.SelectedIndex = PersonListe.Instance.Count - 1;
-                        break;
-                }
+                PersonListe.Instance.Add(newPerson);
+                lv_person.SelectedItem = newPerson;
             }
         }
 
