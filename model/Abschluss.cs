@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Universitätsverwaltung.model
 {
-    public class Abschluss
+    public class Abschluss : IComparable
     {
         [Required(AllowEmptyStrings = false)]
         [StringLength(80, MinimumLength = 2)]
@@ -35,6 +36,11 @@ namespace Universitätsverwaltung.model
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            return Name.CompareTo(obj);
         }
     }
 }

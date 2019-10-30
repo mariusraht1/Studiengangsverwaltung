@@ -11,7 +11,7 @@ namespace Universitätsverwaltung
         Student
     }
 
-    public abstract class Person
+    public abstract class Person : IComparable
     {
         public Rolle Rolle { get; set; }
         [Required]
@@ -92,6 +92,50 @@ namespace Universitätsverwaltung
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null || obj.GetType() != GetType())
+            {
+                return -1;
+            }
+
+            Person person = (Person)obj;
+
+            int rolleEqualRate = Rolle.CompareTo(person.Rolle);
+
+            switch(rolleEqualRate)
+            {
+                case 0:
+                    int vornameEqualRate = Vorname.CompareTo(person.Vorname);
+
+                    switch (vornameEqualRate)
+                    {
+                        case 0:
+                            int nachnameEqualRate = Nachname.CompareTo(person.Nachname);
+
+                            switch (nachnameEqualRate)
+                            {
+                                case 0:
+                                    int geburtsdatumEqualRate = Geburtsdatum.CompareTo(person.Geburtsdatum);
+
+                                    switch (geburtsdatumEqualRate)
+                                    {
+                                        case 0:
+                                            return Adresse.CompareTo(person.Adresse);
+                                        default:
+                                            return geburtsdatumEqualRate;
+                                    }
+                                default:
+                                    return nachnameEqualRate;
+                            }
+                        default:
+                            return vornameEqualRate;
+                    }
+                default:
+                    return rolleEqualRate;
+            }
         }
     }
 }

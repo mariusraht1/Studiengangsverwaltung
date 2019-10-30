@@ -5,7 +5,7 @@ using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
-    public class Dozent : Person
+    public class Dozent : Person, IComparable
     {
         [Required]
         public Abschluss Abschluss { get; set; }
@@ -65,12 +65,31 @@ namespace Universitätsverwaltung
 
         public override string ToString()
         {
-            return base.ToString();
+            return Vorname + " " + Nachname + " (" + Geburtsdatum.ToShortDateString() + ")";
         }
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public new int CompareTo(object obj)
+        {
+            if (obj == null || obj.GetType() != GetType())
+            {
+                return -1;
+            }
+
+            Dozent dozent = (Dozent)obj;
+            int personEqualRate = base.CompareTo(obj);
+
+            switch (personEqualRate)
+            {
+                case 0:
+                    return Abschluss.CompareTo(dozent.Abschluss);
+                default:
+                    return personEqualRate;
+            }
         }
     }
 }

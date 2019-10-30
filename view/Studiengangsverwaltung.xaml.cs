@@ -22,9 +22,9 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
-            cb_kurs.ItemsSource = KursListe.Instance;
-            cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList();
-            cb_student.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Student)).ToList();
+            cb_kurs.ItemsSource = KursListe.Instance.OrderBy(x => x);
+            cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().OrderBy(x => x);
+            cb_student.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Student)).ToList().OrderBy(x => x);
 
             lv_studiengang.ItemsSource = StudiengangListe.Instance;
         }
@@ -68,6 +68,25 @@ namespace Universitätsverwaltung.view
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
             lvStudentSorter.SortHeader(headerClicked, lv_student);
+        }
+
+        #endregion
+
+        #region OnClick
+
+        private void Btn_del_semester_ClickedHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_del_kurs_ClickedHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_del_student_ClickedHandler(object sender, RoutedEventArgs e)
+        {
+
         }
 
         #endregion

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Universitätsverwaltung
 {
-    public class Student : Person
+    public class Student : Person, IComparable
     {
         [Required]
         [Range(1, 999999)]
@@ -77,12 +77,39 @@ namespace Universitätsverwaltung
 
         public override string ToString()
         {
-            return base.ToString();
+            return Matrikelnummer + "; " + Vorname + " " + Nachname + " (" + Geburtsdatum.ToShortDateString() + ")";
         }
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public new int CompareTo(object obj)
+        {
+            if (obj == null || obj.GetType() != GetType())
+            {
+                return -1;
+            }
+
+            Student student = (Student)obj;
+            int matrikelnummerEqualRate = Matrikelnummer.CompareTo(student.Matrikelnummer);
+
+            switch (matrikelnummerEqualRate)
+            {
+                case 0:
+                    int personEqualRate = base.CompareTo(obj);
+
+                    switch (personEqualRate)
+                    {
+                        case 0:
+                            return ECTS.CompareTo(student.ECTS);
+                        default:
+                            return personEqualRate;
+                    }
+                default:
+                    return matrikelnummerEqualRate;
+            }
         }
     }
 }

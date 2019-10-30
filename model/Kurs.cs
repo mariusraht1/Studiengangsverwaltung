@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Universitätsverwaltung
 {
-    public class Kurs
+    public class Kurs : IComparable
     {
         [Required]
         [StringLength(42, MinimumLength = 2)]
@@ -59,12 +60,40 @@ namespace Universitätsverwaltung
 
         public override string ToString()
         {
-            return base.ToString();
+            return Name;
         }
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null || obj.GetType() != GetType())
+            {
+                return -1;
+            }
+
+            Kurs kurs = (Kurs)obj;
+
+            int nameEqualRate = Name.CompareTo(kurs.Name);
+
+            switch (nameEqualRate)
+            {
+                case 0:
+                    int beschreibungEqualRate = Beschreibung.CompareTo(kurs.Beschreibung);
+
+                    switch (beschreibungEqualRate)
+                    {
+                        case 0:
+                            return ECTS.CompareTo(kurs.ECTS);
+                        default:
+                            return beschreibungEqualRate;
+                    }
+                default:
+                    return nameEqualRate;
+            }
         }
     }
 }
