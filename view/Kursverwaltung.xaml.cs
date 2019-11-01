@@ -29,7 +29,7 @@ namespace Universitätsverwaltung.view
             lv_kurs.ItemsSource = KursListe.Instance;
         }
 
-        private void Tb_name_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void tb_name_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             tb_name.Focus();
         }
@@ -49,17 +49,17 @@ namespace Universitätsverwaltung.view
 
         #region GotFocus
 
-        private void Tb_name_GotKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
+        private void tb_name_GotKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
         {
             tb_name.SelectAll();
         }
 
-        private void Tb_beschreibung_GotKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
+        private void tb_beschreibung_GotKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
         {
             tb_beschreibung.SelectAll();
         }
 
-        private void Tb_ects_GotKeyboardFocus(object sender, RoutedEventArgs e)
+        private void tb_ects_GotKeyboardFocus(object sender, RoutedEventArgs e)
         {
             tb_ects.SelectAll();
         }
@@ -93,17 +93,17 @@ namespace Universitätsverwaltung.view
 
         #region TextChanged
 
-        private void Tb_name_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void tb_name_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             ValidateInput(e, 0, typeof(Kurs), tb_name, tb_name.Text, "Name", lbl_name.Content.ToString());
         }
 
-        private void Tb_beschreibung_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void tb_beschreibung_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             ValidateInput(e, 1, typeof(Kurs), tb_beschreibung, tb_beschreibung.Text, "Beschreibung", lbl_beschreibung.Content.ToString());
         }
 
-        private void Tb_ects_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void tb_ects_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             ValidateInput(e, 2, typeof(Kurs), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
         }
@@ -114,7 +114,7 @@ namespace Universitätsverwaltung.view
             {
                 validationController.IsValidAttribute(valID, type, control, value, propertyName, displayName);
                 EnableSaveButton();
-                EnableResetButton();
+                EnableResetbutton();
             }
         }
 
@@ -147,7 +147,7 @@ namespace Universitätsverwaltung.view
             }
         }
 
-        private void EnableResetButton()
+        private void EnableResetbutton()
         {
             switch (lv_kurs.SelectedItem is Kurs
                     && HasChanged())

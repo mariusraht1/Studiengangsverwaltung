@@ -28,8 +28,6 @@ namespace Universitätsverwaltung.view
             ects = 3
         }
 
-        public DatePickerTextBox Dptb_geburtsdatum { get; private set; }
-
         public Personverwaltung()
         {
             InitializeComponent();
@@ -154,47 +152,47 @@ namespace Universitätsverwaltung.view
             ValidateInput(e, 0, typeof(Person), dp_geburtsdatum, dp_geburtsdatum.Text, "Geburtsdatum", lbl_geburtsdatum.Content.ToString());
         }
 
-        private void Tb_matrikelnummer_KeyUp(object sender, KeyEventArgs e)
+        private void tb_matrikelnummer_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 1, typeof(Student), tb_matrikelnummer, tb_matrikelnummer.Text, "Matrikelnummer", lbl_matrikelnummer.Content.ToString());
         }
 
-        private void Tb_abschluss_KeyUp(object sender, KeyEventArgs e)
+        private void tb_abschluss_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 2, typeof(Abschluss), tb_abschluss, tb_abschluss.Text, "Name", lbl_abschluss.Content.ToString());
         }
 
-        private void Tb_ects_KeyUp(object sender, KeyEventArgs e)
+        private void tb_ects_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 3, typeof(Student), tb_ects, tb_ects.Text, "ECTS", lbl_ects.Content.ToString());
         }
 
-        private void Tb_vorname_KeyUp(object sender, KeyEventArgs e)
+        private void tb_vorname_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 4, typeof(Person), tb_vorname, tb_vorname.Text, "Vorname", lbl_vorname.Content.ToString());
         }
 
-        private void Tb_nachname_KeyUp(object sender, KeyEventArgs e)
+        private void tb_nachname_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 5, typeof(Person), tb_nachname, tb_nachname.Text, "Nachname", lbl_nachname.Content.ToString());
         }
 
-        private void Tb_strasse_KeyUp(object sender, KeyEventArgs e)
+        private void tb_strasse_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 6, typeof(Adresse), tb_strasse, tb_strasse.Text, "Strasse", lbl_strasse_nr.Content.ToString());
         }
 
-        private void Tb_hausnummer_KeyUp(object sender, KeyEventArgs e)
+        private void tb_hausnummer_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 7, typeof(Adresse), tb_hausnummer, tb_hausnummer.Text, "Hausnummer", lbl_strasse_nr.Content.ToString());
         }
 
-        private void Tb_postleitzahl_KeyUp(object sender, KeyEventArgs e)
+        private void tb_postleitzahl_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 8, typeof(Adresse), tb_postleitzahl, tb_postleitzahl.Text, "Postleitzahl", lbl_plz_ort.Content.ToString());
         }
 
-        private void Tb_ort_KeyUp(object sender, KeyEventArgs e)
+        private void tb_ort_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateInput(e, 9, typeof(Adresse), tb_ort, tb_ort.Text, "Ort", lbl_plz_ort.Content.ToString());
         }
@@ -205,7 +203,7 @@ namespace Universitätsverwaltung.view
             {
                 validationController.IsValidAttribute(valID, type, control, value, propertyName, displayName);
                 EnableSaveButton();
-                EnableResetButton();
+                EnableResetbutton();
             }
         }
 
@@ -252,7 +250,7 @@ namespace Universitätsverwaltung.view
             }
         }
 
-        private void EnableResetButton()
+        private void EnableResetbutton()
         {
             switch (lv_person.SelectedItem is Person
                     && HasChanged())
@@ -280,47 +278,47 @@ namespace Universitätsverwaltung.view
             }
         }
 
-        private void Tb_matrikelnummer_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_matrikelnummer_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_matrikelnummer.SelectAll();
         }
 
-        private void Tb_ects_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_ects_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_ects.SelectAll();
         }
 
-        private void Tb_abschluss_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_abschluss_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_abschluss.SelectAll();
         }
 
-        private void Tb_vorname_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_vorname_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_vorname.SelectAll();
         }
 
-        private void Tb_nachname_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_nachname_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_nachname.SelectAll();
         }
 
-        private void Tb_strasse_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_strasse_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_strasse.SelectAll();
         }
 
-        private void Tb_hausnummer_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_hausnummer_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_hausnummer.SelectAll();
         }
 
-        private void Tb_postleitzahl_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_postleitzahl_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_postleitzahl.SelectAll();
         }
 
-        private void Tb_ort_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void tb_ort_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             tb_ort.SelectAll();
         }

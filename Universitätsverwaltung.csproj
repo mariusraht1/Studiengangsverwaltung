@@ -89,10 +89,12 @@
     <Compile Include="model\Abschluss.cs" />
     <Compile Include="model\Adresse.cs" />
     <Compile Include="model\Dozent.cs" />
+    <Compile Include="model\KursDozent.cs" />
     <Compile Include="model\Kurs.cs" />
     <Compile Include="model\AbschlussListe.cs" />
     <Compile Include="model\AdressListe.cs" />
     <Compile Include="model\DozentListe.cs" />
+    <Compile Include="model\KursDozentListe.cs" />
     <Compile Include="model\StudentListe.cs" />
     <Compile Include="model\SemesterListe.cs" />
     <Compile Include="model\StudiengangListe.cs" />
@@ -154,6 +156,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

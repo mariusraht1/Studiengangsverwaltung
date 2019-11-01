@@ -11,36 +11,39 @@ namespace Universitätsverwaltung
         [Required]
         [StringLength(3, MinimumLength = 1)]
         public int Nummer { get; set; }
-        [StringLength(80, MinimumLength = 0)]
-        public string Beschreibung { get; set; }
         [Date]
         [Required]
         public DateTime Startdatum { get; set; }
         [Date]
         [Required]
         public DateTime Endedatum { get; set; }
-        public KursListe KursListe { get; set; }
+        public KursDozentListe KursDozentListe { get; set; }
 
         public Semester() { }
 
-        public Semester(int nummer, string beschreibung, DateTime startdatum, DateTime endeDatum)
+        public Semester(int nummer, DateTime startdatum, DateTime endeDatum)
         {
             Nummer = nummer;
-            Beschreibung = beschreibung;
             Startdatum = startdatum;
             Endedatum = endeDatum;
         }
 
-        public Semester(string nummer, string beschreibung, DateTime startdatum, DateTime endeDatum)
+        public Semester(string nummer, string startdatum, string endeDatum)
         {
-            if (int.TryParse(nummer, out int result))
+            if (int.TryParse(nummer, out _))
             {
                 Nummer = int.Parse(nummer);
             }
 
-            Beschreibung = beschreibung;
-            Startdatum = startdatum;
-            Endedatum = endeDatum;
+            if (DateTime.TryParse(startdatum, out _))
+            {
+                Startdatum = DateTime.Parse(startdatum);
+            }
+
+            if (DateTime.TryParse(endeDatum, out _))
+            {
+                Endedatum = DateTime.Parse(endeDatum);
+            }
         }
     }
 }
