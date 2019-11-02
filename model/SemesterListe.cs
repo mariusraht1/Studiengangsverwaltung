@@ -15,5 +15,12 @@ namespace Universitätsverwaltung.model
         {
             instance = semesterListe;
         }
+
+        public SemesterListe() { }
+
+        public bool IsDuplicate(Semester semester)
+        {
+            return Contains(semester);
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Universitätsverwaltung.model
 
         public override string ToString()
         {
-            return base.ToString();
+            return Name;
         }
 
         public override int GetHashCode()

@@ -13,8 +13,8 @@ namespace Universitätsverwaltung
         [Required]
         [Range(1, 999)]
         public int ECTS { get; set; }
-        public SemesterListe SemesterListe { get; set; }
-        public StudentListe StudentListe { get; set; }
+        public SemesterListe SemesterListe { get; set; } = new SemesterListe();
+        public StudentListe StudentListe { get; set; } = new StudentListe();
 
         public Studiengang() { }
 
@@ -39,6 +39,38 @@ namespace Universitätsverwaltung
 
             SemesterListe = semesterListe;
             StudentListe = studentListe;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Studiengang studiengang = (Studiengang)obj;
+
+            return Name.Equals(studiengang.Name);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

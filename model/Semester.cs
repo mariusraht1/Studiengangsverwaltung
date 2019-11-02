@@ -17,7 +17,7 @@ namespace Universitätsverwaltung
         [Date]
         [Required]
         public DateTime Endedatum { get; set; }
-        public KursDozentListe KursDozentListe { get; set; }
+        public KursDozentListe KursDozentListe { get; set; } = new KursDozentListe();
 
         public Semester() { }
 
@@ -44,6 +44,38 @@ namespace Universitätsverwaltung
             {
                 Endedatum = DateTime.Parse(endeDatum);
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Semester semester = (Semester)obj;
+
+            return Nummer.Equals(semester.Nummer);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

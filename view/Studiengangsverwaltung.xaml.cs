@@ -24,6 +24,7 @@ namespace Universitätsverwaltung.view
 
         private ValidationController validationControllerStudiengang = null;
         private ValidationController validationControllerSemester = null;
+
         private Studiengang studiengang = new Studiengang();
 
         public Studiengangsverwaltung()
@@ -37,9 +38,13 @@ namespace Universitätsverwaltung.view
             cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().OrderBy(x => x);
             cb_student.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Student)).ToList().OrderBy(x => x);
 
-            studiengang.SemesterListe = new SemesterListe();
+            if (StudentListe.Instance.Count > 0)
+            {
+                cb_student.IsEnabled = true;
+                btn_add_student.IsEnabled = true;
+            }
+
             lv_studiengang.ItemsSource = StudiengangListe.Instance;
-            lv_semester.ItemsSource = studiengang.SemesterListe;
         }
 
         private void tb_studiengang_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -66,10 +71,10 @@ namespace Universitätsverwaltung.view
             lvSemesterSorter.SortHeader(headerClicked, lv_semester);
         }
 
-        private void GridViewColumnHeaderLvKursClickedHandler(object sender, RoutedEventArgs e)
+        private void GridViewColumnHeaderLvKursDozentClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvKursSorter.SortHeader(headerClicked, lv_kurs);
+            lvKursSorter.SortHeader(headerClicked, lv_kurs_dozent);
         }
 
         private void GridViewColumnHeaderLvStudentClickedHandler(object sender, RoutedEventArgs e)
@@ -130,11 +135,20 @@ namespace Universitätsverwaltung.view
             switch (lv_studiengang.SelectedIndex)
             {
                 case -1:
+                    tb_studiengang.Text = "";
+                    tb_abschluss.Text = "";
+                    tb_ects.Text = "";
+
                     lv_semester.ItemsSource = studiengang.SemesterListe;
                     lv_student.ItemsSource = studiengang.StudentListe;
                     break;
                 default:
                     Studiengang selectedStudiengang = (Studiengang)lv_studiengang.SelectedItem;
+
+                    tb_studiengang.Text = selectedStudiengang.Name;
+                    tb_abschluss.Text = selectedStudiengang.Abschluss.Name;
+                    tb_ects.Text = selectedStudiengang.ECTS.ToString();
+
                     lv_semester.ItemsSource = selectedStudiengang.SemesterListe;
                     lv_student.ItemsSource = selectedStudiengang.StudentListe;
                     break;
@@ -143,14 +157,38 @@ namespace Universitätsverwaltung.view
 
         private void lv_semester_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (lv_semester.SelectedIndex)
+            Semester selectedSemester = (Semester)lv_semester.SelectedItem;
+
+            if (selectedSemester != null)
             {
-                case -1:
-                    break;
-                default:
-                    Semester selectedSemester = (Semester)lv_semester.SelectedItem;
-                    lv_kurs.ItemsSource = selectedSemester.KursDozentListe;
-                    break;
+                tb_semester.Text = selectedSemester.Nummer.ToString();
+                dp_startdatum.Text = selectedSemester.Startdatum.ToShortDateString();
+                dp_endedatum.Text = selectedSemester.Endedatum.ToShortDateString();
+            }
+            else
+            {
+                tb_semester.Text = "";
+                dp_startdatum.Text = "";
+                dp_endedatum.Text = "";
+            }
+
+            if (lv_semester.SelectedIndex > -1
+               && KursListe.Instance.Count > 0
+               && PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().Count > 0)
+            {
+                cb_kurs.IsEnabled = true;
+                cb_dozent.IsEnabled = true;
+                btn_add_kurs.IsEnabled = true;
+
+                lv_kurs_dozent.ItemsSource = selectedSemester.KursDozentListe;
+            }
+            else
+            {
+                cb_kurs.IsEnabled = false;
+                cb_dozent.IsEnabled = false;
+                btn_add_kurs.IsEnabled = false;
+
+                lv_kurs_dozent.ItemsSource = null;
             }
         }
 
@@ -274,7 +312,12 @@ namespace Universitätsverwaltung.view
         {
             Semester semester = new Semester(tb_semester.Text, dp_startdatum.Text, dp_endedatum.Text);
 
-            studiengang.SemesterListe.Add(semester);
+            if (!IsDuplicate(studiengang,semester))
+            {
+              studiengang.SemesterListe.Add(semester);
+                lv_semester.SelectedItem = semester;
+                lv_semester_SelectionChanged(null, null);
+            }
         }
 
         private void btn_add_kurs_Click(object sender, RoutedEventArgs e)
@@ -303,7 +346,7 @@ namespace Universitätsverwaltung.view
         private void btn_del_kurs_ClickedHandler(object sender, RoutedEventArgs e)
         {
             Semester selectedSemester = (Semester)lv_semester.SelectedItem;
-            KursDozent selectedKursDozent = (KursDozent)lv_kurs.SelectedItem;
+            KursDozent selectedKursDozent = (KursDozent)lv_kurs_dozent.SelectedItem;
 
             selectedSemester.KursDozentListe.Remove(selectedKursDozent);
         }
@@ -370,11 +413,10 @@ namespace Universitätsverwaltung.view
             }
         }
 
-        private bool IsDuplicate(Studiengang newStudiengang)
+        private bool IsDuplicate(Studiengang studiengang)
         {
-            List<Studiengang> studiengangResult1 = StudiengangListe.Instance.Where(x => x.Name.Equals(newStudiengang.Name)
-                                                                    || x.Abschluss.Equals(newStudiengang.Abschluss))
-                                                             .ToList();
+            List<Studiengang> studiengangResult1 = StudiengangListe.Instance.Where(x => x.Name.Equals(studiengang.Name)
+                                                                                     || x.Abschluss.Equals(studiengang.Abschluss)).ToList();
 
             if (studiengangResult1.Count > 0)
             {
@@ -388,6 +430,20 @@ namespace Universitätsverwaltung.view
             else
             {
                 return false;
+            }
+        }
+
+        private bool IsDuplicate(Studiengang studiengang, Semester semester)
+        {
+            int indexExistingSemester = studiengang.SemesterListe.IndexOf(semester);
+
+            switch(indexExistingSemester)
+            {
+                case -1:
+                    return false;
+                default:
+                    studiengang.SemesterListe[indexExistingSemester] = semester;
+                    return true;
             }
         }
 

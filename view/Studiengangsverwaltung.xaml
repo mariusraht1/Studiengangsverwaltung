@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
              mc:Ignorable="d" Width="838" Height="520" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Cursor="Arrow">
     <Grid Background="#FFE5E5E5" Cursor="Arrow">
-        <ListView x:Name="lv_studiengang" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvStudiengangClickedHandler" SelectionChanged="lv_studiengang_SelectionChanged">
+        <ListView x:Name="lv_studiengang" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" SelectedIndex="0" GridViewColumnHeader.Click="GridViewColumnHeaderLvStudiengangClickedHandler" SelectionChanged="lv_studiengang_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Studiengang" DisplayMemberBinding="{Binding Name}" Width="370"/>
@@ -24,7 +24,7 @@
         <Label Content="Dozent:" Margin="270,235,0,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="56"/>
         <Label x:Name="lbl_studiengang" Content="Studiengang:" Margin="10,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="94"/>
         <TextBox x:Name="tb_studiengang" TabIndex="0" Height="28" Margin="109,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" Loaded="tb_studiengang_Loaded" GotKeyboardFocus="tb_studiengang_GotKeyboardFocus" KeyUp="tb_studiengang_KeyUp" HorizontalAlignment="Left" Width="230"/>
-        <ListView x:Name="lv_kurs" Margin="270,267,311,0" Height="174" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler">
+        <ListView x:Name="lv_kurs_dozent" Margin="270,267,311,0" Height="174" VerticalAlignment="Top" SelectedIndex="0" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursDozentClickedHandler">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="214"/>
@@ -39,7 +39,7 @@
             </ListView.View>
         </ListView>
         <Label Content="Kurs:" Margin="270,201,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="56"/>
-        <ListView x:Name="lv_semester" Margin="10,267,0,0" Height="174" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvSemesterClickedHandler" HorizontalAlignment="Left" Width="255" SelectionChanged="lv_semester_SelectionChanged">
+        <ListView x:Name="lv_semester" Margin="10,267,0,0" Height="174" VerticalAlignment="Top" SelectedIndex="0" GridViewColumnHeader.Click="GridViewColumnHeaderLvSemesterClickedHandler" HorizontalAlignment="Left" Width="255" SelectionChanged="lv_semester_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nr." Width="40">
@@ -74,8 +74,8 @@
             </ListView.View>
         </ListView>
         <Label Content="Studenten:" Margin="0,201,10,0" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" Width="296" RenderTransformOrigin="0.5,0.5"/>
-        <ComboBox x:Name="cb_student" Margin="0,234,43,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="263" SelectedIndex="0" VerticalContentAlignment="Center" IsEnabled="False"/>
-        <ListView x:Name="lv_student" Margin="0,267,10,0" Height="174" VerticalAlignment="Top" GridViewColumnHeader.Click="GridViewColumnHeaderLvStudentClickedHandler" HorizontalAlignment="Right" Width="296">
+        <ComboBox x:Name="cb_student" TabIndex="10" Margin="0,234,43,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="263" SelectedIndex="0" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <ListView x:Name="lv_student" Margin="0,267,10,0" Height="174" VerticalAlignment="Top" SelectedIndex="0" GridViewColumnHeader.Click="GridViewColumnHeaderLvStudentClickedHandler" HorizontalAlignment="Right" Width="296">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Matrikelnr." Width="66">
@@ -98,26 +98,26 @@
             </ListView.View>
         </ListView>
         <Separator Height="9" Margin="10,187,10,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_reset" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand" Click="btn_reset_Click"/>
-        <Button x:Name="btn_save" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_save_Click"/>
-        <ComboBox x:Name="cb_dozent" Margin="331,234,344,0" VerticalAlignment="Top" Height="28" SelectedIndex="0" VerticalContentAlignment="Center" IsEnabled="False"/>
-        <Button x:Name="btn_new" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_new_Click"/>
-        <Button x:Name="btn_del" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_del_Click"/>
+        <Button x:Name="btn_reset" TabIndex="12" Content="Zurücksetzen" HorizontalAlignment="Left" Margin="10,0,0,44" Width="100" IsCancel="True" IsEnabled="False" FontSize="14" FontFamily="Calibri" Height="28" VerticalAlignment="Bottom" Cursor="Hand" Click="btn_reset_Click"/>
+        <Button x:Name="btn_save" TabIndex="15" Content="Speichern" Margin="0,0,10,44" IsDefault="True" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_save_Click"/>
+        <ComboBox x:Name="cb_dozent" TabIndex="8" Margin="331,234,344,0" VerticalAlignment="Top" Height="28" SelectedIndex="0" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <Button x:Name="btn_new" TabIndex="13" Content="Neu" Margin="0,0,220,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_new_Click"/>
+        <Button x:Name="btn_del" TabIndex="14" Content="Löschen" Margin="0,0,115,44" IsEnabled="False" FontFamily="Calibri" FontSize="14" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Cursor="Hand" Click="btn_del_Click"/>
         <Separator Margin="10,0,10,31" Height="8" VerticalAlignment="Bottom"/>
         <Label Content="{x:Static model:Settings.Version}" Margin="0,0,10,10" Height="21" VerticalAlignment="Bottom" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="68"/>
         <Label x:Name="lbl_error_msg" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Foreground="Red" Width="692" Height="22" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center"/>
         <Label Content="Version:" Margin="0,0,83,10" Height="21" VerticalAlignment="Bottom" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="48" FontWeight="Bold"/>
-        <Button x:Name="btn_add_student" Content="+" HorizontalAlignment="Right" Margin="0,234,10,0" VerticalAlignment="Top" Width="28" Height="28" IsEnabled="False" Click="btn_add_student_Click"/>
+        <Button x:Name="btn_add_student" TabIndex="11" Content="+" HorizontalAlignment="Right" Margin="0,234,10,0" VerticalAlignment="Top" Width="28" Height="28" IsEnabled="False" Click="btn_add_student_Click"/>
         <Label x:Name="lbl_abschluss" Content="Abschlussbez.:" Margin="344,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
         <TextBox x:Name="tb_abschluss" TabIndex="1" Height="28" Margin="449,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" Loaded="tb_studiengang_Loaded" GotKeyboardFocus="tb_abschluss_GotKeyboardFocus" KeyUp="tb_abschluss_KeyUp" HorizontalAlignment="Left" Width="230"/>
-        <ComboBox x:Name="cb_kurs" Margin="331,201,311,0" VerticalAlignment="Top" Height="28" SelectedIndex="0" VerticalContentAlignment="Center" IsEnabled="False"/>
-        <Button x:Name="btn_add_kurs" Content="+" HorizontalAlignment="Left" Margin="499,234,0,0" VerticalAlignment="Top" Width="28" Height="28" IsEnabled="False" Click="btn_add_kurs_Click"/>
+        <ComboBox x:Name="cb_kurs" TabIndex="7" Margin="331,201,311,0" VerticalAlignment="Top" Height="28" SelectedIndex="0" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <Button x:Name="btn_add_kurs" TabIndex="9" Content="+" HorizontalAlignment="Left" Margin="499,234,0,0" VerticalAlignment="Top" Width="28" Height="28" IsEnabled="False" Click="btn_add_kurs_Click"/>
         <DatePicker x:Name="dp_startdatum" TabIndex="4" Margin="133,201,0,291" VerticalContentAlignment="Center" Padding="2" FontSize="14" FontFamily="Calibri" HorizontalAlignment="Left" Width="100" GotKeyboardFocus="dp_startdatum_GotKeyboardFocus" KeyUp="dp_startdatum_KeyUp"/>
-        <DatePicker x:Name="dp_endedatum"  TabIndex="5" Margin="133,234,0,258" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Left" Width="100" GotKeyboardFocus="dp_endedatum_GotKeyboardFocus" KeyUp="dp_endedatum_KeyUp"/>
+        <DatePicker x:Name="dp_endedatum" TabIndex="5" Margin="133,234,0,258" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Left" Width="100" GotKeyboardFocus="dp_endedatum_GotKeyboardFocus" KeyUp="dp_endedatum_KeyUp"/>
         <Label Content="bis" Margin="91,234,0,258" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" Padding="5" HorizontalAlignment="Left" Width="36"/>
         <TextBox x:Name="tb_semester" TabIndex="3" MaxLength="3" Height="28" Margin="91,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" Padding="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLines="1" HorizontalAlignment="Left" Width="37" GotKeyboardFocus="tb_semester_GotKeyboardFocus" KeyUp="tb_semester_KeyUp"/>
         <Label x:Name="lbl_semester" Content="Semester:" Height="28" FontSize="14" FontWeight="Bold" Padding="4,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="10,201,0,0" HorizontalAlignment="Left" Width="76"/>
-        <Button x:Name="btn_add_semester" Content="+" Margin="237,234,0,0" VerticalAlignment="Top" Height="28" MaxHeight="28" HorizontalAlignment="Left" Width="28" MaxWidth="28" IsEnabled="False" Click="btn_add_semester_Click"/>
+        <Button x:Name="btn_add_semester" TabIndex="6" Content="+" Margin="237,234,0,0" VerticalAlignment="Top" Height="28" MaxHeight="28" HorizontalAlignment="Left" Width="28" MaxWidth="28" IsEnabled="False" Click="btn_add_semester_Click"/>
         <TextBox x:Name="tb_ects" TabIndex="2" MaxLength="3" Height="28" Margin="0,155,10,0" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" MaxLines="1" KeyUp="tb_ects_KeyUp" HorizontalContentAlignment="Center" GotKeyboardFocus="tb_ects_GotKeyboardFocus" HorizontalAlignment="Right" Width="40"/>
         <Label x:Name="lbl_ects" Content="ECTS-Punkte:" Margin="684,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="99"/>
     </Grid>

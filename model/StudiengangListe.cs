@@ -15,5 +15,7 @@ namespace Universitätsverwaltung.model
         {
             instance = studiengangListe;
         }
+
+        public StudiengangListe() { }
     }
 }
