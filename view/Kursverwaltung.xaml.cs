@@ -24,7 +24,7 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
-            validationController = new ValidationController(new bool[3], lbl_error_msg, btn_save);
+            validationController = new ValidationController(new bool[3], lbl_error_msg);
 
             lv_kurs.ItemsSource = KursListe.Instance;
         }
@@ -165,13 +165,13 @@ namespace Universitätsverwaltung.view
 
         #region OnClick
 
-        private void Btn_reset_Click(object sender, RoutedEventArgs e)
+        private void btn_reset_Click(object sender, RoutedEventArgs e)
         {
             Lv_kurs_SelectionChanged(null, null);
             lbl_error_msg.Content = "";
         }
 
-        private void Btn_new_Click(object sender, RoutedEventArgs e)
+        private void btn_new_Click(object sender, RoutedEventArgs e)
         {
             lv_kurs.SelectedIndex = -1;
             btn_new.IsEnabled = false;
@@ -184,15 +184,15 @@ namespace Universitätsverwaltung.view
             tb_name.Focus();
         }
 
-        private void Btn_del_Click(object sender, RoutedEventArgs e)
+        private void btn_del_Click(object sender, RoutedEventArgs e)
         {
             Kurs selectedKurs = lv_kurs.SelectedItem as Kurs;
             KursListe.Instance.Remove(selectedKurs);
 
-            Btn_new_Click(null, null);
+            btn_new_Click(null, null);
         }
 
-        private void Btn_save_Click(object sender, RoutedEventArgs e)
+        private void btn_save_Click(object sender, RoutedEventArgs e)
         {
             Kurs newKurs = null;
 

@@ -11,13 +11,11 @@ namespace Universitätsverwaltung.controller
     {
         public bool[] ValidAttributes { get; set; }
         public Label Lbl_error_msg { get; set; }
-        public Button Btn_save { get; set; }
 
-        public ValidationController(bool[] validAttributes, Label lbl_error_msg, Button btn_save)
+        public ValidationController(bool[] validAttributes, Label lbl_error_msg)
         {
             ValidAttributes = validAttributes;
             Lbl_error_msg = lbl_error_msg;
-            Btn_save = btn_save;
         }
 
         public bool IsValidAttribute(int valID, Type type, Control control, string value, string propertyName, string displayName)

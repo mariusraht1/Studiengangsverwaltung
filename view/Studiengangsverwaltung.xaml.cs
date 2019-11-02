@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,19 +24,22 @@ namespace Universitätsverwaltung.view
 
         private ValidationController validationControllerStudiengang = null;
         private ValidationController validationControllerSemester = null;
+        private Studiengang studiengang = new Studiengang();
 
         public Studiengangsverwaltung()
         {
             InitializeComponent();
 
-            validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg, btn_save);
-            validationControllerSemester = new ValidationController(new bool[3], lbl_error_msg, btn_save);
+            validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg);
+            validationControllerSemester = new ValidationController(new bool[3], lbl_error_msg);
 
             cb_kurs.ItemsSource = KursListe.Instance.OrderBy(x => x);
             cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().OrderBy(x => x);
             cb_student.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Student)).ToList().OrderBy(x => x);
 
+            studiengang.SemesterListe = new SemesterListe();
             lv_studiengang.ItemsSource = StudiengangListe.Instance;
+            lv_semester.ItemsSource = studiengang.SemesterListe;
         }
 
         private void tb_studiengang_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -123,22 +127,31 @@ namespace Universitätsverwaltung.view
 
         private void lv_studiengang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            switch (lv_studiengang.SelectedIndex)
+            {
+                case -1:
+                    lv_semester.ItemsSource = studiengang.SemesterListe;
+                    lv_student.ItemsSource = studiengang.StudentListe;
+                    break;
+                default:
+                    Studiengang selectedStudiengang = (Studiengang)lv_studiengang.SelectedItem;
+                    lv_semester.ItemsSource = selectedStudiengang.SemesterListe;
+                    lv_student.ItemsSource = selectedStudiengang.StudentListe;
+                    break;
+            }
         }
 
         private void lv_semester_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void lv_kurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void lv_student_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            switch (lv_semester.SelectedIndex)
+            {
+                case -1:
+                    break;
+                default:
+                    Semester selectedSemester = (Semester)lv_semester.SelectedItem;
+                    lv_kurs.ItemsSource = selectedSemester.KursDozentListe;
+                    break;
+            }
         }
 
         #endregion
@@ -257,13 +270,11 @@ namespace Universitätsverwaltung.view
 
         #region OnClick
 
-        private Studiengang newStudiengang = null;
-
         private void btn_add_semester_Click(object sender, RoutedEventArgs e)
         {
             Semester semester = new Semester(tb_semester.Text, dp_startdatum.Text, dp_endedatum.Text);
 
-            newStudiengang.SemesterListe.Add(semester);
+            studiengang.SemesterListe.Add(semester);
         }
 
         private void btn_add_kurs_Click(object sender, RoutedEventArgs e)
@@ -277,22 +288,107 @@ namespace Universitätsverwaltung.view
 
         private void btn_add_student_Click(object sender, RoutedEventArgs e)
         {
+            Student student = (Student)cb_student.SelectedItem;
 
+            studiengang.StudentListe.Add(student);
         }
 
         private void btn_del_semester_ClickedHandler(object sender, RoutedEventArgs e)
         {
+            Semester selectedSemester = (Semester)((ListBoxItem)lv_semester.ContainerFromElement((Button)sender)).Content;
 
+            studiengang.SemesterListe.Remove(selectedSemester);
         }
 
         private void btn_del_kurs_ClickedHandler(object sender, RoutedEventArgs e)
         {
+            Semester selectedSemester = (Semester)lv_semester.SelectedItem;
+            KursDozent selectedKursDozent = (KursDozent)lv_kurs.SelectedItem;
 
+            selectedSemester.KursDozentListe.Remove(selectedKursDozent);
         }
 
         private void btn_del_student_ClickedHandler(object sender, RoutedEventArgs e)
         {
+            Student selectedStudent = (Student)lv_student.SelectedItem;
 
+            studiengang.StudentListe.Remove(selectedStudent);
+        }
+
+        private void btn_reset_Click(object sender, RoutedEventArgs e)
+        {
+            lv_studiengang_SelectionChanged(null, null);
+            lbl_error_msg.Content = "";
+        }
+
+        private void btn_new_Click(object sender, RoutedEventArgs e)
+        {
+            lv_studiengang.SelectedIndex = -1;
+            btn_new.IsEnabled = false;
+            btn_del.IsEnabled = false;
+
+            tb_studiengang.Text = "";
+            tb_abschluss.Text = "";
+            tb_ects.Text = "";
+            tb_semester.Text = "";
+            dp_startdatum.Text = "";
+            dp_endedatum.Text = "";
+
+            tb_studiengang.Focus();
+        }
+
+        private void btn_del_Click(object sender, RoutedEventArgs e)
+        {
+            Studiengang selectedStudiengang = lv_studiengang.SelectedItem as Studiengang;
+            StudiengangListe.Instance.Remove(selectedStudiengang);
+
+            btn_new_Click(null, null);
+        }
+
+        private void btn_save_Click(object sender, RoutedEventArgs e)
+        {
+            string name = tb_studiengang.Text;
+            Abschluss abschluss = new Abschluss(tb_abschluss.Text);
+            string ects = tb_ects.Text;
+            SemesterListe semesterListe = (SemesterListe)lv_semester.ItemsSource;
+            StudentListe studentListe = (StudentListe)lv_student.ItemsSource;
+
+            Studiengang newStudiengang = new Studiengang(tb_studiengang.Text, abschluss, tb_ects.Text, semesterListe, studentListe);
+
+            if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
+            {
+                Studiengang existingStudiengang = StudiengangListe.Instance.Where(x => x.Equals(selectedStudiengang)).Single();
+                int indexExistingStudiengang = StudiengangListe.Instance.IndexOf(existingStudiengang);
+
+                StudiengangListe.Instance[indexExistingStudiengang] = newStudiengang;
+                lv_studiengang.SelectedItem = newStudiengang;
+            }
+            else if (!IsDuplicate(newStudiengang))
+            {
+                StudiengangListe.Instance.Add(newStudiengang);
+                lv_studiengang.SelectedItem = newStudiengang;
+            }
+        }
+
+        private bool IsDuplicate(Studiengang newStudiengang)
+        {
+            List<Studiengang> studiengangResult1 = StudiengangListe.Instance.Where(x => x.Name.Equals(newStudiengang.Name)
+                                                                    || x.Abschluss.Equals(newStudiengang.Abschluss))
+                                                             .ToList();
+
+            if (studiengangResult1.Count > 0)
+            {
+                MessageBox.Show("Studiengang existiert bereits:" +
+                    "\nName: " + studiengangResult1[0].Name +
+                    "\nAbschluss: " + studiengangResult1[0].Abschluss, "Studiengang vorhanden", MessageBoxButton.OK);
+
+                btn_new.IsEnabled = true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion

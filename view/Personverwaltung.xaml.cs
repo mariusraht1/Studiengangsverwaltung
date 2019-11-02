@@ -32,7 +32,7 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
-            validationController = new ValidationController(new bool[10], lbl_error_msg, btn_save);
+            validationController = new ValidationController(new bool[10], lbl_error_msg);
 
             lv_person.ItemsSource = PersonListe.Instance;
             cb_rolle.ItemsSource = Enum.GetValues(typeof(Rolle));
@@ -327,13 +327,13 @@ namespace Universitätsverwaltung.view
 
         #region OnClick
 
-        private void Btn_reset_Click(object sender, RoutedEventArgs e)
+        private void btn_reset_Click(object sender, RoutedEventArgs e)
         {
             Lv_person_SelectionChanged(null, null);
             lbl_error_msg.Content = "";
         }
 
-        private void Btn_new_Click(object sender, RoutedEventArgs e)
+        private void btn_new_Click(object sender, RoutedEventArgs e)
         {
             lv_person.SelectedIndex = -1;
             btn_new.IsEnabled = false;
@@ -354,15 +354,15 @@ namespace Universitätsverwaltung.view
             dp_geburtsdatum.Focus();
         }
 
-        private void Btn_del_Click(object sender, RoutedEventArgs e)
+        private void btn_del_Click(object sender, RoutedEventArgs e)
         {
             Person selectedPerson = lv_person.SelectedItem as Person;
             PersonListe.Instance.Remove(selectedPerson);
 
-            Btn_new_Click(null, null);
+            btn_new_Click(null, null);
         }
 
-        private void Btn_save_Click(object sender, RoutedEventArgs e)
+        private void btn_save_Click(object sender, RoutedEventArgs e)
         {
             Person newPerson = null;
 
