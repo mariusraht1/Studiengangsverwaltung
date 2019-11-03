@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
              mc:Ignorable="d" Cursor="Arrow" Width="838" Height="520" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}">
     <Grid Background="#FFE5E5E5">
-        <ListView x:Name="lv_kurs" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler" SelectionChanged="Lv_kurs_SelectionChanged">
+        <ListView x:Name="lv_kurs" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler" SelectionChanged="Lv_kurs_SelectionChanged" Loaded="lv_kurs_Loaded">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="270"/>

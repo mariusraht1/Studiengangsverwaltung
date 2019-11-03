@@ -33,8 +33,17 @@ namespace Universitätsverwaltung.view
             InitializeComponent();
 
             validationController = new ValidationController(new bool[10], lbl_error_msg);
+        }
 
+        #region Loaded
+
+        private void lv_person_Loaded(object sender, RoutedEventArgs e)
+        {
             lv_person.ItemsSource = PersonListe.Instance;
+        }
+
+        private void cb_rolle_Loaded(object sender, RoutedEventArgs e)
+        {
             cb_rolle.ItemsSource = Enum.GetValues(typeof(Rolle));
             cb_rolle.SelectedItem = Rolle.Student;
         }
@@ -48,6 +57,8 @@ namespace Universitätsverwaltung.view
                 datePickerTextBox.Focus();
             }
         }
+
+        #endregion
 
         #region ListViewSorter
 

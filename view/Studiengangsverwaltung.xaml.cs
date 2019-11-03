@@ -31,15 +31,24 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
-            // TODO: Bestehende Semester ändern, neue Semester hinzufügen
-
             validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg);
             validationControllerSemester = new ValidationController(new bool[3], lbl_error_msg);
+        }
 
+        #region Loaded
 
-
+        private void lv_studiengang_Loaded(object sender, RoutedEventArgs e)
+        {
             lv_studiengang.ItemsSource = StudiengangListe.Instance;
+        }
+
+        private void lv_semester_Loaded(object sender, RoutedEventArgs e)
+        {
             lv_semester.ItemsSource = studiengang.SemesterListe;
+        }
+
+        private void lv_student_Loaded(object sender, RoutedEventArgs e)
+        {
             lv_student.ItemsSource = studiengang.StudentListe;
         }
 
@@ -68,6 +77,8 @@ namespace Universitätsverwaltung.view
                 btn_add_student.IsEnabled = true;
             }
         }
+
+        #endregion
 
         #region ListViewSorter
 

@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
              mc:Ignorable="d" Width="838" Height="520" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Cursor="Arrow">
     <Grid Background="#FFE5E5E5">
-        <ListView x:Name="lv_person" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="Lv_person_SelectionChanged" GridViewColumnHeader.Click="GridViewColumnHeaderLvPersonClickedHandler">
+        <ListView x:Name="lv_person" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="Lv_person_SelectionChanged" GridViewColumnHeader.Click="GridViewColumnHeaderLvPersonClickedHandler" Loaded="lv_person_Loaded">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Rolle" Width="60">
@@ -23,7 +23,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="cb_rolle" TabIndex="0" HorizontalAlignment="Left" Margin="100,155,0,0" VerticalAlignment="Top" Width="156" Height="28" FontSize="14" FontFamily="Calibri" SelectedIndex="0" VerticalContentAlignment="Center" Padding="8,3" SelectionChanged="Cb_rolle_SelectionChanged" RenderTransformOrigin="0.5,0.5"/>
+        <ComboBox x:Name="cb_rolle" TabIndex="0" HorizontalAlignment="Left" Margin="100,155,0,0" VerticalAlignment="Top" Width="156" Height="28" FontSize="14" FontFamily="Calibri" SelectedIndex="0" VerticalContentAlignment="Center" Padding="8,3" SelectionChanged="Cb_rolle_SelectionChanged" RenderTransformOrigin="0.5,0.5" Loaded="cb_rolle_Loaded"/>
         <Label x:Name="lbl_vorname" Content="Vorname:" Margin="10,254,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="85"/>
         <TextBox x:Name="tb_vorname" TabIndex="4" MaxLength="42" HorizontalAlignment="Left" Height="28" Margin="100,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" BorderBrush="#FF4D4D4D" Foreground="#FF4D4D4D" AutoWordSelection="True" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Center" Padding="4,0,0,0" MaxLines="1" KeyUp="tb_vorname_KeyUp" GotKeyboardFocus="tb_vorname_GotKeyboardFocus"/>
         <Label x:Name="lbl_nachname" Content="Nachname:" Margin="10,287,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="85"/>

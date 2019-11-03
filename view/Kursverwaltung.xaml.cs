@@ -25,7 +25,12 @@ namespace Universitätsverwaltung.view
             InitializeComponent();
 
             validationController = new ValidationController(new bool[3], lbl_error_msg);
+        }
 
+        #region Loaded
+
+        private void lv_kurs_Loaded(object sender, RoutedEventArgs e)
+        {
             lv_kurs.ItemsSource = KursListe.Instance;
         }
 
@@ -33,6 +38,8 @@ namespace Universitätsverwaltung.view
         {
             tb_name.Focus();
         }
+
+        #endregion
 
         #region ListViewSorter
 
