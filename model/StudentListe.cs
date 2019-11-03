@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Universitätsverwaltung.model
 {
@@ -10,5 +11,7 @@ namespace Universitätsverwaltung.model
         {
             get { return instance ?? (instance = new StudentListe()); }
         }
+
+        public StudentListe() { }
     }
 }

@@ -31,25 +31,42 @@ namespace Universitätsverwaltung.view
         {
             InitializeComponent();
 
+            // TODO: Bestehende Semester ändern, neue Semester hinzufügen
+
             validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg);
             validationControllerSemester = new ValidationController(new bool[3], lbl_error_msg);
 
-            cb_kurs.ItemsSource = KursListe.Instance.OrderBy(x => x);
-            cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().OrderBy(x => x);
-            cb_student.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Student)).ToList().OrderBy(x => x);
 
-            if (StudentListe.Instance.Count > 0)
-            {
-                cb_student.IsEnabled = true;
-                btn_add_student.IsEnabled = true;
-            }
 
             lv_studiengang.ItemsSource = StudiengangListe.Instance;
+            lv_semester.ItemsSource = studiengang.SemesterListe;
+            lv_student.ItemsSource = studiengang.StudentListe;
         }
 
         private void tb_studiengang_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             tb_studiengang.Focus();
+        }
+
+        private void cb_kurs_Loaded(object sender, RoutedEventArgs e)
+        {
+            cb_kurs.ItemsSource = KursListe.Instance.OrderBy(x => x);
+        }
+
+        private void cb_dozent_Loaded(object sender, RoutedEventArgs e)
+        {
+            cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().OrderBy(x => x);
+        }
+
+        private void cb_student_Loaded(object sender, RoutedEventArgs e)
+        {
+            cb_student.ItemsSource = PersonListe.Instance.GetStudentListe().OrderBy(x => x);
+
+            if (PersonListe.Instance.GetStudentListe().Count > 0)
+            {
+                cb_student.IsEnabled = true;
+                btn_add_student.IsEnabled = true;
+            }
         }
 
         #region ListViewSorter
@@ -132,47 +149,34 @@ namespace Universitätsverwaltung.view
 
         private void lv_studiengang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (lv_studiengang.SelectedIndex)
+            btn_reset.IsEnabled = false;
+            btn_new.IsEnabled = true;
+            btn_del.IsEnabled = true;
+            btn_save.IsEnabled = false;
+
+            if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
             {
-                case -1:
-                    tb_studiengang.Text = "";
-                    tb_abschluss.Text = "";
-                    tb_ects.Text = "";
+                tb_studiengang.Text = selectedStudiengang.Name;
+                tb_abschluss.Text = selectedStudiengang.Abschluss.Name;
+                tb_ects.Text = selectedStudiengang.ECTS.ToString();
 
-                    lv_semester.ItemsSource = studiengang.SemesterListe;
-                    lv_student.ItemsSource = studiengang.StudentListe;
-                    break;
-                default:
-                    Studiengang selectedStudiengang = (Studiengang)lv_studiengang.SelectedItem;
+                lv_semester.ItemsSource = selectedStudiengang.SemesterListe;
+                lv_student.ItemsSource = selectedStudiengang.StudentListe;
+            }
+            else
+            {
+                tb_studiengang.Text = "";
+                tb_abschluss.Text = "";
+                tb_ects.Text = "";
 
-                    tb_studiengang.Text = selectedStudiengang.Name;
-                    tb_abschluss.Text = selectedStudiengang.Abschluss.Name;
-                    tb_ects.Text = selectedStudiengang.ECTS.ToString();
-
-                    lv_semester.ItemsSource = selectedStudiengang.SemesterListe;
-                    lv_student.ItemsSource = selectedStudiengang.StudentListe;
-                    break;
+                lv_semester.ItemsSource = studiengang.SemesterListe;
+                lv_student.ItemsSource = studiengang.StudentListe;
             }
         }
 
         private void lv_semester_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Semester selectedSemester = (Semester)lv_semester.SelectedItem;
-
-            if (selectedSemester != null)
-            {
-                tb_semester.Text = selectedSemester.Nummer.ToString();
-                dp_startdatum.Text = selectedSemester.Startdatum.ToShortDateString();
-                dp_endedatum.Text = selectedSemester.Endedatum.ToShortDateString();
-            }
-            else
-            {
-                tb_semester.Text = "";
-                dp_startdatum.Text = "";
-                dp_endedatum.Text = "";
-            }
-
-            if (lv_semester.SelectedIndex > -1
+            if (lv_semester.SelectedItem is Semester selectedSemester
                && KursListe.Instance.Count > 0
                && PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().Count > 0)
             {
@@ -312,11 +316,20 @@ namespace Universitätsverwaltung.view
         {
             Semester semester = new Semester(tb_semester.Text, dp_startdatum.Text, dp_endedatum.Text);
 
-            if (!IsDuplicate(studiengang,semester))
+            switch (studiengang.SemesterListe.Contains(semester))
             {
-              studiengang.SemesterListe.Add(semester);
-                lv_semester.SelectedItem = semester;
-                lv_semester_SelectionChanged(null, null);
+                case true:
+                    lbl_error_msg.Content = semester.Nummer + ". Semester existiert bereits.";
+                    break;
+                case false:
+                    tb_semester.Text = "";
+                    dp_startdatum.Text = "";
+                    dp_endedatum.Text = "";
+
+                    studiengang.SemesterListe.Add(semester);
+                    lv_semester.SelectedItem = semester;
+                    lv_semester_SelectionChanged(null, null);
+                    break;
             }
         }
 
@@ -430,20 +443,6 @@ namespace Universitätsverwaltung.view
             else
             {
                 return false;
-            }
-        }
-
-        private bool IsDuplicate(Studiengang studiengang, Semester semester)
-        {
-            int indexExistingSemester = studiengang.SemesterListe.IndexOf(semester);
-
-            switch(indexExistingSemester)
-            {
-                case -1:
-                    return false;
-                default:
-                    studiengang.SemesterListe[indexExistingSemester] = semester;
-                    return true;
             }
         }
 

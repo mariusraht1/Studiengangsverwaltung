@@ -30,9 +30,9 @@ namespace Universitätsverwaltung.controller
                     Console.Out.WriteLine("Datei " + filePath + " existiert nicht.");
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.Out.WriteLine("Daten konnten nicht ausgelesen werden.");
+                Console.Out.WriteLine("ERROR: " + e.Message);
             }
         }
 
@@ -47,9 +47,9 @@ namespace Universitätsverwaltung.controller
                     serializer.WriteObject(output, SerializeObjectsWrapper.Instance);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.Out.WriteLine("Daten konnten nicht gespeichert werden.");
+                Console.Out.WriteLine("ERROR: " + e.Message);
             }
         }
     }

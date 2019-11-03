@@ -7,6 +7,8 @@ namespace Universitätsverwaltung.controller
     [KnownType(typeof(Dozent))]
     [KnownType(typeof(Student))]
     [KnownType(typeof(Rolle))]
+    [KnownType(typeof(Semester))]
+    [KnownType(typeof(KursDozent))]
     public class SerializeObjectsWrapper
     {
         [DataMember(Order = 0)]
@@ -18,8 +20,6 @@ namespace Universitätsverwaltung.controller
         [DataMember(Order = 3)]
         protected KursListe KursListe { get; set; }
         [DataMember(Order = 4)]
-        protected SemesterListe SemesterListe { get; set; }
-        [DataMember(Order = 5)]
         protected StudiengangListe StudiengangListe { get; set; }
 
         private static SerializeObjectsWrapper instance;
@@ -35,7 +35,6 @@ namespace Universitätsverwaltung.controller
             AdressListe = AdressListe.Instance;
             PersonListe = PersonListe.Instance;
             KursListe = KursListe.Instance;
-            SemesterListe = SemesterListe.Instance;
             StudiengangListe = StudiengangListe.Instance;
         }
 
@@ -50,7 +49,6 @@ namespace Universitätsverwaltung.controller
             AdressListe.SetInstance(AdressListe);
             PersonListe.SetInstance(PersonListe);
             KursListe.SetInstance(KursListe);
-            SemesterListe.SetInstance(SemesterListe);
             StudiengangListe.SetInstance(StudiengangListe);
         }
     }

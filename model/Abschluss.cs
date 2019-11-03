@@ -14,6 +14,13 @@ namespace Universitätsverwaltung.model
         public Abschluss(string name)
         {
             Name = name;
+
+            switch (AbschlussListe.Instance.Contains(this))
+            {
+                case false:
+                    AbschlussListe.Instance.Add(this);
+                    break;
+            }
         }
 
         public override bool Equals(object obj)
