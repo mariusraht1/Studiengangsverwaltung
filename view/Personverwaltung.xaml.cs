@@ -426,11 +426,11 @@ namespace Universitätsverwaltung.view
 
             if (personResult1.Count > 0)
             {
-                MessageBox.Show("Person existiert bereits:" +
-                    "\nRolle: " + personResult1[0].Rolle +
-                    "\nName: " + personResult1[0].Vorname + " " + personResult1[0].Nachname +
-                    "\nGeburtsdatum: " + personResult1[0].Geburtsdatum.ToShortDateString() +
-                    "\nAdresse: " + personResult1[0].Adresse, "Person vorhanden", MessageBoxButton.OK);
+                MessageBox.Show($"Person existiert bereits:" +
+                    $"\nRolle: { personResult1[0].Rolle }" +
+                    $"\nName: { personResult1[0].Vorname } { personResult1[0].Nachname }" +
+                    $"\nGeburtsdatum: { personResult1[0].Geburtsdatum.ToShortDateString() }" +
+                    $"\nAdresse: { personResult1[0].Adresse }", "Person vorhanden", MessageBoxButton.OK);
 
                 btn_new.IsEnabled = true;
                 return true;
@@ -441,8 +441,7 @@ namespace Universitätsverwaltung.view
 
                 foreach (Person person in personResult2)
                 {
-                    msgTxt += "Vorname: " + person.Vorname + "; Nachname: " + person.Nachname
-                                + "; Geburtsdatum: " + person.Geburtsdatum + "\n";
+                    msgTxt += $"Vorname: { person.Vorname }; Nachname: { person.Nachname }; Geburtsdatum: { person.Geburtsdatum }\n";
                 }
 
                 msgTxt += "Möchten Sie die Person dennoch anlegen?";

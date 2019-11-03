@@ -330,7 +330,7 @@ namespace Universitätsverwaltung.view
             switch (studiengang.SemesterListe.Contains(semester))
             {
                 case true:
-                    lbl_error_msg.Content = semester.Nummer + ". Semester existiert bereits.";
+                    lbl_error_msg.Content = $"{ semester.Nummer }. Semester existiert bereits.";
                     break;
                 case false:
                     tb_semester.Text = "";
@@ -444,9 +444,9 @@ namespace Universitätsverwaltung.view
 
             if (studiengangResult1.Count > 0)
             {
-                MessageBox.Show("Studiengang existiert bereits:" +
-                    "\nName: " + studiengangResult1[0].Name +
-                    "\nAbschluss: " + studiengangResult1[0].Abschluss, "Studiengang vorhanden", MessageBoxButton.OK);
+                MessageBox.Show($"Studiengang existiert bereits:" +
+                                $"\nName: { studiengangResult1[0].Name }" +
+                                $"\nAbschluss: { studiengangResult1[0].Abschluss }", "Studiengang vorhanden", MessageBoxButton.OK);
 
                 btn_new.IsEnabled = true;
                 return true;
