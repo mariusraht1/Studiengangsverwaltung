@@ -56,11 +56,11 @@ namespace Universitätsverwaltung.controller
             return isValidObject;
         }
 
-        public void ResetValidAttributes(bool reset)
+        public void ResetValidAttributes(bool valid)
         {
             for (int i = 0; i < ValidAttributes.Length; i++)
             {
-                ValidAttributes[i] = reset;
+                ValidAttributes[i] = valid;
             }
         }
     }

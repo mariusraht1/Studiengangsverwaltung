@@ -29,6 +29,13 @@ namespace Universitätsverwaltung.view
 
         public Studiengangsverwaltung()
         {
+            // [FIX] btn_add_semester.IsEnabled == true though input for new Semester object is invalid
+            // [FIX] btn_reset doesn't recognize SemesterListe object
+            // [FIX] reset lbl_error_message on click of btn_add_student and btn_del_student
+            // [FIX] repeatable add and del of students fails
+            // [FIX] btn_save.IsEnabled == false though Semester, Kurs or Student object was added
+            // [FIX] Only enable btn_reset if Studiengang object changed
+
             InitializeComponent();
 
             validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg);
@@ -167,21 +174,17 @@ namespace Universitätsverwaltung.view
 
             if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
             {
-                tb_studiengang.Text = selectedStudiengang.Name;
-                tb_abschluss.Text = selectedStudiengang.Abschluss.Name;
-                tb_ects.Text = selectedStudiengang.ECTS.ToString();
+                studiengang = selectedStudiengang;
 
-                lv_semester.ItemsSource = selectedStudiengang.SemesterListe;
-                lv_student.ItemsSource = selectedStudiengang.StudentListe;
+                tb_studiengang.Text = studiengang.Name;
+                tb_abschluss.Text = studiengang.Abschluss.Name;
+                tb_ects.Text = studiengang.ECTS.ToString();
             }
             else
             {
                 tb_studiengang.Text = "";
                 tb_abschluss.Text = "";
                 tb_ects.Text = "";
-
-                lv_semester.ItemsSource = studiengang.SemesterListe;
-                lv_student.ItemsSource = studiengang.StudentListe;
             }
         }
 
@@ -294,10 +297,14 @@ namespace Universitätsverwaltung.view
 
             if (selectedStudiengang != null)
             {
-                Abschluss abschluss = new Abschluss(tb_abschluss.Text);
-                Studiengang studiengang = new Studiengang(tb_studiengang.Text, abschluss, tb_ects.Text, null, null);
+                studiengang.Name = tb_studiengang.Text;
+                studiengang.Abschluss = new Abschluss(tb_abschluss.Text);
+                if (int.TryParse(tb_ects.Text, out int result))
+                {
+                    studiengang.ECTS = result;
+                }
 
-                return studiengang.Equals(selectedStudiengang);
+                return studiengang.Equals(studiengang);
             }
             else
             {
@@ -336,6 +343,8 @@ namespace Universitätsverwaltung.view
                     tb_semester.Text = "";
                     dp_startdatum.Text = "";
                     dp_endedatum.Text = "";
+                    btn_add_semester.IsEnabled = false;
+                    validationControllerSemester.ResetValidAttributes(false);
 
                     studiengang.SemesterListe.Add(semester);
                     lv_semester.SelectedItem = semester;
@@ -349,15 +358,34 @@ namespace Universitätsverwaltung.view
             Semester selectedSemester = (Semester)lv_semester.SelectedItem;
             Kurs kurs = (Kurs)cb_kurs.SelectedItem;
             Dozent dozent = (Dozent)cb_dozent.SelectedItem;
+            KursDozent kursDozent = new KursDozent(kurs, dozent);
 
-            selectedSemester.KursDozentListe.Add(new KursDozent(kurs, dozent));
+            switch (selectedSemester.KursDozentListe.Contains(kursDozent))
+            {
+                case true:
+                    lbl_error_msg.Content = $"Kurs { kursDozent.Kurs } wurde bereits dem { selectedSemester.Nummer }. Semester zugeordnet.";
+                    break;
+                case false:
+                    selectedSemester.KursDozentListe.Add(kursDozent);
+                    lv_kurs_dozent.SelectedIndex = 0;
+                    break;
+            }
         }
 
         private void btn_add_student_Click(object sender, RoutedEventArgs e)
         {
             Student student = (Student)cb_student.SelectedItem;
 
-            studiengang.StudentListe.Add(student);
+            switch (studiengang.StudentListe.Contains(student))
+            {
+                case true:
+                    lbl_error_msg.Content = $"Student { student.Vorname } { student.Nachname } (Matrikelnr.: { student.Matrikelnummer }) wurde bereits dem Studiengang zugeordnet.";
+                    break;
+                case false:
+                    studiengang.StudentListe.Add(student);
+                    lv_student.SelectedIndex = 0;
+                    break;
+            }
         }
 
         private void btn_del_semester_ClickedHandler(object sender, RoutedEventArgs e)
@@ -414,26 +442,18 @@ namespace Universitätsverwaltung.view
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {
-            string name = tb_studiengang.Text;
-            Abschluss abschluss = new Abschluss(tb_abschluss.Text);
-            string ects = tb_ects.Text;
-            SemesterListe semesterListe = (SemesterListe)lv_semester.ItemsSource;
-            StudentListe studentListe = (StudentListe)lv_student.ItemsSource;
-
-            Studiengang newStudiengang = new Studiengang(tb_studiengang.Text, abschluss, tb_ects.Text, semesterListe, studentListe);
-
             if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
             {
                 Studiengang existingStudiengang = StudiengangListe.Instance.Where(x => x.Equals(selectedStudiengang)).Single();
                 int indexExistingStudiengang = StudiengangListe.Instance.IndexOf(existingStudiengang);
 
-                StudiengangListe.Instance[indexExistingStudiengang] = newStudiengang;
-                lv_studiengang.SelectedItem = newStudiengang;
+                StudiengangListe.Instance[indexExistingStudiengang] = studiengang;
+                lv_studiengang.SelectedItem = studiengang;
             }
-            else if (!IsDuplicate(newStudiengang))
+            else if (!IsDuplicate(studiengang))
             {
-                StudiengangListe.Instance.Add(newStudiengang);
-                lv_studiengang.SelectedItem = newStudiengang;
+                StudiengangListe.Instance.Add(studiengang);
+                lv_studiengang.SelectedItem = studiengang;
             }
         }
 

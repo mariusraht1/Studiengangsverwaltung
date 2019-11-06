@@ -31,7 +31,7 @@
                     <GridViewColumn Header="X" Width="30">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="x" Margin="-4,0,-4,0" Width="22" Height="22" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_del_kurs_ClickedHandler"/>
+                                <Button Content="x" Margin="-4,0,-4,0" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_del_kurs_ClickedHandler"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -66,7 +66,7 @@
                     <GridViewColumn Header="X" Width="30">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="x" Margin="-4,0,-4,0" Width="22" Height="22" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_del_semester_ClickedHandler"/>
+                                <Button Content="x" Margin="-4,0,-4,0" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_del_semester_ClickedHandler"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -90,7 +90,7 @@
                     <GridViewColumn Header="X" Width="30">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="x" Margin="-4,0,-4,0" Width="22" Height="22" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_del_student_ClickedHandler"/>
+                                <Button Content="x" Margin="-4,0,-4,0" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_del_student_ClickedHandler"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
