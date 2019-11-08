@@ -24,14 +24,14 @@ namespace Universitätsverwaltung
         public Student(string vorname, string nachname, Adresse adresse, string geburtsdatum, string matrikelnummer, string ects)
         : base(Rolle.Student, vorname, nachname, adresse, geburtsdatum)
         {
-            if (int.TryParse(matrikelnummer, out int result))
+            if (int.TryParse(matrikelnummer, out int resultMatrikelnummer))
             {
-                Matrikelnummer = int.Parse(matrikelnummer);
+                Matrikelnummer = resultMatrikelnummer;
             }
 
-            if (int.TryParse(ects, out result))
+            if (int.TryParse(ects, out int resultECTS))
             {
-                ECTS = int.Parse(ects);
+                ECTS = resultECTS;
             }
         }
 

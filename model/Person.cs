@@ -44,9 +44,9 @@ namespace Universitätsverwaltung
             Nachname = nachname;
             Adresse = adresse;
 
-            if (DateTime.TryParse(geburtsdatum, out DateTime result))
+            if (DateTime.TryParse(geburtsdatum, out DateTime resultGeburtsdatum))
             {
-                Geburtsdatum = DateTime.Parse(geburtsdatum);
+                Geburtsdatum = resultGeburtsdatum;
             }
         }
 

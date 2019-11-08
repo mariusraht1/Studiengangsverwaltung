@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Universitätsverwaltung.model
 {
-    public class SemesterListe : ObservableCollection<Semester>
+    public class SemesterListe : ObservableCollection<Semester>, ICloneable
     {
         private static SemesterListe instance;
 
@@ -18,9 +20,18 @@ namespace Universitätsverwaltung.model
 
         public SemesterListe() { }
 
+        public SemesterListe(IEnumerable<Semester> collection) : base(collection)
+        {
+        }
+
         public bool IsDuplicate(Semester semester)
         {
             return Contains(semester);
+        }
+
+        public object Clone()
+        {
+            return new SemesterListe(this);
         }
     }
 }

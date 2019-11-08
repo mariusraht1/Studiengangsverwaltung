@@ -30,19 +30,19 @@ namespace Universitätsverwaltung
 
         public Semester(string nummer, string startdatum, string endeDatum)
         {
-            if (int.TryParse(nummer, out _))
+            if (int.TryParse(nummer, out int resultNummer))
             {
-                Nummer = int.Parse(nummer);
+                Nummer = resultNummer;
             }
 
-            if (DateTime.TryParse(startdatum, out _))
+            if (DateTime.TryParse(startdatum, out DateTime resultStartdatum))
             {
-                Startdatum = DateTime.Parse(startdatum);
+                Startdatum = resultStartdatum;
             }
 
-            if (DateTime.TryParse(endeDatum, out _))
+            if (DateTime.TryParse(endeDatum, out DateTime resultEndedatum))
             {
-                Endedatum = DateTime.Parse(endeDatum);
+                Endedatum = resultEndedatum;
             }
         }
 

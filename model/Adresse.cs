@@ -28,12 +28,19 @@ namespace Universitätsverwaltung
             Strasse = strasse;
             Hausnummer = hausnummer;
 
-            if (int.TryParse(postleitzahl, out int result))
+            if (int.TryParse(postleitzahl, out int resultPostleitzahl))
             {
-                Postleitzahl = int.Parse(postleitzahl);
+                Postleitzahl = resultPostleitzahl;
             }
             
             Ort = ort;
+
+            switch (AdressListe.Instance.Contains(this))
+            {
+                case false:
+                    AdressListe.Instance.Add(this);
+                    break;
+            }
         }
 
         public Adresse(string strasse, string hausnummer, int postleitzahl, string ort)

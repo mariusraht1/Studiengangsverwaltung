@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Universitätsverwaltung.model
 {
-    public class StudentListe : ObservableCollection<Student>
+    public class StudentListe : ObservableCollection<Student>, ICloneable
     {
         private static StudentListe instance;
 
@@ -13,5 +14,14 @@ namespace Universitätsverwaltung.model
         }
 
         public StudentListe() { }
+
+        public StudentListe(IEnumerable<Student> collection) : base(collection)
+        {
+        }
+
+        public object Clone()
+        {
+            return new StudentListe(this);
+        }
     }
 }

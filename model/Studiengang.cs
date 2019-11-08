@@ -1,9 +1,10 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
-    public class Studiengang
+    public class Studiengang : ICloneable
     {
         [Required]
         [StringLength(42, MinimumLength = 2)]
@@ -71,6 +72,16 @@ namespace Universitätsverwaltung
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            Studiengang studiengang = (Studiengang)MemberwiseClone();
+            studiengang.Abschluss = (Abschluss)Abschluss.Clone();
+            studiengang.SemesterListe = (SemesterListe)SemesterListe.Clone();
+            studiengang.StudentListe = (StudentListe)StudentListe.Clone();
+
+            return studiengang;
         }
     }
 }

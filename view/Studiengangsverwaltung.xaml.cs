@@ -51,12 +51,12 @@ namespace Universitätsverwaltung.view
 
         private void lv_semester_Loaded(object sender, RoutedEventArgs e)
         {
-            lv_semester.ItemsSource = studiengang.SemesterListe;
+            //lv_semester.ItemsSource = studiengang.SemesterListe;
         }
 
         private void lv_student_Loaded(object sender, RoutedEventArgs e)
         {
-            lv_student.ItemsSource = studiengang.StudentListe;
+            //lv_student.ItemsSource = studiengang.StudentListe;
         }
 
         private void tb_studiengang_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -174,11 +174,14 @@ namespace Universitätsverwaltung.view
 
             if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
             {
-                studiengang = selectedStudiengang;
+                studiengang = (Studiengang)selectedStudiengang.Clone();
 
                 tb_studiengang.Text = studiengang.Name;
                 tb_abschluss.Text = studiengang.Abschluss.Name;
                 tb_ects.Text = studiengang.ECTS.ToString();
+
+                lv_semester.ItemsSource = studiengang.SemesterListe;
+                lv_student.ItemsSource = studiengang.StudentListe;
             }
             else
             {
@@ -304,7 +307,11 @@ namespace Universitätsverwaltung.view
                     studiengang.ECTS = result;
                 }
 
-                return studiengang.Equals(studiengang);
+                return selectedStudiengang.Name.Equals(studiengang.Name)
+                    && selectedStudiengang.Abschluss.Equals(studiengang.Abschluss)
+                    && selectedStudiengang.ECTS.Equals(studiengang.ECTS)
+                    && selectedStudiengang.SemesterListe.Equals(studiengang.SemesterListe)
+                    && selectedStudiengang.StudentListe.Equals(studiengang.StudentListe);
             }
             else
             {
@@ -348,7 +355,9 @@ namespace Universitätsverwaltung.view
 
                     studiengang.SemesterListe.Add(semester);
                     lv_semester.SelectedItem = semester;
-                    lv_semester_SelectionChanged(null, null);
+
+                    EnableSaveButton();
+                    EnableResetbutton();
                     break;
             }
         }
@@ -368,6 +377,9 @@ namespace Universitätsverwaltung.view
                 case false:
                     selectedSemester.KursDozentListe.Add(kursDozent);
                     lv_kurs_dozent.SelectedIndex = 0;
+
+                    EnableSaveButton();
+                    EnableResetbutton();
                     break;
             }
         }
@@ -384,6 +396,9 @@ namespace Universitätsverwaltung.view
                 case false:
                     studiengang.StudentListe.Add(student);
                     lv_student.SelectedIndex = 0;
+
+                    EnableSaveButton();
+                    EnableResetbutton();
                     break;
             }
         }
@@ -393,6 +408,9 @@ namespace Universitätsverwaltung.view
             Semester selectedSemester = (Semester)((ListBoxItem)lv_semester.ContainerFromElement((Button)sender)).Content;
 
             studiengang.SemesterListe.Remove(selectedSemester);
+
+            EnableSaveButton();
+            EnableResetbutton();
         }
 
         private void btn_del_kurs_ClickedHandler(object sender, RoutedEventArgs e)
@@ -401,6 +419,9 @@ namespace Universitätsverwaltung.view
             KursDozent selectedKursDozent = (KursDozent)lv_kurs_dozent.SelectedItem;
 
             selectedSemester.KursDozentListe.Remove(selectedKursDozent);
+
+            EnableSaveButton();
+            EnableResetbutton();
         }
 
         private void btn_del_student_ClickedHandler(object sender, RoutedEventArgs e)
@@ -408,11 +429,16 @@ namespace Universitätsverwaltung.view
             Student selectedStudent = (Student)lv_student.SelectedItem;
 
             studiengang.StudentListe.Remove(selectedStudent);
+
+            EnableSaveButton();
+            EnableResetbutton();
         }
 
         private void btn_reset_Click(object sender, RoutedEventArgs e)
         {
-            lv_studiengang_SelectionChanged(null, null);
+            Studiengang selectedStudiengang = (Studiengang)lv_studiengang.SelectedItem;
+
+            studiengang = selectedStudiengang;
             lbl_error_msg.Content = "";
         }
 

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Universitätsverwaltung.model
 {
-    public class Abschluss : IComparable
+    public class Abschluss : IComparable, ICloneable
     {
         [Required(AllowEmptyStrings = false)]
         [StringLength(80, MinimumLength = 2)]
@@ -48,6 +48,11 @@ namespace Universitätsverwaltung.model
         public int CompareTo(object obj)
         {
             return Name.CompareTo(obj);
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 }
