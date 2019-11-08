@@ -6,6 +6,7 @@ using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
+    [Serializable]
     public class Adresse : IComparable
     {
         [Required]

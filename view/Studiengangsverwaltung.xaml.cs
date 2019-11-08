@@ -174,21 +174,15 @@ namespace Universitätsverwaltung.view
 
             if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
             {
-                studiengang = (Studiengang)selectedStudiengang.Clone();
-
-                tb_studiengang.Text = studiengang.Name;
-                tb_abschluss.Text = studiengang.Abschluss.Name;
-                tb_ects.Text = studiengang.ECTS.ToString();
-
-                lv_semester.ItemsSource = studiengang.SemesterListe;
-                lv_student.ItemsSource = studiengang.StudentListe;
+                studiengang = CloneController.DeepClone(selectedStudiengang);
             }
-            else
-            {
-                tb_studiengang.Text = "";
-                tb_abschluss.Text = "";
-                tb_ects.Text = "";
-            }
+
+            tb_studiengang.Text = studiengang.Name;
+            tb_abschluss.Text = studiengang.Abschluss.Name;
+            tb_ects.Text = studiengang.ECTS.ToString();
+
+            lv_semester.ItemsSource = studiengang.SemesterListe;
+            lv_student.ItemsSource = studiengang.StudentListe;
         }
 
         private void lv_semester_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -307,11 +301,17 @@ namespace Universitätsverwaltung.view
                     studiengang.ECTS = result;
                 }
 
-                return selectedStudiengang.Name.Equals(studiengang.Name)
+                Console.Out.WriteLine($"NAME:      { selectedStudiengang.Name.Equals(studiengang.Name) }");
+                Console.Out.WriteLine($"ABSCHLUSS: { selectedStudiengang.Abschluss.Equals(studiengang.Abschluss) }");
+                Console.Out.WriteLine($"ECTS:      { selectedStudiengang.ECTS.Equals(studiengang.ECTS) }");
+                Console.Out.WriteLine($"SEMESTER:  { selectedStudiengang.SemesterListe.Equals(studiengang.SemesterListe) }");
+                Console.Out.WriteLine($"STUDENT:   { selectedStudiengang.StudentListe.Equals(studiengang.StudentListe) }");
+
+                return !(selectedStudiengang.Name.Equals(studiengang.Name)
                     && selectedStudiengang.Abschluss.Equals(studiengang.Abschluss)
                     && selectedStudiengang.ECTS.Equals(studiengang.ECTS)
                     && selectedStudiengang.SemesterListe.Equals(studiengang.SemesterListe)
-                    && selectedStudiengang.StudentListe.Equals(studiengang.StudentListe);
+                    && selectedStudiengang.StudentListe.Equals(studiengang.StudentListe));
             }
             else
             {
@@ -438,7 +438,8 @@ namespace Universitätsverwaltung.view
         {
             Studiengang selectedStudiengang = (Studiengang)lv_studiengang.SelectedItem;
 
-            studiengang = selectedStudiengang;
+            lv_studiengang.SelectedIndex = -1;
+            lv_studiengang.SelectedItem = selectedStudiengang;
             lbl_error_msg.Content = "";
         }
 
@@ -468,6 +469,11 @@ namespace Universitätsverwaltung.view
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {
+            studiengang.Name = tb_studiengang.Text;
+            studiengang.Abschluss = new Abschluss(tb_abschluss.Text);
+            int.TryParse(tb_ects.Text, out int resultECTS);
+            studiengang.ECTS = resultECTS;
+
             if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
             {
                 Studiengang existingStudiengang = StudiengangListe.Instance.Where(x => x.Equals(selectedStudiengang)).Single();

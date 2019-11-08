@@ -1,5 +1,8 @@
-﻿namespace Universitätsverwaltung
+﻿using System;
+
+namespace Universitätsverwaltung
 {
+    [Serializable]
     public class KursDozent
     {
         public Kurs Kurs { get; set; }

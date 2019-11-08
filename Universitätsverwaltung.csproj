@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controller\CloneController.cs" />
     <Compile Include="controller\ListViewSorter.cs" />
     <Compile Include="controller\ReadWriteController.cs" />
     <Compile Include="controller\SerializeObjectsWrapper.cs" />

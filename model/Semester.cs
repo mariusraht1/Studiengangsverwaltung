@@ -5,6 +5,7 @@ using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
+    [Serializable]
     public class Semester
     {
         [Integer]
