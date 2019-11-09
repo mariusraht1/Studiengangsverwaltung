@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Universitätsverwaltung.model
 {
-    [Serializable]
     public class PersonListe : ObservableCollection<Person>
     {
         private static PersonListe instance;

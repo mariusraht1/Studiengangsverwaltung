@@ -45,7 +45,6 @@ namespace Universitätsverwaltung.view
         private void cb_rolle_Loaded(object sender, RoutedEventArgs e)
         {
             cb_rolle.ItemsSource = Enum.GetValues(typeof(Rolle));
-            cb_rolle.SelectedItem = Rolle.Student;
         }
 
         private void Dp_geburtsdatum_Loaded(object sender, RoutedEventArgs e)
@@ -114,7 +113,7 @@ namespace Universitätsverwaltung.view
             }
         }
 
-        private void Cb_rolle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cb_rolle_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Rolle rolle = (Rolle)cb_rolle.SelectedItem;
 
@@ -143,15 +142,8 @@ namespace Universitätsverwaltung.view
                     break;
             }
 
-            Person selectedPerson = lv_person.SelectedItem as Person;
-
-            if (selectedPerson != null)
-            {
-                if (!rolle.Equals(selectedPerson.Rolle))
-                {
-                    btn_reset.IsEnabled = true;
-                }
-            }
+            EnableResetbutton();
+            EnableSaveButton();
         }
 
         #endregion
@@ -350,7 +342,7 @@ namespace Universitätsverwaltung.view
             btn_new.IsEnabled = false;
             btn_del.IsEnabled = false;
 
-            Cb_rolle_SelectionChanged(null, null);
+            cb_rolle_SelectionChanged(null, null);
             dp_geburtsdatum.Text = "";
             tb_matrikelnummer.Text = "";
             tb_ects.Text = "";

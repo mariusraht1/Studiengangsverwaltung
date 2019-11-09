@@ -6,7 +6,6 @@ using System.ComponentModel;
 
 namespace Universitätsverwaltung.model
 {
-    [Serializable]
     public class SemesterListe : ObservableCollection<Semester>, ICloneable
     {
         private static SemesterListe instance;

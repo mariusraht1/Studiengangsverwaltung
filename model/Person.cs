@@ -11,7 +11,6 @@ namespace Universitätsverwaltung
         Student
     }
 
-    [Serializable]
     public abstract class Person : IComparable
     {
         public Rolle Rolle { get; set; }

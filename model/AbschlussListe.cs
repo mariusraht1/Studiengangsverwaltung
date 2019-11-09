@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Universitätsverwaltung.model
 {
-    [Serializable]
     public class AbschlussListe : ObservableCollection<Abschluss>
     {
         private static AbschlussListe instance;

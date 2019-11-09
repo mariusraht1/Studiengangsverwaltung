@@ -4,7 +4,6 @@ using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
-    [Serializable]
     public class Studiengang : ICloneable
     {
         [Required]

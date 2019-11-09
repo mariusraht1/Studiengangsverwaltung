@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Universitätsverwaltung.model
 {
-    [Serializable]
     public class KursDozentListe : ObservableCollection<KursDozent>, ICloneable
     {
         private static KursDozentListe instance;

@@ -2,7 +2,6 @@
 
 namespace Universitätsverwaltung
 {
-    [Serializable]
     public class KursDozent : ICloneable
     {
         public Kurs Kurs { get; set; }

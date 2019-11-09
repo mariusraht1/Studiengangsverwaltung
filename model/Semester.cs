@@ -5,7 +5,6 @@ using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
-    [Serializable]
     public class Semester : ICloneable
     {
         [Integer]

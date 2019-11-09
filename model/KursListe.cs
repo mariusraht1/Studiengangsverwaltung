@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Universitätsverwaltung.model
 {
-    [Serializable]
     public class KursListe : ObservableCollection<Kurs>
     {
         private static KursListe instance;

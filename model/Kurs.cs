@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Universitätsverwaltung
 {
-    [Serializable]
     public class Kurs : IComparable, ICloneable
     {
         [Required]

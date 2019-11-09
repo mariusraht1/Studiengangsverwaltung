@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Universitätsverwaltung.model
 {
-    [Serializable]
     public class Abschluss : IComparable, ICloneable
     {
         [Required(AllowEmptyStrings = false)]

@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Universitätsverwaltung
 {
-    [Serializable]
     public class Student : Person, IComparable, ICloneable
     {
         [Required]
