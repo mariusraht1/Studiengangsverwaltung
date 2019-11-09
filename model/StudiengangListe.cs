@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Universitätsverwaltung.model
 {
+    [Serializable]
     public class StudiengangListe : ObservableCollection<Studiengang>
     {
         private static StudiengangListe instance;

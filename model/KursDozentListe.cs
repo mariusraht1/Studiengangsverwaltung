@@ -15,13 +15,12 @@ namespace Universitätsverwaltung.model
             get { return instance ?? (instance = new KursDozentListe()); }
         }
 
-        public override event NotifyCollectionChangedEventHandler CollectionChanged;
-        protected override event PropertyChangedEventHandler PropertyChanged;
-
         public static void SetInstance(KursDozentListe kursDozentListe)
         {
             instance = kursDozentListe;
         }
+
+        public KursDozentListe() { }
 
         public override bool Equals(object obj)
         {

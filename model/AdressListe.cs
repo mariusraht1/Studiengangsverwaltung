@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Universitätsverwaltung.model
 {
+    [Serializable]
     public class AdressListe : ObservableCollection<Adresse>
     {
         private static AdressListe instance;
@@ -15,5 +17,7 @@ namespace Universitätsverwaltung.model
         {
             instance = adressListe;
         }
+
+        public AdressListe() { }
     }
 }

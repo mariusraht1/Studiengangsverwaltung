@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Universitätsverwaltung.model
 {
+    [Serializable]
     public class AbschlussListe : ObservableCollection<Abschluss>
     {
         private static AbschlussListe instance;
@@ -15,5 +17,7 @@ namespace Universitätsverwaltung.model
         {
             instance = abschlussListe;
         }
+
+        public AbschlussListe() { }
     }
 }

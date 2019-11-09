@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Universitätsverwaltung.model
 {
+    [Serializable]
     public class DozentListe : ObservableCollection<Dozent>
     {
         private static DozentListe instance;
@@ -10,5 +12,7 @@ namespace Universitätsverwaltung.model
         {
             get { return instance ?? (instance = new DozentListe()); }
         }
+
+        public DozentListe() { }
     }
 }

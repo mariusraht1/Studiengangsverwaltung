@@ -11,7 +11,7 @@ namespace Universitätsverwaltung
         [StringLength(42, MinimumLength = 2)]
         public string Name { get; set; }
         [Required]
-        public Abschluss Abschluss { get; set; }
+        public Abschluss Abschluss { get; set; } = new Abschluss();
         [Required]
         [Range(1, 999)]
         public int ECTS { get; set; }

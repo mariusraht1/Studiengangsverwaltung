@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Universitätsverwaltung.model
 {
+    [Serializable]
     public class PersonListe : ObservableCollection<Person>
     {
         private static PersonListe instance;

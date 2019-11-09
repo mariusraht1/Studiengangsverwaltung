@@ -11,17 +11,14 @@ namespace Universitätsverwaltung.model
     {
         private static SemesterListe instance;
 
-        public override event NotifyCollectionChangedEventHandler CollectionChanged;
-        protected override event PropertyChangedEventHandler PropertyChanged;
-
         public static SemesterListe Instance
         {
             get { return instance ?? (instance = new SemesterListe()); }
         }
 
-        public static void SetInstance(SemesterListe semesterListe)
+        public static void SetInstance(SemesterListe studiengangListe)
         {
-            instance = semesterListe;
+            instance = studiengangListe;
         }
 
         public SemesterListe() { }
@@ -29,11 +26,6 @@ namespace Universitätsverwaltung.model
         public SemesterListe(IEnumerable<Semester> collection) : base(collection)
         {
         }
-
-        //public bool IsDuplicate(Semester semester)
-        //{
-        //    return Contains(semester);
-        //}
 
         public override bool Equals(object obj)
         {

@@ -11,9 +11,6 @@ namespace Universitätsverwaltung.model
     {
         private static StudentListe instance;
 
-        public override event NotifyCollectionChangedEventHandler CollectionChanged;
-        protected override event PropertyChangedEventHandler PropertyChanged;
-
         public static StudentListe Instance
         {
             get { return instance ?? (instance = new StudentListe()); }

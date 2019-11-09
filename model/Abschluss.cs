@@ -48,7 +48,14 @@ namespace Universitätsverwaltung.model
 
         public int CompareTo(object obj)
         {
-            return Name.CompareTo(obj);
+            if (obj == null || obj.GetType() != GetType())
+            {
+                return -1;
+            }
+
+            Abschluss abschluss = (Abschluss)obj;
+
+            return Name.CompareTo(abschluss.Name);
         }
 
         public object Clone()
