@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Universitätsverwaltung
 {
     [Serializable]
-    public class Kurs : IComparable
+    public class Kurs : IComparable, ICloneable
     {
         [Required]
         [StringLength(42, MinimumLength = 2)]
@@ -95,6 +95,11 @@ namespace Universitätsverwaltung
                 default:
                     return nameEqualRate;
             }
+        }
+
+        public object Clone()
+        {
+            return new Kurs(Name, Beschreibung, ECTS);
         }
     }
 }

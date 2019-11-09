@@ -6,7 +6,7 @@ using Universitätsverwaltung.model;
 namespace Universitätsverwaltung
 {
     [Serializable]
-    public class Semester
+    public class Semester : ICloneable
     {
         [Integer]
         [Required]
@@ -21,6 +21,14 @@ namespace Universitätsverwaltung
         public KursDozentListe KursDozentListe { get; set; } = new KursDozentListe();
 
         public Semester() { }
+
+        public Semester(int nummer, DateTime startdatum, DateTime endeDatum, KursDozentListe kursDozentListe)
+        {
+            Nummer = nummer;
+            Startdatum = startdatum;
+            Endedatum = endeDatum;
+            KursDozentListe = kursDozentListe;
+        }
 
         public Semester(int nummer, DateTime startdatum, DateTime endeDatum)
         {
@@ -66,7 +74,10 @@ namespace Universitätsverwaltung
 
             Semester semester = (Semester)obj;
 
-            return Nummer.Equals(semester.Nummer);
+            return Nummer.Equals(semester.Nummer)
+                && Startdatum.Equals(semester.Startdatum)
+                && Endedatum.Equals(semester.Endedatum)
+                && KursDozentListe.Equals(semester.KursDozentListe);
         }
 
         public override string ToString()
@@ -77,6 +88,11 @@ namespace Universitätsverwaltung
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            return new Semester(Nummer, Startdatum, Endedatum, (KursDozentListe)KursDozentListe.Clone());
         }
     }
 }

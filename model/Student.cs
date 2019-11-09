@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Universitätsverwaltung
 {
     [Serializable]
-    public class Student : Person, IComparable
+    public class Student : Person, IComparable, ICloneable
     {
         [Required]
         [Range(1, 999999)]
@@ -111,6 +111,13 @@ namespace Universitätsverwaltung
                 default:
                     return matrikelnummerEqualRate;
             }
+        }
+
+        public object Clone()
+        {
+            Adresse adresse = (Adresse)Adresse.Clone();
+
+            return new Student(Vorname, Nachname, adresse, Geburtsdatum, Matrikelnummer, ECTS);
         }
     }
 }

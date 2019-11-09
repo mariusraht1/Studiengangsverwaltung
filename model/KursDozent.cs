@@ -3,7 +3,7 @@
 namespace Universitätsverwaltung
 {
     [Serializable]
-    public class KursDozent
+    public class KursDozent : ICloneable
     {
         public Kurs Kurs { get; set; }
         public Dozent Dozent { get; set; }
@@ -46,6 +46,11 @@ namespace Universitätsverwaltung
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            return new KursDozent((Kurs)Kurs.Clone(), (Dozent)Dozent.Clone());
         }
     }
 }

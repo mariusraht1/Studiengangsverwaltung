@@ -5,7 +5,7 @@ using Universitätsverwaltung.model;
 namespace Universitätsverwaltung
 {
     [Serializable]
-    public class Studiengang
+    public class Studiengang : ICloneable
     {
         [Required]
         [StringLength(42, MinimumLength = 2)]
@@ -16,11 +16,11 @@ namespace Universitätsverwaltung
         [Range(1, 999)]
         public int ECTS { get; set; }
         public SemesterListe SemesterListe { get; set; } = new SemesterListe();
-        public StudentListe StudentListe { get; set; } = new StudentListe();
+        public PersonListe StudentListe { get; set; } = new PersonListe();
 
         public Studiengang() { }
 
-        public Studiengang(string name, Abschluss abschluss, int ects, SemesterListe semesterListe, StudentListe studentListe)
+        public Studiengang(string name, Abschluss abschluss, int ects, SemesterListe semesterListe, PersonListe studentListe)
         {
             Name = name;
             Abschluss = abschluss;
@@ -29,7 +29,7 @@ namespace Universitätsverwaltung
             StudentListe = studentListe;
         }
 
-        public Studiengang(string name, Abschluss abschluss, string ects, SemesterListe semesterListe, StudentListe studentListe)
+        public Studiengang(string name, Abschluss abschluss, string ects, SemesterListe semesterListe, PersonListe studentListe)
         {
             Name = name;
             Abschluss = abschluss;
@@ -73,6 +73,15 @@ namespace Universitätsverwaltung
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            Abschluss abschluss = (Abschluss)Abschluss.Clone();
+            SemesterListe semesterListe = (SemesterListe)SemesterListe.Clone();
+            PersonListe studentListe = (PersonListe)StudentListe.Clone();
+
+            return new Studiengang(Name, abschluss, ECTS, semesterListe, studentListe);
         }
     }
 }

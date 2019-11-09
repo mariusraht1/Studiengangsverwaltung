@@ -6,7 +6,7 @@ using System.ComponentModel;
 namespace Universitätsverwaltung.model
 {
     [Serializable]
-    public class KursDozentListe : ObservableCollection<KursDozent>
+    public class KursDozentListe : ObservableCollection<KursDozent>, ICloneable
     {
         private static KursDozentListe instance;
 
@@ -100,6 +100,18 @@ namespace Universitätsverwaltung.model
         protected override void SetItem(int index, KursDozent item)
         {
             base.SetItem(index, item);
+        }
+
+        public object Clone()
+        {
+            KursDozentListe kursDozentListe = new KursDozentListe();
+
+            foreach (KursDozent kursDozent in this)
+            {
+                kursDozentListe.Add((KursDozent)kursDozent.Clone());
+            }
+
+            return kursDozentListe;
         }
     }
 }

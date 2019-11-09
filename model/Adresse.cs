@@ -132,5 +132,10 @@ namespace Universitätsverwaltung
                     return strasseEqualRate;
             }
         }
+
+        public object Clone()
+        {
+            return new Adresse(Strasse,Hausnummer,Postleitzahl,Ort);
+        }
     }
 }

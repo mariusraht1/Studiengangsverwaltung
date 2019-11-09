@@ -29,12 +29,6 @@ namespace Universitätsverwaltung.view
 
         public Studiengangsverwaltung()
         {
-            // [FIX] btn_reset doesn't recognize SemesterListe object
-            // [FIX] reset lbl_error_message on click of btn_add_student and btn_del_student
-            // [FIX] repeatable add and del of students fails
-            // [FIX] btn_save.IsEnabled == false though Semester, Kurs or Student object was added
-            // [FIX] Only enable btn_reset if Studiengang object changed
-
             InitializeComponent();
 
             validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg);
@@ -56,11 +50,25 @@ namespace Universitätsverwaltung.view
         private void cb_kurs_Loaded(object sender, RoutedEventArgs e)
         {
             cb_kurs.ItemsSource = KursListe.Instance.OrderBy(x => x);
+
+            if(KursListe.Instance.Count > 0
+                && PersonListe.Instance.GetDozentListe().Count > 0)
+            {
+                cb_kurs.IsEnabled = true;
+                cb_dozent.IsEnabled = true;
+                btn_add_kurs.IsEnabled = true;
+            }
+            else
+            {
+                cb_kurs.IsEnabled = false;
+                cb_dozent.IsEnabled = false;
+                btn_add_kurs.IsEnabled = false;
+            }
         }
 
         private void cb_dozent_Loaded(object sender, RoutedEventArgs e)
         {
-            cb_dozent.ItemsSource = PersonListe.Instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList().OrderBy(x => x);
+            cb_dozent.ItemsSource = PersonListe.Instance.GetDozentListe().OrderBy(x => x);
         }
 
         private void cb_student_Loaded(object sender, RoutedEventArgs e)
@@ -71,6 +79,11 @@ namespace Universitätsverwaltung.view
             {
                 cb_student.IsEnabled = true;
                 btn_add_student.IsEnabled = true;
+            }
+            else
+            {
+                cb_student.IsEnabled = false;
+                btn_add_student.IsEnabled = false;
             }
         }
 
@@ -158,7 +171,7 @@ namespace Universitätsverwaltung.view
         {
             if (lv_studiengang.SelectedItem is Studiengang selectedStudiengang)
             {
-                studiengang = CloneController.DeepClone(selectedStudiengang);
+                studiengang = (Studiengang)selectedStudiengang.Clone();
                 validationControllerStudiengang.ResetValidAttributes(true);
             }
             else
@@ -288,20 +301,6 @@ namespace Universitätsverwaltung.view
             }
         }
 
-        private void EnableSaveButton()
-        {
-            switch (validationControllerStudiengang.IsValidObject()
-                    && HasChanged())
-            {
-                case true:
-                    btn_save.IsEnabled = true;
-                    break;
-                case false:
-                    btn_save.IsEnabled = false;
-                    break;
-            }
-        }
-
         private bool HasChanged()
         {
             Studiengang selectedStudiengang = (Studiengang)lv_studiengang.SelectedItem;
@@ -333,6 +332,20 @@ namespace Universitätsverwaltung.view
             }
         }
 
+        private void EnableSaveButton()
+        {
+            switch (validationControllerStudiengang.IsValidObject()
+                    && HasChanged())
+            {
+                case true:
+                    btn_save.IsEnabled = true;
+                    break;
+                case false:
+                    btn_save.IsEnabled = false;
+                    break;
+            }
+        }
+
         private void EnableResetbutton()
         {
             switch (lv_studiengang.SelectedItem is Studiengang
@@ -355,6 +368,9 @@ namespace Universitätsverwaltung.view
         {
             Semester semester = new Semester(tb_semester.Text, dp_startdatum.Text, dp_endedatum.Text);
 
+            tb_semester.Text = "";
+            dp_startdatum.Text = "";
+            dp_endedatum.Text = "";
             btn_add_semester.IsEnabled = false;
             validationControllerSemester.ResetValidAttributes(false);
 
@@ -369,6 +385,8 @@ namespace Universitätsverwaltung.view
 
         private void btn_add_kurs_Click(object sender, RoutedEventArgs e)
         {
+            // [FIX] Kurs wird nach Hinzufügen nicht speicherbar
+
             Semester selectedSemester = (Semester)lv_semester.SelectedItem;
             Kurs kurs = (Kurs)cb_kurs.SelectedItem;
             Dozent dozent = (Dozent)cb_dozent.SelectedItem;
@@ -391,6 +409,8 @@ namespace Universitätsverwaltung.view
 
         private void btn_add_student_Click(object sender, RoutedEventArgs e)
         {
+            // [FIX] Student wird nach Hinzufügen nicht in ListView angezeigt
+
             Student student = (Student)cb_student.SelectedItem;
 
             switch (studiengang.StudentListe.Contains(student))

@@ -6,7 +6,7 @@ using Universitätsverwaltung.model;
 namespace Universitätsverwaltung
 {
     [Serializable]
-    public class Dozent : Person, IComparable
+    public class Dozent : Person, IComparable, ICloneable
     {
         [Required]
         public Abschluss Abschluss { get; set; }
@@ -91,6 +91,14 @@ namespace Universitätsverwaltung
                 default:
                     return personEqualRate;
             }
+        }
+
+        public object Clone()
+        {
+            Adresse adresse = (Adresse)Adresse.Clone();
+            Abschluss abschluss = (Abschluss)Abschluss.Clone();
+
+            return new Dozent(Vorname, Nachname, adresse, Geburtsdatum, abschluss);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace Universitätsverwaltung.model
 {
     [Serializable]
-    public class SemesterListe : ObservableCollection<Semester>
+    public class SemesterListe : ObservableCollection<Semester>, ICloneable
     {
         private static SemesterListe instance;
 
@@ -105,6 +105,18 @@ namespace Universitätsverwaltung.model
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             base.OnCollectionChanged(e);
+        }
+
+        public object Clone()
+        {
+            SemesterListe semesterListe = new SemesterListe();
+
+            foreach (Semester semester in this)
+            {
+                semesterListe.Add((Semester)semester.Clone());
+            }
+
+            return semesterListe;
         }
     }
 }
