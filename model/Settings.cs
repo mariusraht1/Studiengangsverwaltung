@@ -2,7 +2,7 @@
 {
     internal class Settings
     {
-        public static string Version = "17.11.2019";
+        public static string Version = "26.11.2019";
 
         public string PathToProgram { get; set; }
         public string PathToDataFile { get; set; }

@@ -21,6 +21,30 @@ namespace Universitätsverwaltung.model
 
         public KursDozentListe() { }
 
+        public PersonListe GetDozentListe()
+        {
+            PersonListe dozentListe = new PersonListe();
+
+            foreach (KursDozent kursDozent in this)
+            {
+                dozentListe.Add(kursDozent.Dozent);
+            }
+
+            return dozentListe;
+        }
+
+        public KursListe GetKursListe()
+        {
+            KursListe kursListe = new KursListe();
+
+            foreach(KursDozent kursDozent in this)
+            {
+                kursListe.Add(kursDozent.Kurs);
+            }
+
+            return kursListe;
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

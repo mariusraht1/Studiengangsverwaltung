@@ -9,7 +9,7 @@ namespace Universitätsverwaltung.controller
         private GridViewColumnHeader lastHeaderClicked = null;
         private ListSortDirection lastDirection = ListSortDirection.Ascending;
 
-        public void SortHeader(GridViewColumnHeader headerClicked, ListView listView)
+        public void SortHeader(GridViewColumnHeader headerClicked, string attrName, ListView listView)
         {
             ListSortDirection direction;
 
@@ -33,9 +33,19 @@ namespace Universitätsverwaltung.controller
                         }
                     }
 
-                    string header = headerClicked.Column.Header as string;
-                    Sort(header, direction, listView);
+                    if (attrName == null 
+                        || attrName.Equals(""))
+                    {
+                        attrName = headerClicked.Column.Header as string;
+                    }
 
+                    switch(attrName)
+                    {
+                        case "X":
+                            return;
+                    }
+
+                    Sort(attrName, direction, listView);
 
                     lastHeaderClicked = headerClicked;
                     lastDirection = direction;

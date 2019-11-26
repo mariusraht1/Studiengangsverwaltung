@@ -66,7 +66,7 @@ namespace Universitätsverwaltung.view
         private void GridViewColumnHeaderLvPersonClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvPersonSorter.SortHeader(headerClicked, lv_person);
+            lvPersonSorter.SortHeader(headerClicked, null, lv_person);
         }
 
         #endregion

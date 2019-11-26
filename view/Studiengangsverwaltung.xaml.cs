@@ -29,6 +29,14 @@ namespace Universitätsverwaltung.view
 
         public Studiengangsverwaltung()
         {
+            // TODO:
+            // > [DONE] Kurse können mit unterschiedlichen Dozenten doppelt hinzugefügt werden
+            // > Kurse/Personen müssen auch aus Studiengängen gelöscht werden
+            // > [DONE] ComboBoxen nach Tabwechsel nicht freigeschaltet
+            // > [DONE] Add-Button für Student/Kurs erst freischalten, wenn Objekt noch nicht in Studiengang enthalten
+            // > [DONE] Kurse können nicht nach Name sortiert werden
+            // >
+
             InitializeComponent();
 
             validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg);
@@ -50,21 +58,6 @@ namespace Universitätsverwaltung.view
         private void cb_kurs_Loaded(object sender, RoutedEventArgs e)
         {
             cb_kurs.ItemsSource = KursListe.Instance.OrderBy(x => x);
-
-            if (lv_semester.SelectedIndex > 0
-                && KursListe.Instance.Count > 0
-                && PersonListe.Instance.GetDozentListe().Count > 0)
-            {
-                cb_kurs.IsEnabled = true;
-                cb_dozent.IsEnabled = true;
-                btn_add_kurs.IsEnabled = true;
-            }
-            else
-            {
-                cb_kurs.IsEnabled = false;
-                cb_dozent.IsEnabled = false;
-                btn_add_kurs.IsEnabled = false;
-            }
         }
 
         private void cb_dozent_Loaded(object sender, RoutedEventArgs e)
@@ -75,17 +68,6 @@ namespace Universitätsverwaltung.view
         private void cb_student_Loaded(object sender, RoutedEventArgs e)
         {
             cb_student.ItemsSource = PersonListe.Instance.GetStudentListe().OrderBy(x => x);
-
-            if (PersonListe.Instance.GetStudentListe().Count > 0)
-            {
-                cb_student.IsEnabled = true;
-                btn_add_student.IsEnabled = true;
-            }
-            else
-            {
-                cb_student.IsEnabled = false;
-                btn_add_student.IsEnabled = false;
-            }
         }
 
         #endregion
@@ -100,25 +82,45 @@ namespace Universitätsverwaltung.view
         private void GridViewColumnHeaderLvStudiengangClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvStudiengangSorter.SortHeader(headerClicked, lv_studiengang);
+            lvStudiengangSorter.SortHeader(headerClicked, null, lv_studiengang);
         }
 
         private void GridViewColumnHeaderLvSemesterClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvSemesterSorter.SortHeader(headerClicked, lv_semester);
+            lvSemesterSorter.SortHeader(headerClicked, null, lv_semester);
         }
 
         private void GridViewColumnHeaderLvKursDozentClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvKursSorter.SortHeader(headerClicked, lv_kurs_dozent);
+
+            string attrName = headerClicked.Column.Header as string;
+
+            switch (attrName)
+            {
+                case "Name":
+                    attrName = "Kurs.Name";
+                    break;
+            }
+
+            lvKursSorter.SortHeader(headerClicked, attrName, lv_kurs_dozent);
         }
 
         private void GridViewColumnHeaderLvStudentClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvStudentSorter.SortHeader(headerClicked, lv_student);
+
+            string attrName = headerClicked.Column.Header as string;
+
+            switch (attrName)
+            {
+                case "Matrikelnr.":
+                    attrName = "Matrikelnummer";
+                    break;
+            }
+
+            lvStudentSorter.SortHeader(headerClicked, attrName, lv_student);
         }
 
         #endregion
@@ -180,6 +182,11 @@ namespace Universitätsverwaltung.view
                 studiengang = new Studiengang();
             }
 
+            if(PersonListe.Instance.GetStudentListe().Count > 0)
+            {
+                cb_student.IsEnabled = true;
+            }
+
             btn_reset.IsEnabled = false;
             btn_new.IsEnabled = true;
             btn_del.IsEnabled = true;
@@ -209,7 +216,6 @@ namespace Universitätsverwaltung.view
             {
                 cb_kurs.IsEnabled = true;
                 cb_dozent.IsEnabled = true;
-                btn_add_kurs.IsEnabled = true;
 
                 lv_kurs_dozent.ItemsSource = selectedSemester.KursDozentListe;
             }
@@ -217,12 +223,45 @@ namespace Universitätsverwaltung.view
             {
                 cb_kurs.IsEnabled = false;
                 cb_dozent.IsEnabled = false;
-                btn_add_kurs.IsEnabled = false;
 
                 lv_kurs_dozent.ItemsSource = null;
             }
 
             lbl_error_msg.Content = "";
+        }
+
+        private void cb_kurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Semester selectedSemester = (Semester)lv_semester.SelectedItem;
+            Kurs selectedKurs = (Kurs)cb_kurs.SelectedItem;
+
+            if (cb_kurs.IsEnabled
+                && selectedSemester != null
+                && !selectedSemester.KursDozentListe.GetKursListe().Contains(selectedKurs))
+            {
+                btn_add_kurs.IsEnabled = true;
+            }
+            else
+            {
+                btn_add_kurs.IsEnabled = false;
+            }
+        }
+
+        private void cb_student_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Studiengang selectedStudiengang = (Studiengang)lv_studiengang.SelectedItem;
+            Student selectedStudent = (Student)cb_student.SelectedItem;
+
+            if (cb_student.IsEnabled
+                && selectedStudiengang != null
+                && !selectedStudiengang.StudentListe.GetStudentListe().Contains(selectedStudent))
+            {
+                btn_add_student.IsEnabled = true;
+            }
+            else
+            {
+                btn_add_student.IsEnabled = false;
+            }
         }
 
         #endregion
@@ -309,39 +348,26 @@ namespace Universitätsverwaltung.view
             Dozent dozent = (Dozent)cb_dozent.SelectedItem;
             KursDozent kursDozent = new KursDozent(kurs, dozent);
 
-            switch (selectedSemester.KursDozentListe.Contains(kursDozent))
-            {
-                case true:
-                    lbl_error_msg.Content = $"Kurs { kursDozent.Kurs } wurde bereits dem { selectedSemester.Nummer }. Semester zugeordnet.";
-                    break;
-                case false:
-                    selectedSemester.KursDozentListe.Add(kursDozent);
-                    lv_kurs_dozent.SelectedIndex = 0;
+            selectedSemester.KursDozentListe.Add(kursDozent);
+            lv_kurs_dozent.ItemsSource = selectedSemester.KursDozentListe;
 
-                    EnableSaveButton();
-                    EnableResetbutton();
-                    break;
-            }
+            btn_add_kurs.IsEnabled = false;
+
+            EnableSaveButton();
+            EnableResetbutton();
         }
 
         private void btn_add_student_Click(object sender, RoutedEventArgs e)
         {
             Student student = (Student)cb_student.SelectedItem;
 
-            switch (studiengang.StudentListe.Contains(student))
-            {
-                case true:
-                    lbl_error_msg.Content = $"Student { student.Vorname } { student.Nachname } (Matrikelnr.: { student.Matrikelnummer }) wurde bereits dem Studiengang zugeordnet.";
-                    break;
-                case false:
-                    studiengang.StudentListe.Add(student);
+            studiengang.StudentListe.Add(student);
+            lv_student.ItemsSource = studiengang.StudentListe;
 
-                    lv_student.ItemsSource = studiengang.StudentListe;
+            btn_add_student.IsEnabled = false;
 
-                    EnableSaveButton();
-                    EnableResetbutton();
-                    break;
-            }
+            EnableSaveButton();
+            EnableResetbutton();
         }
 
         private void btn_del_semester_ClickedHandler(object sender, RoutedEventArgs e)
