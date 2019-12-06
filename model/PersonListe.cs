@@ -26,12 +26,12 @@ namespace Universitätsverwaltung.model
 
         public PersonListe GetDozentListe()
         {
-            return new PersonListe(instance.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList());
+            return new PersonListe(this.Where(x => x.Rolle.Equals(Rolle.Dozent)).ToList());
         }
 
         public PersonListe GetStudentListe()
         {
-            return new PersonListe(instance.Where(x => x.Rolle.Equals(Rolle.Student)).ToList());
+            return new PersonListe(this.Where(x => x.Rolle.Equals(Rolle.Student)).ToList());
         }
 
         public override bool Equals(object obj)

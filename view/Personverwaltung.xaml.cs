@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -360,6 +361,17 @@ namespace Universitätsverwaltung.view
         private void btn_del_Click(object sender, RoutedEventArgs e)
         {
             Person selectedPerson = lv_person.SelectedItem as Person;
+
+            switch(selectedPerson.Rolle)
+            {
+                case Rolle.Dozent:
+                    StudiengangListe.Instance.Remove(selectedPerson as Dozent);
+                    break;
+                case Rolle.Student:
+                    StudiengangListe.Instance.Remove(selectedPerson as Student);
+                    break;
+            }
+
             PersonListe.Instance.Remove(selectedPerson);
 
             btn_new_Click(null, null);

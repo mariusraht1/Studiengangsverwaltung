@@ -30,11 +30,7 @@ namespace Universitätsverwaltung.view
         public Studiengangsverwaltung()
         {
             // TODO:
-            // > [DONE] Kurse können mit unterschiedlichen Dozenten doppelt hinzugefügt werden
             // > Kurse/Personen müssen auch aus Studiengängen gelöscht werden
-            // > [DONE] ComboBoxen nach Tabwechsel nicht freigeschaltet
-            // > [DONE] Add-Button für Student/Kurs erst freischalten, wenn Objekt noch nicht in Studiengang enthalten
-            // > [DONE] Kurse können nicht nach Name sortiert werden
             // >
 
             InitializeComponent();

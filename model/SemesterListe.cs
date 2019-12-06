@@ -26,6 +26,22 @@ namespace Universitätsverwaltung.model
         {
         }
 
+        public void Remove(Kurs kurs)
+        {
+            foreach(Semester semester in this)
+            {
+                semester.Remove(kurs);
+            }
+        }
+
+        public void Remove(Dozent dozent)
+        {
+            foreach (Semester semester in this)
+            {
+                semester.Remove(dozent);
+            }
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

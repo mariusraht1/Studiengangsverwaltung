@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Universitätsverwaltung.controller;
 using Universitätsverwaltung.model;
 
@@ -52,6 +53,21 @@ namespace Universitätsverwaltung
             {
                 Endedatum = resultEndedatum;
             }
+        }
+
+        public void Remove(KursDozent kursDozent)
+        {
+            KursDozentListe.Remove(kursDozent);
+        }
+
+        public void Remove(Kurs kurs)
+        {
+            KursDozentListe = new KursDozentListe(KursDozentListe.Where(x => !x.Kurs.Equals(kurs)).ToList());
+        }
+
+        public void Remove(Dozent dozent)
+        {
+            KursDozentListe = new KursDozentListe(KursDozentListe.Where(x => !x.Dozent.Equals(dozent)).ToList());
         }
 
         public override bool Equals(object obj)

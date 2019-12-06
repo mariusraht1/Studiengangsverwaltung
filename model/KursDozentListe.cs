@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Universitätsverwaltung.model
 {
@@ -20,6 +22,11 @@ namespace Universitätsverwaltung.model
         }
 
         public KursDozentListe() { }
+
+        public KursDozentListe(List<KursDozent> list) : base(list)
+        {
+            instance = this;
+        }
 
         public PersonListe GetDozentListe()
         {
@@ -43,6 +50,11 @@ namespace Universitätsverwaltung.model
             }
 
             return kursListe;
+        }
+
+        internal bool Contains(Kurs kurs)
+        {
+            throw new NotImplementedException();
         }
 
         public override bool Equals(object obj)

@@ -22,6 +22,30 @@ namespace Universitätsverwaltung.model
 
         public StudiengangListe() { }
 
+        public void Remove(Student student)
+        {
+            foreach(Studiengang studiengang in this)
+            {
+                studiengang.StudentListe.Remove(student);
+            }
+        }
+
+        public void Remove(Kurs kurs)
+        {
+            foreach(Studiengang studiengang in this)
+            {
+                studiengang.SemesterListe.Remove(kurs);
+            }
+        }
+
+        public void Remove(Dozent dozent)
+        {
+            foreach(Studiengang studiengang in this)
+            {
+                studiengang.SemesterListe.Remove(dozent);
+            }
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
