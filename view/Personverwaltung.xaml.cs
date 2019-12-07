@@ -67,7 +67,11 @@ namespace Universitätsverwaltung.view
         private void GridViewColumnHeaderLvPersonClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvPersonSorter.SortHeader(headerClicked, null, lv_person);
+
+            if (headerClicked != null)
+            {
+                lvPersonSorter.SortHeader(headerClicked, null, lv_person);
+            }
         }
 
         #endregion
@@ -362,7 +366,7 @@ namespace Universitätsverwaltung.view
         {
             Person selectedPerson = lv_person.SelectedItem as Person;
 
-            switch(selectedPerson.Rolle)
+            switch (selectedPerson.Rolle)
             {
                 case Rolle.Dozent:
                     StudiengangListe.Instance.Remove(selectedPerson as Dozent);

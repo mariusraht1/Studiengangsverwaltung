@@ -48,7 +48,11 @@ namespace Universitätsverwaltung.view
         private void GridViewColumnHeaderLvKursClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvKursSorter.SortHeader(headerClicked, null, lv_kurs);
+
+            if (headerClicked != null)
+            {
+                lvKursSorter.SortHeader(headerClicked, null, lv_kurs);
+            }
         }
 
         #endregion

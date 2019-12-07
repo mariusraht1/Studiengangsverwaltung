@@ -29,10 +29,6 @@ namespace Universitätsverwaltung.view
 
         public Studiengangsverwaltung()
         {
-            // TODO:
-            // > Kurse/Personen müssen auch aus Studiengängen gelöscht werden
-            // >
-
             InitializeComponent();
 
             validationControllerStudiengang = new ValidationController(new bool[3], lbl_error_msg);
@@ -78,45 +74,59 @@ namespace Universitätsverwaltung.view
         private void GridViewColumnHeaderLvStudiengangClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvStudiengangSorter.SortHeader(headerClicked, null, lv_studiengang);
+
+            if (headerClicked != null)
+            {
+                lvStudiengangSorter.SortHeader(headerClicked, null, lv_studiengang);
+            }
         }
 
         private void GridViewColumnHeaderLvSemesterClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-            lvSemesterSorter.SortHeader(headerClicked, null, lv_semester);
+
+            if (headerClicked != null)
+            {
+                lvSemesterSorter.SortHeader(headerClicked, null, lv_semester);
+            }
         }
 
         private void GridViewColumnHeaderLvKursDozentClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
 
-            string attrName = headerClicked.Column.Header as string;
-
-            switch (attrName)
+            if (headerClicked != null)
             {
-                case "Name":
-                    attrName = "Kurs.Name";
-                    break;
-            }
+                string attrName = headerClicked.Column.Header as string;
 
-            lvKursSorter.SortHeader(headerClicked, attrName, lv_kurs_dozent);
+                switch (attrName)
+                {
+                    case "Name":
+                        attrName = "Kurs.Name";
+                        break;
+                }
+
+                lvKursSorter.SortHeader(headerClicked, attrName, lv_kurs_dozent);
+            }
         }
 
         private void GridViewColumnHeaderLvStudentClickedHandler(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
 
-            string attrName = headerClicked.Column.Header as string;
-
-            switch (attrName)
+            if (headerClicked != null)
             {
-                case "Matrikelnr.":
-                    attrName = "Matrikelnummer";
-                    break;
-            }
+                string attrName = headerClicked.Column.Header as string;
 
-            lvStudentSorter.SortHeader(headerClicked, attrName, lv_student);
+                switch (attrName)
+                {
+                    case "Matrikelnr.":
+                        attrName = "Matrikelnummer";
+                        break;
+                }
+
+                lvStudentSorter.SortHeader(headerClicked, attrName, lv_student);
+            }
         }
 
         #endregion
@@ -178,7 +188,7 @@ namespace Universitätsverwaltung.view
                 studiengang = new Studiengang();
             }
 
-            if(PersonListe.Instance.GetStudentListe().Count > 0)
+            if (PersonListe.Instance.GetStudentListe().Count > 0)
             {
                 cb_student.IsEnabled = true;
             }
@@ -214,6 +224,7 @@ namespace Universitätsverwaltung.view
                 cb_dozent.IsEnabled = true;
 
                 lv_kurs_dozent.ItemsSource = selectedSemester.KursDozentListe;
+                lv_kurs_dozent.SelectedIndex = 0;
             }
             else
             {
@@ -346,6 +357,7 @@ namespace Universitätsverwaltung.view
 
             selectedSemester.KursDozentListe.Add(kursDozent);
             lv_kurs_dozent.ItemsSource = selectedSemester.KursDozentListe;
+            lv_kurs_dozent.SelectedIndex = 0;
 
             btn_add_kurs.IsEnabled = false;
 
@@ -359,6 +371,7 @@ namespace Universitätsverwaltung.view
 
             studiengang.StudentListe.Add(student);
             lv_student.ItemsSource = studiengang.StudentListe;
+            lv_student.SelectedIndex = 0;
 
             btn_add_student.IsEnabled = false;
 
