@@ -193,6 +193,8 @@ namespace Universitätsverwaltung.view
         private void btn_del_Click(object sender, RoutedEventArgs e)
         {
             Kurs selectedKurs = lv_kurs.SelectedItem as Kurs;
+
+            StudiengangListe.Instance.Remove(selectedKurs);
             KursListe.Instance.Remove(selectedKurs);
 
             btn_new_Click(null, null);
