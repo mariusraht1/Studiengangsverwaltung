@@ -34,6 +34,17 @@ namespace Universitätsverwaltung.model
             return new PersonListe(this.Where(x => x.Rolle.Equals(Rolle.Student)).ToList());
         }
 
+        public void Update(Person oldPerson, Person newPerson)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                if (this[i].Equals(oldPerson))
+                {
+                    SetItem(i, newPerson);
+                }
+            }
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

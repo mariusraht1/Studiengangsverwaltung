@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
@@ -99,6 +101,28 @@ namespace Universitätsverwaltung
         public object Clone()
         {
             return new Kurs(Name, Beschreibung, ECTS);
+        }
+
+        public void Update(Kurs newKurs)
+        {
+            Kurs existingKurs = KursListe.Instance.Where(x => x.Equals(this)).Single();
+            int indexExistingKurs = KursListe.Instance.IndexOf(existingKurs);
+
+            KursListe.Instance[indexExistingKurs] = newKurs;
+
+            foreach (Studiengang studiengang in StudiengangListe.Instance)
+            {
+                foreach (Semester semester in studiengang.SemesterListe)
+                {
+                    foreach (KursDozent kursDozent in semester.KursDozentListe)
+                    {
+                        if (kursDozent.Kurs.Equals(this))
+                        {
+                            kursDozent.Kurs = newKurs;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Universitätsverwaltung.controller;
+using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
@@ -50,8 +52,26 @@ namespace Universitätsverwaltung
             }
         }
 
+        public void Update(Person newPerson)
+        {
+            Person existingPerson = PersonListe.Instance.Where(x => x.Equals(this)).Single();
+            int indexExistingPerson = PersonListe.Instance.IndexOf(existingPerson);
+
+            PersonListe.Instance[indexExistingPerson] = newPerson;
+
+            switch (Rolle)
+            {
+                case Rolle.Dozent:
+                    ((Dozent)this).Update(newPerson);
+                    break;
+                case Rolle.Student:
+                    ((Student)this).Update(newPerson);
+                    break;
+            }
+        }
+
         public bool IsValid()
-        {   
+        {
             ValidationContext validationContext = new ValidationContext(this);
             List<ValidationResult> validationResults = new List<ValidationResult>();
 
@@ -105,36 +125,33 @@ namespace Universitätsverwaltung
 
             int rolleEqualRate = Rolle.CompareTo(person.Rolle);
 
-            switch(rolleEqualRate)
+            if (rolleEqualRate < 0 || rolleEqualRate > 0)
+            {
+                return rolleEqualRate;
+            }
+
+            int vornameEqualRate = Vorname.CompareTo(person.Vorname);
+
+            if (vornameEqualRate < 0 || vornameEqualRate > 0)
+            {
+                return vornameEqualRate;
+            }
+
+            int nachnameEqualRate = Nachname.CompareTo(person.Nachname);
+
+            if (nachnameEqualRate < 0 || nachnameEqualRate > 0)
+            {
+                return nachnameEqualRate;
+            }
+
+            int geburtsdatumEqualRate = Geburtsdatum.CompareTo(person.Geburtsdatum);
+
+            switch (geburtsdatumEqualRate)
             {
                 case 0:
-                    int vornameEqualRate = Vorname.CompareTo(person.Vorname);
-
-                    switch (vornameEqualRate)
-                    {
-                        case 0:
-                            int nachnameEqualRate = Nachname.CompareTo(person.Nachname);
-
-                            switch (nachnameEqualRate)
-                            {
-                                case 0:
-                                    int geburtsdatumEqualRate = Geburtsdatum.CompareTo(person.Geburtsdatum);
-
-                                    switch (geburtsdatumEqualRate)
-                                    {
-                                        case 0:
-                                            return Adresse.CompareTo(person.Adresse);
-                                        default:
-                                            return geburtsdatumEqualRate;
-                                    }
-                                default:
-                                    return nachnameEqualRate;
-                            }
-                        default:
-                            return vornameEqualRate;
-                    }
+                    return Adresse.CompareTo(person.Adresse);
                 default:
-                    return rolleEqualRate;
+                    return geburtsdatumEqualRate;
             }
         }
     }

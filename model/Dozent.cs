@@ -24,6 +24,23 @@ namespace Universitätsverwaltung
             Abschluss = abschluss;
         }
 
+        public new void Update(Person newPerson)
+        {
+            foreach (Studiengang studiengang in StudiengangListe.Instance)
+            {
+                foreach (Semester semester in studiengang.SemesterListe)
+                {
+                    foreach (KursDozent kursDozent in semester.KursDozentListe)
+                    {
+                        if (kursDozent.Dozent.Equals(this))
+                        {
+                            kursDozent.Dozent = (Dozent)newPerson;
+                        }
+                    }
+                }
+            }
+        }
+
         public new bool IsValid()
         {
             switch (base.IsValid())
@@ -65,7 +82,12 @@ namespace Universitätsverwaltung
 
         public override string ToString()
         {
-            return Vorname + " " + Nachname + " (" + Geburtsdatum.ToShortDateString() + ")";
+            return Vorname + " " + Nachname;
+        }
+
+        internal void Update()
+        {
+            throw new NotImplementedException();
         }
 
         public override int GetHashCode()

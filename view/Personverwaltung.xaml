@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
-             mc:Ignorable="d" Width="838" Height="520" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Cursor="Arrow">
+             mc:Ignorable="d" Cursor="Arrow" Width="938" Height="520" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}">
     <Grid Background="#FFE5E5E5">
         <ListView x:Name="lv_person" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="Lv_person_SelectionChanged" GridViewColumnHeader.Click="GridViewColumnHeaderLvPersonClickedHandler" Loaded="lv_person_Loaded">
             <ListView.View>
@@ -16,10 +16,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" Width="189"/>
-                    <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" Width="189"/>
+                    <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" Width="219"/>
+                    <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" Width="219"/>
                     <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum, StringFormat='dd.MM.yyyy'}" Width="100"/>
-                    <GridViewColumn Header="Adresse" DisplayMemberBinding="{Binding Adresse}" Width="270"/>
+                    <GridViewColumn Header="Adresse" DisplayMemberBinding="{Binding Adresse}" Width="300"/>
                 </GridView>
             </ListView.View>
         </ListView>

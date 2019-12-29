@@ -97,7 +97,7 @@ namespace Universitätsverwaltung
 
         public override string ToString()
         {
-            return base.ToString();
+            return Nummer + ". Semester (" + Startdatum.ToShortDateString() + " - " + Endedatum.ToShortDateString() + ")";
         }
 
         public override int GetHashCode()

@@ -1,8 +1,11 @@
 Universitätsverwaltung - Studienleistung OBJC
 
-Lizenz:	MIT
+Lizenz: MIT
 Autor:	Marius Raht (Student an der Universität Duisburg-Essen)
+	
+Erstellt mit Microsoft Visual Studio Community 2019 Version 16.3.7
+	     .NET Version 4.8.03752
 
-Interesting Facts:
-===============================================================================================================
-https://blogs.msdn.microsoft.com/ericlippert/2010/03/09/do-not-name-a-class-the-same-as-its-namespace-part-one/
+Getroffene Annahmen:
+==================================================================
+> keine besonderen Annahmen getroffen

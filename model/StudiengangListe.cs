@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -21,6 +22,10 @@ namespace Universitätsverwaltung.model
         }
 
         public StudiengangListe() { }
+
+        public StudiengangListe(List<Studiengang> list) : base(list)
+        {
+        }
 
         public void Remove(Student student)
         {

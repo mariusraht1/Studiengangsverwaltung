@@ -39,7 +39,7 @@ namespace Universitätsverwaltung
 
         public override string ToString()
         {
-            return Kurs.Name;
+            return Kurs.Name + "; " + Dozent.ToString();
         }
 
         public override int GetHashCode()

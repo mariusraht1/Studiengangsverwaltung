@@ -39,7 +39,9 @@ namespace Universitätsverwaltung.view
 
         private void lv_studiengang_Loaded(object sender, RoutedEventArgs e)
         {
+            lv_studiengang.ItemsSource = null;
             lv_studiengang.ItemsSource = StudiengangListe.Instance.OrderBy(x => x.Name);
+            lv_studiengang.SelectedIndex = 0;
         }
 
         private void tb_studiengang_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -50,16 +52,19 @@ namespace Universitätsverwaltung.view
         private void cb_kurs_Loaded(object sender, RoutedEventArgs e)
         {
             cb_kurs.ItemsSource = KursListe.Instance.OrderBy(x => x);
+            cb_dozent.SelectedIndex = 0;
         }
 
         private void cb_dozent_Loaded(object sender, RoutedEventArgs e)
         {
             cb_dozent.ItemsSource = PersonListe.Instance.GetDozentListe().OrderBy(x => x);
+            cb_dozent.SelectedIndex = 0;
         }
 
         private void cb_student_Loaded(object sender, RoutedEventArgs e)
         {
             cb_student.ItemsSource = PersonListe.Instance.GetStudentListe().OrderBy(x => x);
+            cb_student.SelectedIndex = 0;
         }
 
         #endregion

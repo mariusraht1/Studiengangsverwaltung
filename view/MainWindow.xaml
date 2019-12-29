@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Universitätsverwaltung.view"
-        mc:Ignorable="d" Title="Universitätsverwaltung" Width="880" Height="616" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Closing="MainWindow_Closing" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        mc:Ignorable="d" Title="Universitätsverwaltung" Width="980" Height="616" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" Closing="MainWindow_Closing" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Window.Resources>
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="ToolTip" Value="{Binding}"/>
         </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Cursor" Value="Hand"/>
@@ -39,19 +40,19 @@
                 <TabItem.Header>
                     <TextBlock Text="Personverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
-                <local:Personverwaltung/>
+                <local:Personverwaltung HorizontalAlignment="Center" Margin="0"/>
             </TabItem>
             <TabItem x:Name="ti_kursverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-4,0,0,0">
                 <TabItem.Header>
                     <TextBlock Text="Kursverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
-                <local:Kursverwaltung/>
+                <local:Kursverwaltung HorizontalAlignment="Center" Margin="0"/>
             </TabItem>
             <TabItem x:Name="ti_studiengangsverwaltung" FontFamily="Calibri" FontSize="14" Width="160" Height="28" Cursor="Hand" Margin="-4,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <TabItem.Header>
                     <TextBlock Text="Studiengangsverwaltung" Style="{StaticResource TabItemText}" />
                 </TabItem.Header>
-                <local:Studiengangsverwaltung/>
+                <local:Studiengangsverwaltung HorizontalAlignment="Center" Margin="0"/>
             </TabItem>
         </TabControl>
     </Grid>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using Universitätsverwaltung.model;
 
 namespace Universitätsverwaltung
 {
@@ -32,6 +34,16 @@ namespace Universitätsverwaltung
             if (int.TryParse(ects, out int resultECTS))
             {
                 ECTS = resultECTS;
+            }
+        }
+
+        public new void Update(Person newPerson)
+        {
+            StudiengangListe studiengangListe = new StudiengangListe(StudiengangListe.Instance.Where(x => x.StudentListe.Contains(this)).ToList());
+
+            foreach (Studiengang studiengang in studiengangListe)
+            {
+                studiengang.StudentListe.Update(this, newPerson);
             }
         }
 

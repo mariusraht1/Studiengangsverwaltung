@@ -4,13 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:model="clr-namespace:Universitätsverwaltung.model"
-             mc:Ignorable="d" Cursor="Arrow" Width="838" Height="520" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}">
+             mc:Ignorable="d" Cursor="Arrow" Width="938" Height="520" MinWidth="{Binding Width}" MinHeight="{Binding Height}" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}">
     <Grid Background="#FFE5E5E5">
         <ListView x:Name="lv_kurs" Height="140" Margin="10,10,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" GridViewColumnHeader.Click="GridViewColumnHeaderLvKursClickedHandler" SelectionChanged="Lv_kurs_SelectionChanged" Loaded="lv_kurs_Loaded" SelectionMode="Single">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="270"/>
-                    <GridViewColumn Header="Beschreibung" DisplayMemberBinding="{Binding Beschreibung}" Width="480"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="300"/>
+                    <GridViewColumn Header="Beschreibung" DisplayMemberBinding="{Binding Beschreibung}" Width="540"/>
                     <GridViewColumn Header="ECTS" DisplayMemberBinding="{Binding ECTS}" Width="58"/>
                 </GridView>
             </ListView.View>

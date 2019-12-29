@@ -217,11 +217,8 @@ namespace Universitätsverwaltung.view
             if (lv_kurs.SelectedItem is Kurs selectedKurs)
             {
                 Kurs existingKurs = KursListe.Instance.Where(x => x.Equals(selectedKurs)).Single();
-                int indexExistingKurs = KursListe.Instance.IndexOf(existingKurs);
+                existingKurs.Update(newKurs);
 
-                selectedKurs = newKurs;
-
-                KursListe.Instance[indexExistingKurs] = newKurs;
                 lv_kurs.SelectedItem = newKurs;
             }
             else if (!IsDuplicate(newKurs))

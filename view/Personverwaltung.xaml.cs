@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +7,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Universitätsverwaltung.controller;
 using Universitätsverwaltung.model;
-using ValidationController = Universitätsverwaltung.controller.ValidationController;
 
 namespace Universitätsverwaltung.view
 {
@@ -250,7 +248,7 @@ namespace Universitätsverwaltung.view
                         break;
                 }
 
-                return person.Equals(selectedPerson);
+                return !person.Equals(selectedPerson);
             }
             else
             {
@@ -398,23 +396,23 @@ namespace Universitätsverwaltung.view
             string matrikelnummer = tb_matrikelnummer.Text;
             string ects = tb_ects.Text;
 
-            if (rolle.Equals(Rolle.Dozent))
+            switch (rolle)
             {
-                Dozent dozent = new Dozent(vorname, nachname, adresse, geburtstag, abschluss);
-                newPerson = dozent;
-            }
-            else
-            {
-                Student student = new Student(vorname, nachname, adresse, geburtstag, matrikelnummer, ects);
-                newPerson = student;
+                case Rolle.Dozent:
+                    Dozent dozent = new Dozent(vorname, nachname, adresse, geburtstag, abschluss);
+                    newPerson = dozent;
+                    break;
+                case Rolle.Student:
+                    Student student = new Student(vorname, nachname, adresse, geburtstag, matrikelnummer, ects);
+                    newPerson = student;
+                    break;
             }
 
             if (lv_person.SelectedItem is Person selectedPerson)
             {
                 Person existingPerson = PersonListe.Instance.Where(x => x.Equals(selectedPerson)).Single();
-                int indexExistingPerson = PersonListe.Instance.IndexOf(existingPerson);
+                existingPerson.Update(newPerson);
 
-                PersonListe.Instance[indexExistingPerson] = newPerson;
                 lv_person.SelectedItem = newPerson;
             }
             else if (!IsDuplicate(newPerson))
