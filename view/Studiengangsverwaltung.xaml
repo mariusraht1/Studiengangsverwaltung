@@ -123,4 +123,3 @@
         <Label x:Name="lbl_ects" Content="ECTS-Punkte:" Margin="784,155,0,0" VerticalAlignment="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Padding="4,0,0,0" HorizontalAlignment="Left" Width="99"/>
     </Grid>
 </UserControl>
-Franz
