@@ -12,6 +12,11 @@ Funktionen:
 > Kursverwaltung (Anlegen, Bearbeiten, Löschen)
 > Studiengangverwaltung (Anlegen, Bearbeiten, Löschen)
 
+Installationshinweise:
+==================================================================
+> data.xml muss im gleichen Ordner wie die exe-Datei sein; der
+  Pfad kann nicht geändert werden
+
 Getroffene Annahmen:
 ==================================================================
 > keine besonderen Annahmen getroffen
