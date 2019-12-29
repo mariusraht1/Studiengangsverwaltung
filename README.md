@@ -1,4 +1,5 @@
 Universitätsverwaltung - Studienleistung OBJC
+https://github.com/mariusraht1/Studiengangsverwaltung.git
 
 Lizenz: MIT
 Autor:	Marius Raht (Student an der Universität Duisburg-Essen)
